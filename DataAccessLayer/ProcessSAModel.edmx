@@ -1,0 +1,1366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTH_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_AUTH" />
+          </Key>
+          <Property Name="ID_AUTH" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar2" MaxLength="45" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="45" Nullable="false" />
+          <Property Name="USUARIO_ID_USER" Type="varchar2" MaxLength="10" />
+          <Property Name="USUARIO_SISTEMA_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUMENTOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRICION_DOCUMENTO" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA_DOCUMENTO" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="RUBRO" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ERROR_TAREA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="TAREA_ID_TAREA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ERRORES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADO_FLUJO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADOTAREA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FLUJO">
+          <Key>
+            <PropertyRef Name="ID_FRUJO" />
+          </Key>
+          <Property Name="ID_FRUJO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="EJECUCION" Type="date" Nullable="false" />
+          <Property Name="ESTADO_FLUJO_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="USUARIO_ID_USER" Type="varchar2" MaxLength="10" />
+          <Property Name="USUARIO_SISTEMA_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_FLUJOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRICINO_HISTORIAL_FLUJO" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA_HISTORIAL_FLUJO" Type="date" Nullable="false" />
+          <Property Name="FECHA_CREACION" Type="date" Nullable="false" />
+          <Property Name="FLUJO_ID_FRUJO" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_TAREA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA_TERMINO" Type="date" Nullable="false" />
+          <Property Name="FECHA_CREACION" Type="date" Nullable="false" />
+          <Property Name="TAREA_ID_TAREA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROL_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROL_SISTEMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SEXO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAREA">
+          <Key>
+            <PropertyRef Name="ID_TAREA" />
+          </Key>
+          <Property Name="ID_TAREA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="250" Nullable="false" />
+          <Property Name="COMIENZO" Type="date" Nullable="false" />
+          <Property Name="TERMINO" Type="date" Nullable="false" />
+          <Property Name="JUSTIFICACION" Type="varchar2" MaxLength="150" />
+          <Property Name="ESTADOTAREA_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USUARIO_ID_USER" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="TAREA_ID_TAREA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USUARIO_SISTEMA_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="HISTORIAL_TAREA_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+          </Key>
+          <Property Name="ID_USER" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="RUT_USUARIO" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PATERNO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="MATERNO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="SEXO_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="250" Nullable="false" />
+          <Property Name="TELEFONO" Type="number" Precision="38" Scale="0" />
+          <Property Name="AUTH_USUARIO_ID_AUTH" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DEPARTAMENTO_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROL_CLIENTE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO_USUARIO_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EMPRESA_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO_SISTEMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="ROL_SISTEMA_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO_USUARIO_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="AUTH_USUARIO_ID_AUTH" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="AUTH_USUARIO_SISTEMA_FK">
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="0..1" />
+          <End Role="AUTH_USUARIO" Type="Self.AUTH_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AUTH_USUARIO">
+              <PropertyRef Name="USUARIO_SISTEMA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AUTH_USUARIO_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="AUTH_USUARIO" Type="Self.AUTH_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="AUTH_USUARIO">
+              <PropertyRef Name="USUARIO_ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ERROR_TAREA_TAREA_FK">
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="1" />
+          <End Role="ERROR_TAREA" Type="Self.ERROR_TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREA">
+              <PropertyRef Name="ID_TAREA" />
+            </Principal>
+            <Dependent Role="ERROR_TAREA">
+              <PropertyRef Name="TAREA_ID_TAREA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_ESTADO_FLUJO_FK">
+          <End Role="ESTADO_FLUJO" Type="Self.ESTADO_FLUJO" Multiplicity="1" />
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_FLUJO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FLUJO">
+              <PropertyRef Name="ESTADO_FLUJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="FLUJO">
+              <PropertyRef Name="USUARIO_ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_USUARIO_SISTEMA_FK">
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="0..1" />
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FLUJO">
+              <PropertyRef Name="USUARIO_SISTEMA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HISTORIAL_FLUJOS_FLUJO_FK">
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="1" />
+          <End Role="HISTORIAL_FLUJOS" Type="Self.HISTORIAL_FLUJOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FLUJO">
+              <PropertyRef Name="ID_FRUJO" />
+            </Principal>
+            <Dependent Role="HISTORIAL_FLUJOS">
+              <PropertyRef Name="FLUJO_ID_FRUJO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HISTORIAL_TAREA_TAREA_FK">
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="1" />
+          <End Role="HISTORIAL_TAREA" Type="Self.HISTORIAL_TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREA">
+              <PropertyRef Name="ID_TAREA" />
+            </Principal>
+            <Dependent Role="HISTORIAL_TAREA">
+              <PropertyRef Name="TAREA_ID_TAREA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_ESTADOTAREA_FK">
+          <End Role="ESTADOTAREA" Type="Self.ESTADOTAREA" Multiplicity="1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOTAREA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="ESTADOTAREA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_HISTORIAL_TAREA_FK">
+          <End Role="HISTORIAL_TAREA" Type="Self.HISTORIAL_TAREA" Multiplicity="1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_TAREA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="HISTORIAL_TAREA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_TAREA_FK">
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="1" />
+          <End Role="TAREA1" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREA">
+              <PropertyRef Name="ID_TAREA" />
+            </Principal>
+            <Dependent Role="TAREA1">
+              <PropertyRef Name="TAREA_ID_TAREA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="USUARIO_ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_USUARIO_SISTEMA_FK">
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="0..1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="USUARIO_SISTEMA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_AUTH_USUARIO_FK">
+          <End Role="AUTH_USUARIO" Type="Self.AUTH_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTH_USUARIO">
+              <PropertyRef Name="ID_AUTH" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="AUTH_USUARIO_ID_AUTH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_DEPARTAMENTO_FK">
+          <End Role="DEPARTAMENTO" Type="Self.DEPARTAMENTO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTAMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="DEPARTAMENTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_EMPRESA_FK">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="EMPRESA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_ESTADO_USUARIO_FK">
+          <End Role="ESTADO_USUARIO" Type="Self.ESTADO_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ESTADO_USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_ROL_CLIENTE_FK">
+          <End Role="ROL_CLIENTE" Type="Self.ROL_CLIENTE" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL_CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ROL_CLIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_SEXO_FK">
+          <End Role="SEXO" Type="Self.SEXO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEXO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="SEXO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_SISTEMA_AUTH_FK">
+          <End Role="AUTH_USUARIO" Type="Self.AUTH_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTH_USUARIO">
+              <PropertyRef Name="ID_AUTH" />
+            </Principal>
+            <Dependent Role="USUARIO_SISTEMA">
+              <PropertyRef Name="AUTH_USUARIO_ID_AUTH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_SISTEMA_ESTADO_FK">
+          <End Role="ESTADO_USUARIO" Type="Self.ESTADO_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ESTADO_USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_SISTEMA_ROL_SISTEMA_FK">
+          <End Role="ROL_SISTEMA" Type="Self.ROL_SISTEMA" Multiplicity="1" />
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL_SISTEMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ROL_SISTEMA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AUTH_USUARIO" EntityType="Self.AUTH_USUARIO" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="DEPARTAMENTO" EntityType="Self.DEPARTAMENTO" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="DOCUMENTOS" EntityType="Self.DOCUMENTOS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ERROR_TAREA" EntityType="Self.ERROR_TAREA" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ERRORES" EntityType="Self.ERRORES" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ESTADO_FLUJO" EntityType="Self.ESTADO_FLUJO" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ESTADO_USUARIO" EntityType="Self.ESTADO_USUARIO" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ESTADOTAREA" EntityType="Self.ESTADOTAREA" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="FLUJO" EntityType="Self.FLUJO" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="HISTORIAL_FLUJOS" EntityType="Self.HISTORIAL_FLUJOS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="HISTORIAL_TAREA" EntityType="Self.HISTORIAL_TAREA" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ROL_CLIENTE" EntityType="Self.ROL_CLIENTE" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ROL_SISTEMA" EntityType="Self.ROL_SISTEMA" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="SEXO" EntityType="Self.SEXO" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="TAREA" EntityType="Self.TAREA" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="USUARIO_SISTEMA" EntityType="Self.USUARIO_SISTEMA" Schema="SYSTEM" store:Type="Tables" />
+          <AssociationSet Name="AUTH_USUARIO_SISTEMA_FK" Association="Self.AUTH_USUARIO_SISTEMA_FK">
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+            <End Role="AUTH_USUARIO" EntitySet="AUTH_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="AUTH_USUARIO_USUARIO_FK" Association="Self.AUTH_USUARIO_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="AUTH_USUARIO" EntitySet="AUTH_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="ERROR_TAREA_TAREA_FK" Association="Self.ERROR_TAREA_TAREA_FK">
+            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="ERROR_TAREA" EntitySet="ERROR_TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_ESTADO_FLUJO_FK" Association="Self.FLUJO_ESTADO_FLUJO_FK">
+            <End Role="ESTADO_FLUJO" EntitySet="ESTADO_FLUJO" />
+            <End Role="FLUJO" EntitySet="FLUJO" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_USUARIO_FK" Association="Self.FLUJO_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="FLUJO" EntitySet="FLUJO" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_USUARIO_SISTEMA_FK" Association="Self.FLUJO_USUARIO_SISTEMA_FK">
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+            <End Role="FLUJO" EntitySet="FLUJO" />
+          </AssociationSet>
+          <AssociationSet Name="HISTORIAL_FLUJOS_FLUJO_FK" Association="Self.HISTORIAL_FLUJOS_FLUJO_FK">
+            <End Role="FLUJO" EntitySet="FLUJO" />
+            <End Role="HISTORIAL_FLUJOS" EntitySet="HISTORIAL_FLUJOS" />
+          </AssociationSet>
+          <AssociationSet Name="HISTORIAL_TAREA_TAREA_FK" Association="Self.HISTORIAL_TAREA_TAREA_FK">
+            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="HISTORIAL_TAREA" EntitySet="HISTORIAL_TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_ESTADOTAREA_FK" Association="Self.TAREA_ESTADOTAREA_FK">
+            <End Role="ESTADOTAREA" EntitySet="ESTADOTAREA" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_HISTORIAL_TAREA_FK" Association="Self.TAREA_HISTORIAL_TAREA_FK">
+            <End Role="HISTORIAL_TAREA" EntitySet="HISTORIAL_TAREA" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_TAREA_FK" Association="Self.TAREA_TAREA_FK">
+            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="TAREA1" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_USUARIO_FK" Association="Self.TAREA_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_USUARIO_SISTEMA_FK" Association="Self.TAREA_USUARIO_SISTEMA_FK">
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_AUTH_USUARIO_FK" Association="Self.USUARIO_AUTH_USUARIO_FK">
+            <End Role="AUTH_USUARIO" EntitySet="AUTH_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_DEPARTAMENTO_FK" Association="Self.USUARIO_DEPARTAMENTO_FK">
+            <End Role="DEPARTAMENTO" EntitySet="DEPARTAMENTO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_EMPRESA_FK" Association="Self.USUARIO_EMPRESA_FK">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_ESTADO_USUARIO_FK" Association="Self.USUARIO_ESTADO_USUARIO_FK">
+            <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_ROL_CLIENTE_FK" Association="Self.USUARIO_ROL_CLIENTE_FK">
+            <End Role="ROL_CLIENTE" EntitySet="ROL_CLIENTE" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_SEXO_FK" Association="Self.USUARIO_SEXO_FK">
+            <End Role="SEXO" EntitySet="SEXO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_SISTEMA_AUTH_FK" Association="Self.USUARIO_SISTEMA_AUTH_FK">
+            <End Role="AUTH_USUARIO" EntitySet="AUTH_USUARIO" />
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_SISTEMA_ESTADO_FK" Association="Self.USUARIO_SISTEMA_ESTADO_FK">
+            <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_SISTEMA_ROL_SISTEMA_FK" Association="Self.USUARIO_SISTEMA_ROL_SISTEMA_FK">
+            <End Role="ROL_SISTEMA" EntitySet="ROL_SISTEMA" />
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AUTH_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_AUTH" />
+          </Key>
+          <Property Name="ID_AUTH" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USUARIO_ID_USER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_SISTEMA_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="USUARIO_SISTEMA" Relationship="Self.AUTH_USUARIO_SISTEMA_FK" FromRole="AUTH_USUARIO" ToRole="USUARIO_SISTEMA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.AUTH_USUARIO_USUARIO_FK" FromRole="AUTH_USUARIO" ToRole="USUARIO" />
+          <NavigationProperty Name="USUARIO1" Relationship="Self.USUARIO_AUTH_USUARIO_FK" FromRole="AUTH_USUARIO" ToRole="USUARIO" />
+          <NavigationProperty Name="USUARIO_SISTEMA1" Relationship="Self.USUARIO_SISTEMA_AUTH_FK" FromRole="AUTH_USUARIO" ToRole="USUARIO_SISTEMA" />
+        </EntityType>
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.USUARIO_DEPARTAMENTO_FK" FromRole="DEPARTAMENTO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="DOCUMENTOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRICION_DOCUMENTO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_DOCUMENTO" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUBRO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.USUARIO_EMPRESA_FK" FromRole="EMPRESA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ERROR_TAREA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" />
+          <Property Name="TAREA_ID_TAREA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="TAREA" Relationship="Self.ERROR_TAREA_TAREA_FK" FromRole="ERROR_TAREA" ToRole="TAREA" />
+        </EntityType>
+        <EntityType Name="ERRORES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADO_FLUJO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FLUJO" Relationship="Self.FLUJO_ESTADO_FLUJO_FK" FromRole="ESTADO_FLUJO" ToRole="FLUJO" />
+        </EntityType>
+        <EntityType Name="ESTADO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.USUARIO_ESTADO_USUARIO_FK" FromRole="ESTADO_USUARIO" ToRole="USUARIO" />
+          <NavigationProperty Name="USUARIO_SISTEMA" Relationship="Self.USUARIO_SISTEMA_ESTADO_FK" FromRole="ESTADO_USUARIO" ToRole="USUARIO_SISTEMA" />
+        </EntityType>
+        <EntityType Name="ESTADOTAREA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TAREA" Relationship="Self.TAREA_ESTADOTAREA_FK" FromRole="ESTADOTAREA" ToRole="TAREA" />
+        </EntityType>
+        <EntityType Name="FLUJO">
+          <Key>
+            <PropertyRef Name="ID_FRUJO" />
+          </Key>
+          <Property Name="ID_FRUJO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EJECUCION" Type="DateTime" Nullable="false" />
+          <Property Name="ESTADO_FLUJO_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USUARIO_ID_USER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO_SISTEMA_ID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="ESTADO_FLUJO" Relationship="Self.FLUJO_ESTADO_FLUJO_FK" FromRole="FLUJO" ToRole="ESTADO_FLUJO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FLUJO_USUARIO_FK" FromRole="FLUJO" ToRole="USUARIO" />
+          <NavigationProperty Name="USUARIO_SISTEMA" Relationship="Self.FLUJO_USUARIO_SISTEMA_FK" FromRole="FLUJO" ToRole="USUARIO_SISTEMA" />
+          <NavigationProperty Name="HISTORIAL_FLUJOS" Relationship="Self.HISTORIAL_FLUJOS_FLUJO_FK" FromRole="FLUJO" ToRole="HISTORIAL_FLUJOS" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_FLUJOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRICINO_HISTORIAL_FLUJO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_HISTORIAL_FLUJO" Type="DateTime" Nullable="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Nullable="false" />
+          <Property Name="FLUJO_ID_FRUJO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="FLUJO" Relationship="Self.HISTORIAL_FLUJOS_FLUJO_FK" FromRole="HISTORIAL_FLUJOS" ToRole="FLUJO" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_TAREA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_TERMINO" Type="DateTime" Nullable="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Nullable="false" />
+          <Property Name="TAREA_ID_TAREA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="TAREA" Relationship="Self.HISTORIAL_TAREA_TAREA_FK" FromRole="HISTORIAL_TAREA" ToRole="TAREA" />
+          <NavigationProperty Name="TAREA1" Relationship="Self.TAREA_HISTORIAL_TAREA_FK" FromRole="HISTORIAL_TAREA" ToRole="TAREA" />
+        </EntityType>
+        <EntityType Name="ROL_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.USUARIO_ROL_CLIENTE_FK" FromRole="ROL_CLIENTE" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ROL_SISTEMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO_SISTEMA" Relationship="Self.USUARIO_SISTEMA_ROL_SISTEMA_FK" FromRole="ROL_SISTEMA" ToRole="USUARIO_SISTEMA" />
+        </EntityType>
+        <EntityType Name="SEXO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.USUARIO_SEXO_FK" FromRole="SEXO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="TAREA">
+          <Key>
+            <PropertyRef Name="ID_TAREA" />
+          </Key>
+          <Property Name="ID_TAREA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMIENZO" Type="DateTime" Nullable="false" />
+          <Property Name="TERMINO" Type="DateTime" Nullable="false" />
+          <Property Name="JUSTIFICACION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADOTAREA_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USUARIO_ID_USER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TAREA_ID_TAREA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USUARIO_SISTEMA_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="HISTORIAL_TAREA_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ERROR_TAREA" Relationship="Self.ERROR_TAREA_TAREA_FK" FromRole="TAREA" ToRole="ERROR_TAREA" />
+          <NavigationProperty Name="ESTADOTAREA" Relationship="Self.TAREA_ESTADOTAREA_FK" FromRole="TAREA" ToRole="ESTADOTAREA" />
+          <NavigationProperty Name="HISTORIAL_TAREA" Relationship="Self.HISTORIAL_TAREA_TAREA_FK" FromRole="TAREA" ToRole="HISTORIAL_TAREA" />
+          <NavigationProperty Name="HISTORIAL_TAREA1" Relationship="Self.TAREA_HISTORIAL_TAREA_FK" FromRole="TAREA" ToRole="HISTORIAL_TAREA" />
+          <NavigationProperty Name="TAREA1" Relationship="Self.TAREA_TAREA_FK" FromRole="TAREA" ToRole="TAREA1" />
+          <NavigationProperty Name="TAREA2" Relationship="Self.TAREA_TAREA_FK" FromRole="TAREA1" ToRole="TAREA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.TAREA_USUARIO_FK" FromRole="TAREA" ToRole="USUARIO" />
+          <NavigationProperty Name="USUARIO_SISTEMA" Relationship="Self.TAREA_USUARIO_SISTEMA_FK" FromRole="TAREA" ToRole="USUARIO_SISTEMA" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+          </Key>
+          <Property Name="ID_USER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUT_USUARIO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SEXO_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="AUTH_USUARIO_ID_AUTH" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DEPARTAMENTO_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ROL_CLIENTE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO_USUARIO_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EMPRESA_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="AUTH_USUARIO" Relationship="Self.AUTH_USUARIO_USUARIO_FK" FromRole="USUARIO" ToRole="AUTH_USUARIO" />
+          <NavigationProperty Name="AUTH_USUARIO1" Relationship="Self.USUARIO_AUTH_USUARIO_FK" FromRole="USUARIO" ToRole="AUTH_USUARIO" />
+          <NavigationProperty Name="DEPARTAMENTO" Relationship="Self.USUARIO_DEPARTAMENTO_FK" FromRole="USUARIO" ToRole="DEPARTAMENTO" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.USUARIO_EMPRESA_FK" FromRole="USUARIO" ToRole="EMPRESA" />
+          <NavigationProperty Name="ESTADO_USUARIO" Relationship="Self.USUARIO_ESTADO_USUARIO_FK" FromRole="USUARIO" ToRole="ESTADO_USUARIO" />
+          <NavigationProperty Name="FLUJO" Relationship="Self.FLUJO_USUARIO_FK" FromRole="USUARIO" ToRole="FLUJO" />
+          <NavigationProperty Name="ROL_CLIENTE" Relationship="Self.USUARIO_ROL_CLIENTE_FK" FromRole="USUARIO" ToRole="ROL_CLIENTE" />
+          <NavigationProperty Name="SEXO" Relationship="Self.USUARIO_SEXO_FK" FromRole="USUARIO" ToRole="SEXO" />
+          <NavigationProperty Name="TAREA" Relationship="Self.TAREA_USUARIO_FK" FromRole="USUARIO" ToRole="TAREA" />
+        </EntityType>
+        <EntityType Name="USUARIO_SISTEMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROL_SISTEMA_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO_USUARIO_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AUTH_USUARIO_ID_AUTH" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="AUTH_USUARIO" Relationship="Self.AUTH_USUARIO_SISTEMA_FK" FromRole="USUARIO_SISTEMA" ToRole="AUTH_USUARIO" />
+          <NavigationProperty Name="AUTH_USUARIO1" Relationship="Self.USUARIO_SISTEMA_AUTH_FK" FromRole="USUARIO_SISTEMA" ToRole="AUTH_USUARIO" />
+          <NavigationProperty Name="ESTADO_USUARIO" Relationship="Self.USUARIO_SISTEMA_ESTADO_FK" FromRole="USUARIO_SISTEMA" ToRole="ESTADO_USUARIO" />
+          <NavigationProperty Name="FLUJO" Relationship="Self.FLUJO_USUARIO_SISTEMA_FK" FromRole="USUARIO_SISTEMA" ToRole="FLUJO" />
+          <NavigationProperty Name="ROL_SISTEMA" Relationship="Self.USUARIO_SISTEMA_ROL_SISTEMA_FK" FromRole="USUARIO_SISTEMA" ToRole="ROL_SISTEMA" />
+          <NavigationProperty Name="TAREA" Relationship="Self.TAREA_USUARIO_SISTEMA_FK" FromRole="USUARIO_SISTEMA" ToRole="TAREA" />
+        </EntityType>
+        <Association Name="AUTH_USUARIO_SISTEMA_FK">
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="0..1" />
+          <End Role="AUTH_USUARIO" Type="Self.AUTH_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AUTH_USUARIO">
+              <PropertyRef Name="USUARIO_SISTEMA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AUTH_USUARIO_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="AUTH_USUARIO" Type="Self.AUTH_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="AUTH_USUARIO">
+              <PropertyRef Name="USUARIO_ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_AUTH_USUARIO_FK">
+          <End Role="AUTH_USUARIO" Type="Self.AUTH_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTH_USUARIO">
+              <PropertyRef Name="ID_AUTH" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="AUTH_USUARIO_ID_AUTH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_SISTEMA_AUTH_FK">
+          <End Role="AUTH_USUARIO" Type="Self.AUTH_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTH_USUARIO">
+              <PropertyRef Name="ID_AUTH" />
+            </Principal>
+            <Dependent Role="USUARIO_SISTEMA">
+              <PropertyRef Name="AUTH_USUARIO_ID_AUTH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_DEPARTAMENTO_FK">
+          <End Role="DEPARTAMENTO" Type="Self.DEPARTAMENTO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTAMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="DEPARTAMENTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_EMPRESA_FK">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="EMPRESA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ERROR_TAREA_TAREA_FK">
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="1" />
+          <End Role="ERROR_TAREA" Type="Self.ERROR_TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREA">
+              <PropertyRef Name="ID_TAREA" />
+            </Principal>
+            <Dependent Role="ERROR_TAREA">
+              <PropertyRef Name="TAREA_ID_TAREA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_ESTADO_FLUJO_FK">
+          <End Role="ESTADO_FLUJO" Type="Self.ESTADO_FLUJO" Multiplicity="1" />
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_FLUJO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FLUJO">
+              <PropertyRef Name="ESTADO_FLUJO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_ESTADO_USUARIO_FK">
+          <End Role="ESTADO_USUARIO" Type="Self.ESTADO_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ESTADO_USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_SISTEMA_ESTADO_FK">
+          <End Role="ESTADO_USUARIO" Type="Self.ESTADO_USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ESTADO_USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_ESTADOTAREA_FK">
+          <End Role="ESTADOTAREA" Type="Self.ESTADOTAREA" Multiplicity="1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOTAREA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="ESTADOTAREA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="FLUJO">
+              <PropertyRef Name="USUARIO_ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_USUARIO_SISTEMA_FK">
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="0..1" />
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FLUJO">
+              <PropertyRef Name="USUARIO_SISTEMA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HISTORIAL_FLUJOS_FLUJO_FK">
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="1" />
+          <End Role="HISTORIAL_FLUJOS" Type="Self.HISTORIAL_FLUJOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FLUJO">
+              <PropertyRef Name="ID_FRUJO" />
+            </Principal>
+            <Dependent Role="HISTORIAL_FLUJOS">
+              <PropertyRef Name="FLUJO_ID_FRUJO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HISTORIAL_TAREA_TAREA_FK">
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="1" />
+          <End Role="HISTORIAL_TAREA" Type="Self.HISTORIAL_TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREA">
+              <PropertyRef Name="ID_TAREA" />
+            </Principal>
+            <Dependent Role="HISTORIAL_TAREA">
+              <PropertyRef Name="TAREA_ID_TAREA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_HISTORIAL_TAREA_FK">
+          <End Role="HISTORIAL_TAREA" Type="Self.HISTORIAL_TAREA" Multiplicity="1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_TAREA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="HISTORIAL_TAREA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_ROL_CLIENTE_FK">
+          <End Role="ROL_CLIENTE" Type="Self.ROL_CLIENTE" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL_CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ROL_CLIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_SISTEMA_ROL_SISTEMA_FK">
+          <End Role="ROL_SISTEMA" Type="Self.ROL_SISTEMA" Multiplicity="1" />
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL_SISTEMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ROL_SISTEMA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_SEXO_FK">
+          <End Role="SEXO" Type="Self.SEXO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEXO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="SEXO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_TAREA_FK">
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="1" />
+          <End Role="TAREA1" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREA">
+              <PropertyRef Name="ID_TAREA" />
+            </Principal>
+            <Dependent Role="TAREA1">
+              <PropertyRef Name="TAREA_ID_TAREA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_USUARIO_FK">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="USUARIO_ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_USUARIO_SISTEMA_FK">
+          <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="0..1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SISTEMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="USUARIO_SISTEMA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AUTH_USUARIO" EntityType="Self.AUTH_USUARIO" />
+          <EntitySet Name="DEPARTAMENTO" EntityType="Self.DEPARTAMENTO" />
+          <EntitySet Name="DOCUMENTOS" EntityType="Self.DOCUMENTOS" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+          <EntitySet Name="ERROR_TAREA" EntityType="Self.ERROR_TAREA" />
+          <EntitySet Name="ERRORES" EntityType="Self.ERRORES" />
+          <EntitySet Name="ESTADO_FLUJO" EntityType="Self.ESTADO_FLUJO" />
+          <EntitySet Name="ESTADO_USUARIO" EntityType="Self.ESTADO_USUARIO" />
+          <EntitySet Name="ESTADOTAREA" EntityType="Self.ESTADOTAREA" />
+          <EntitySet Name="FLUJO" EntityType="Self.FLUJO" />
+          <EntitySet Name="HISTORIAL_FLUJOS" EntityType="Self.HISTORIAL_FLUJOS" />
+          <EntitySet Name="HISTORIAL_TAREA" EntityType="Self.HISTORIAL_TAREA" />
+          <EntitySet Name="ROL_CLIENTE" EntityType="Self.ROL_CLIENTE" />
+          <EntitySet Name="ROL_SISTEMA" EntityType="Self.ROL_SISTEMA" />
+          <EntitySet Name="SEXO" EntityType="Self.SEXO" />
+          <EntitySet Name="TAREA" EntityType="Self.TAREA" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="USUARIO_SISTEMA" EntityType="Self.USUARIO_SISTEMA" />
+          <AssociationSet Name="AUTH_USUARIO_SISTEMA_FK" Association="Self.AUTH_USUARIO_SISTEMA_FK">
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+            <End Role="AUTH_USUARIO" EntitySet="AUTH_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="AUTH_USUARIO_USUARIO_FK" Association="Self.AUTH_USUARIO_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="AUTH_USUARIO" EntitySet="AUTH_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_AUTH_USUARIO_FK" Association="Self.USUARIO_AUTH_USUARIO_FK">
+            <End Role="AUTH_USUARIO" EntitySet="AUTH_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_SISTEMA_AUTH_FK" Association="Self.USUARIO_SISTEMA_AUTH_FK">
+            <End Role="AUTH_USUARIO" EntitySet="AUTH_USUARIO" />
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_DEPARTAMENTO_FK" Association="Self.USUARIO_DEPARTAMENTO_FK">
+            <End Role="DEPARTAMENTO" EntitySet="DEPARTAMENTO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_EMPRESA_FK" Association="Self.USUARIO_EMPRESA_FK">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="ERROR_TAREA_TAREA_FK" Association="Self.ERROR_TAREA_TAREA_FK">
+            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="ERROR_TAREA" EntitySet="ERROR_TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_ESTADO_FLUJO_FK" Association="Self.FLUJO_ESTADO_FLUJO_FK">
+            <End Role="ESTADO_FLUJO" EntitySet="ESTADO_FLUJO" />
+            <End Role="FLUJO" EntitySet="FLUJO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_ESTADO_USUARIO_FK" Association="Self.USUARIO_ESTADO_USUARIO_FK">
+            <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_SISTEMA_ESTADO_FK" Association="Self.USUARIO_SISTEMA_ESTADO_FK">
+            <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_ESTADOTAREA_FK" Association="Self.TAREA_ESTADOTAREA_FK">
+            <End Role="ESTADOTAREA" EntitySet="ESTADOTAREA" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_USUARIO_FK" Association="Self.FLUJO_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="FLUJO" EntitySet="FLUJO" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_USUARIO_SISTEMA_FK" Association="Self.FLUJO_USUARIO_SISTEMA_FK">
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+            <End Role="FLUJO" EntitySet="FLUJO" />
+          </AssociationSet>
+          <AssociationSet Name="HISTORIAL_FLUJOS_FLUJO_FK" Association="Self.HISTORIAL_FLUJOS_FLUJO_FK">
+            <End Role="FLUJO" EntitySet="FLUJO" />
+            <End Role="HISTORIAL_FLUJOS" EntitySet="HISTORIAL_FLUJOS" />
+          </AssociationSet>
+          <AssociationSet Name="HISTORIAL_TAREA_TAREA_FK" Association="Self.HISTORIAL_TAREA_TAREA_FK">
+            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="HISTORIAL_TAREA" EntitySet="HISTORIAL_TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_HISTORIAL_TAREA_FK" Association="Self.TAREA_HISTORIAL_TAREA_FK">
+            <End Role="HISTORIAL_TAREA" EntitySet="HISTORIAL_TAREA" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_ROL_CLIENTE_FK" Association="Self.USUARIO_ROL_CLIENTE_FK">
+            <End Role="ROL_CLIENTE" EntitySet="ROL_CLIENTE" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_SISTEMA_ROL_SISTEMA_FK" Association="Self.USUARIO_SISTEMA_ROL_SISTEMA_FK">
+            <End Role="ROL_SISTEMA" EntitySet="ROL_SISTEMA" />
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_SEXO_FK" Association="Self.USUARIO_SEXO_FK">
+            <End Role="SEXO" EntitySet="SEXO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_TAREA_FK" Association="Self.TAREA_TAREA_FK">
+            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="TAREA1" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_USUARIO_FK" Association="Self.TAREA_USUARIO_FK">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_USUARIO_SISTEMA_FK" Association="Self.TAREA_USUARIO_SISTEMA_FK">
+            <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AUTH_USUARIO">
+            <EntityTypeMapping TypeName="Model.AUTH_USUARIO">
+              <MappingFragment StoreEntitySet="AUTH_USUARIO">
+                <ScalarProperty Name="ID_AUTH" ColumnName="ID_AUTH" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USUARIO_ID_USER" ColumnName="USUARIO_ID_USER" />
+                <ScalarProperty Name="USUARIO_SISTEMA_ID" ColumnName="USUARIO_SISTEMA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPARTAMENTO">
+            <EntityTypeMapping TypeName="Model.DEPARTAMENTO">
+              <MappingFragment StoreEntitySet="DEPARTAMENTO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUMENTOS">
+            <EntityTypeMapping TypeName="Model.DOCUMENTOS">
+              <MappingFragment StoreEntitySet="DOCUMENTOS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRICION_DOCUMENTO" ColumnName="DESCRICION_DOCUMENTO" />
+                <ScalarProperty Name="FECHA_DOCUMENTO" ColumnName="FECHA_DOCUMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="Model.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="RUBRO" ColumnName="RUBRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ERROR_TAREA">
+            <EntityTypeMapping TypeName="Model.ERROR_TAREA">
+              <MappingFragment StoreEntitySet="ERROR_TAREA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="TAREA_ID_TAREA" ColumnName="TAREA_ID_TAREA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ERRORES">
+            <EntityTypeMapping TypeName="Model.ERRORES">
+              <MappingFragment StoreEntitySet="ERRORES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO_FLUJO">
+            <EntityTypeMapping TypeName="Model.ESTADO_FLUJO">
+              <MappingFragment StoreEntitySet="ESTADO_FLUJO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO_USUARIO">
+            <EntityTypeMapping TypeName="Model.ESTADO_USUARIO">
+              <MappingFragment StoreEntitySet="ESTADO_USUARIO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADOTAREA">
+            <EntityTypeMapping TypeName="Model.ESTADOTAREA">
+              <MappingFragment StoreEntitySet="ESTADOTAREA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FLUJO">
+            <EntityTypeMapping TypeName="Model.FLUJO">
+              <MappingFragment StoreEntitySet="FLUJO">
+                <ScalarProperty Name="ID_FRUJO" ColumnName="ID_FRUJO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="EJECUCION" ColumnName="EJECUCION" />
+                <ScalarProperty Name="ESTADO_FLUJO_ID" ColumnName="ESTADO_FLUJO_ID" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="USUARIO_ID_USER" ColumnName="USUARIO_ID_USER" />
+                <ScalarProperty Name="USUARIO_SISTEMA_ID" ColumnName="USUARIO_SISTEMA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIAL_FLUJOS">
+            <EntityTypeMapping TypeName="Model.HISTORIAL_FLUJOS">
+              <MappingFragment StoreEntitySet="HISTORIAL_FLUJOS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRICINO_HISTORIAL_FLUJO" ColumnName="DESCRICINO_HISTORIAL_FLUJO" />
+                <ScalarProperty Name="FECHA_HISTORIAL_FLUJO" ColumnName="FECHA_HISTORIAL_FLUJO" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="FLUJO_ID_FRUJO" ColumnName="FLUJO_ID_FRUJO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIAL_TAREA">
+            <EntityTypeMapping TypeName="Model.HISTORIAL_TAREA">
+              <MappingFragment StoreEntitySet="HISTORIAL_TAREA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="FECHA_TERMINO" ColumnName="FECHA_TERMINO" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="TAREA_ID_TAREA" ColumnName="TAREA_ID_TAREA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL_CLIENTE">
+            <EntityTypeMapping TypeName="Model.ROL_CLIENTE">
+              <MappingFragment StoreEntitySet="ROL_CLIENTE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL_SISTEMA">
+            <EntityTypeMapping TypeName="Model.ROL_SISTEMA">
+              <MappingFragment StoreEntitySet="ROL_SISTEMA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEXO">
+            <EntityTypeMapping TypeName="Model.SEXO">
+              <MappingFragment StoreEntitySet="SEXO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAREA">
+            <EntityTypeMapping TypeName="Model.TAREA">
+              <MappingFragment StoreEntitySet="TAREA">
+                <ScalarProperty Name="ID_TAREA" ColumnName="ID_TAREA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="COMIENZO" ColumnName="COMIENZO" />
+                <ScalarProperty Name="TERMINO" ColumnName="TERMINO" />
+                <ScalarProperty Name="JUSTIFICACION" ColumnName="JUSTIFICACION" />
+                <ScalarProperty Name="ESTADOTAREA_ID" ColumnName="ESTADOTAREA_ID" />
+                <ScalarProperty Name="USUARIO_ID_USER" ColumnName="USUARIO_ID_USER" />
+                <ScalarProperty Name="TAREA_ID_TAREA" ColumnName="TAREA_ID_TAREA" />
+                <ScalarProperty Name="USUARIO_SISTEMA_ID" ColumnName="USUARIO_SISTEMA_ID" />
+                <ScalarProperty Name="HISTORIAL_TAREA_ID" ColumnName="HISTORIAL_TAREA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="Model.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="RUT_USUARIO" ColumnName="RUT_USUARIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PATERNO" ColumnName="PATERNO" />
+                <ScalarProperty Name="MATERNO" ColumnName="MATERNO" />
+                <ScalarProperty Name="SEXO_ID" ColumnName="SEXO_ID" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="AUTH_USUARIO_ID_AUTH" ColumnName="AUTH_USUARIO_ID_AUTH" />
+                <ScalarProperty Name="DEPARTAMENTO_ID" ColumnName="DEPARTAMENTO_ID" />
+                <ScalarProperty Name="ROL_CLIENTE_ID" ColumnName="ROL_CLIENTE_ID" />
+                <ScalarProperty Name="ESTADO_USUARIO_ID" ColumnName="ESTADO_USUARIO_ID" />
+                <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO_SISTEMA">
+            <EntityTypeMapping TypeName="Model.USUARIO_SISTEMA">
+              <MappingFragment StoreEntitySet="USUARIO_SISTEMA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ROL_SISTEMA_ID" ColumnName="ROL_SISTEMA_ID" />
+                <ScalarProperty Name="ESTADO_USUARIO_ID" ColumnName="ESTADO_USUARIO_ID" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="AUTH_USUARIO_ID_AUTH" ColumnName="AUTH_USUARIO_ID_AUTH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
