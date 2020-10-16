@@ -167,7 +167,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Tarea.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Helpers\RESTClient.cs" />
     <Compile Include="ViewModels\AdminViewModels\ConfiguracionViewModel.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="ViewModels\DisenadorViewModels\GestionRolesViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionUnidadesViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionUsuariosViewModel.cs" />
+    <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarEmpresaViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\ModeloProcesoViewModel.cs" />
     <Compile Include="ViewModels\EjecutivoViewModels\ContratosViewModel.cs" />
     <Compile Include="ViewModels\Interface\IViewModel.cs" />
@@ -270,7 +273,6 @@
     <Compile Include="ViewModels\MainAnalistaViewModel.cs" />
     <Compile Include="ViewModels\MainDisenadorViewModel.cs" />
     <Compile Include="ViewModels\MainEjecutivoViewModel.cs" />
-    <Compile Include="ViewModels\WelcomeViewModel.cs" />
     <Compile Include="Views\AdminViews\ConfiguracionesView.xaml.cs">
       <DependentUpon>ConfiguracionesView.xaml</DependentUpon>
     </Compile>
@@ -361,7 +363,9 @@
   <ItemGroup>
     <Resource Include="Resource\ProcessLogo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\DisenadorViews\Modal\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\ProcessSAIcon.png" />
   </ItemGroup>

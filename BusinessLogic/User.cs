@@ -29,7 +29,7 @@ namespace BusinessLogic
         }
         public User(USUARIO usuario)
         {
-            Id = int.Parse(usuario.ID_USER);
+            Id = decimal.ToInt32(usuario.ID_USER);
             Nombre = usuario.NOMBRE;
             Apellido = usuario.PATERNO;
             Sexo = new Sexo(usuario.SEXO);
@@ -136,7 +136,7 @@ namespace BusinessLogic
             Entities ent = new Entities();
             if (type == UserType.USUARIO_CLIENTE)
             {
-                USUARIO user = ent.USUARIO.Where(p => p.ID_USER == id.ToString()).FirstOrDefault();
+                USUARIO user = ent.USUARIO.Where(p => p.ID_USER == id).FirstOrDefault();
                 ent.USUARIO.Remove(user);
                 ent.SaveChanges();
                 return true;
@@ -149,9 +149,29 @@ namespace BusinessLogic
             }
             return false;
         }
-        public static bool Add(User user, UserType type)
+        public bool Add()
         {
-            return true;
+            throw new NotImplementedException();
+        }
+
+        public static List<User> USUARIOToUser(ICollection<USUARIO> col)
+        {
+            List<User> listaFinal = new List<User>();
+            foreach (USUARIO user in col)
+            {
+                listaFinal.Add(new User(user));
+            }
+            return listaFinal;
+        }
+
+        public static List<User> USUARIO_SISTEMAToUser(ICollection<USUARIO_SISTEMA> col)
+        {
+            List<User> listaFinal = new List<User>();
+            foreach (USUARIO_SISTEMA user in col)
+            {
+                listaFinal.Add(new User(user));
+            }
+            return listaFinal;
         }
         #endregion
 

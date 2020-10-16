@@ -11,10 +11,11 @@ using System.Text;
 
 namespace ProcessSAServicio
 {
-    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IService1" en el código y en el archivo de configuración a la vez.
     [ServiceContract]
     public interface IUserServicio
     {
+        #region Usuarios
+
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
@@ -25,21 +26,49 @@ namespace ProcessSAServicio
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/LoginSistema/")]
-        User LoginSistema(RequestData data);
+        User LoginSistema(LoginRequestData data);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/LoginCliente/")]
-        User LoginCliente(RequestData data);
+        User LoginCliente(LoginRequestData data);
 
-        // TODO: agregue aquí sus operaciones de servicio
+        #endregion
+        #region Empresas
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Empresas/")]
+        List<Empresa> GetAllEmpresas();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/GuardarEmpresa/")]
+        void GuardarEmpresa(Empresa emp);
+        #endregion
+
+        #region Tareas
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Tareas/")]
+        List<Tarea> GetAllTareas();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/CambiarEstado/")]
+        void CambiarEstadoTarea(int id, EstadoTarea estado);
+        #endregion
     }
 
     [DataContract]
-    public class RequestData
+    public class LoginRequestData
     {
-        public RequestData(string username, string password)
+        public LoginRequestData(string username, string password)
         {
             Username = username;
             Password = password;

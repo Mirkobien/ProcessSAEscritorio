@@ -20,5 +20,18 @@ namespace BusinessLogic
         public int Id { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
+
+        public static List<Sexo> GetAllSexo()
+        {
+            List<Sexo> lista = new List<Sexo>();
+            Entities ent = new Entities();
+
+            foreach(SEXO sex in ent.SEXO)
+            {
+                lista.Add(new Sexo(sex));
+            }
+
+            return lista;
+        }
     }
 }

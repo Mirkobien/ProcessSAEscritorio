@@ -49,7 +49,7 @@
     <mah:HamburgerMenu SelectedIndex="{Binding Index}" Content="{Binding CurrentViewModel}" x:Name="HamburgerMenuControl"
                        PaneBackground="{DynamicResource MahApps.Brushes.Accent}"
                            ItemTemplate="{StaticResource HamburgerMenuItem}"
-                           DisplayMode="CompactOverlay"
+                           DisplayMode="CompactInline"
                           ItemInvoked="HamburgerMenuControl_OnItemInvoked"
                        ItemsSource="{Binding BaseViewModels}">
         <mah:HamburgerMenu.HamburgerMenuHeaderTemplate>

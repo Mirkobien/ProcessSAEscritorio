@@ -14,12 +14,12 @@ namespace BusinessLogic
         public Rol(ROL_CLIENTE rol)
         {
             Id = decimal.ToInt32(rol.ID);
-            Nombre = rol.NOMBRE;
+            Nombre = rol.DESCRIPCION;
         }
         public Rol(ROL_SISTEMA rol)
         {
             Id = decimal.ToInt32(rol.ID);
-            Nombre = rol.NOMBRE;
+            Nombre = rol.DESCRIPCION;
         }
 
         [DataMember]

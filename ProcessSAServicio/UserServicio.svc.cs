@@ -14,34 +14,53 @@ namespace ProcessSAServicio
     // NOTA: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione ProcessSAServicio.svc o ProcessSAServicio.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class UserServicio : IUserServicio
     {
-        private readonly Entities ent = new Entities();
         public List<User> GetAllUsers()
         {
             return User.GetAllUsers(UserType.USUARIO_CLIENTE);
         }
 
-        public User LoginSistema(RequestData data)
+        public User LoginSistema(LoginRequestData data)
         {
             try
             {
                 return User.Login(data.Username, data.Password, UserType.USUARIO_SISTEMA);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new WebFaultException(System.Net.HttpStatusCode.NotFound);
             }
         }
 
-        public User LoginCliente(RequestData data)
+        public User LoginCliente(LoginRequestData data)
         {
             try
             {
                 return User.Login(data.Username, data.Password, UserType.USUARIO_CLIENTE);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new WebFaultException(System.Net.HttpStatusCode.NotFound);
             }
+        }
+
+        public List<Empresa> GetAllEmpresas()
+        {
+            return Empresa.GetAllEmpresas();
+        }
+
+        public void GuardarEmpresa(Empresa emp)
+        {
+            WebOperationContext.Current.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.Created;
+        }
+
+        public List<Tarea> GetAllTareas()
+        {
+            return Tarea.GetAllTarea();
+        }
+
+        public void CambiarEstadoTarea(int id, EstadoTarea estado)
+        {
+            Tarea.GetTarea(id).CambiarEstado(estado);
         }
     }
 }
