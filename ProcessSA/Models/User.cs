@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace ProcessSA.Models
 {
-    enum UserType
+    public enum UserType
     {
         USUARIO_CLIENTE,
         USUARIO_SISTEMA
     }
-    class User : ObservableObject
+    public class User : ObservableObject
     {
         private int id;
         private string nombre;

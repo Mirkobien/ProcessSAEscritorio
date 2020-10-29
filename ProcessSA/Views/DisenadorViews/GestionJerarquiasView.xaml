@@ -12,11 +12,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Button VerticalAlignment="Center" Content="Elegir Empresa" Command="{Binding ElegirEmpresaCommand}" Grid.Column="1"/>
             <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Empresa.JerarquiaDepartamentos}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -29,7 +31,7 @@
                                                 <Border Height="100" BorderBrush="Black" BorderThickness="1" Margin="10">
                                                     <DockPanel>
                                                         <Label DockPanel.Dock="Top" Content="{Binding Nombre}"></Label>
-                                                        <Button Content="Modificar Departamento"/>
+                                                        <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ModificarDepCommand}" Content="Modificar Departamento"/>
                                                     </DockPanel>
                                                 </Border>
                                             </DataTemplate>
@@ -41,7 +43,7 @@
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                     </ItemsControl>
-                                    <Button Margin="10" VerticalAlignment="Center" Content="Añadir Departamento"/>
+                                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.CrearDepartamentoCommand}" CommandParameter="{Binding}" Margin="10" VerticalAlignment="Center" Content="Añadir Departamento"/>
                                 </DockPanel>
                             </ScrollViewer>
                         </Border>
@@ -54,6 +56,7 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
             <Label Margin="10, 0, 10, 10" FontSize="26" FontWeight="Bold" Content="Organigramas"/>
+            <Button Style="{StaticResource BlueButton}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="Añadir nivel"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

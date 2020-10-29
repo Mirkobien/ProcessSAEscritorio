@@ -158,7 +158,12 @@ namespace ProcessSAServicio
 
         public Departamento GetDepartamento(string id)
         {
-            throw new NotImplementedException();
+            return Departamento.GetDepartamento(int.Parse(id));
+        }
+
+        public void AddDepartamento(Departamento Departamento, int Idjer)
+        {
+            Departamento.Guardar(Idjer);
         }
 
         #endregion

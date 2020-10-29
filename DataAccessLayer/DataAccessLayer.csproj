@@ -59,14 +59,99 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AUTH_USER.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DEPARTAMENTO.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOCUMENTO.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMPRESA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERROR_TAREA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESTADO_FLUJO.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESTADO_TAREA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESTADO_USUARIO.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FLUJO.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JERARQUIA_DEP.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JERARQUIA_USR.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessSAModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProcessSAModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessSAModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessSAModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProcessSAModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ROL_CLIENTE.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ROL_SISTEMA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SEXO.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAREA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USUARIO_CLIENTE.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USUARIO_SISTEMA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="ProcessSAModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProcessSAModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ProcessSAModel.edmx.diagram">
+      <DependentUpon>ProcessSAModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProcessSAModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProcessSAModel.edmx</DependentUpon>
+      <LastGenOutput>ProcessSAModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ProcessSAModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProcessSAModel.edmx</DependentUpon>
+      <LastGenOutput>ProcessSAModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

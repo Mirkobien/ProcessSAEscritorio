@@ -83,6 +83,18 @@ namespace ProcessSA.Models
             return null;
         }
 
+        public async static Task<bool> GuardarDepartamento(Departamento departamento, int idjer)
+        {
+            string jsonData = JsonConvert.SerializeObject(new { Departamento = departamento, Idjer = idjer });
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            HttpResponseMessage message = await client.PostAsync(USER_URL + "AddDepartamento", content);
+            if (message.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
+
         internal static Task ActualizarEmpresa(Empresa emp)
         {
             throw new NotImplementedException();

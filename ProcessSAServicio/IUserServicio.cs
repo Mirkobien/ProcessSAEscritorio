@@ -79,6 +79,12 @@ namespace ProcessSAServicio
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Departamentos/{id}")]
         Departamento GetDepartamento(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/AddDepartamento/")]
+        void AddDepartamento(Departamento Departamento, int Idjer);
         #endregion
         #region Tareas
         [OperationContract]

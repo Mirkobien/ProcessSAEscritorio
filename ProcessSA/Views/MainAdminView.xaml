@@ -98,6 +98,9 @@
             <DataTemplate DataType="{x:Type diseviewmodels:GestionJerarquiasViewModel}">
                 <diseviews:GestionJerarquiasView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type disemodalvms:AgregarDepartamentoViewModel}">
+                <disemodalviews:DepartamentoView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type diseviewmodels:GestionRolesViewModel}">
                 <diseviews:GestionRolesView/>
             </DataTemplate>

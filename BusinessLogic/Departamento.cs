@@ -18,10 +18,13 @@ namespace BusinessLogic
         {
             Nombre = dep.NOMBRE;
             Id = decimal.ToInt32(dep.IDDEP);
+            Descripcion = dep.DESCRIPCION;
         }
 
         public string Nombre { get; set; }
         public int Id { get; set; }
+        public string Descripcion { get; set; }
+        public List<User> Usuarios { get; set; }
 
         public static List<Departamento> GetDepartamentos(int idEmpresa)
         {
@@ -42,6 +45,18 @@ namespace BusinessLogic
             Entities ent = new Entities();
             DEPARTAMENTO dep = ent.DEPARTAMENTO.Where(d => d.IDDEP == id).FirstOrDefault();
             return new Departamento(dep);
+        }
+
+        public void Guardar(int jer)
+        {
+            DEPARTAMENTO dep = new DEPARTAMENTO();
+            dep.DESCRIPCION = this.Descripcion;
+            dep.NOMBRE = this.Nombre;
+            dep.JERARQUIA_DEP_IDJER = jer;
+            Entities ent = new Entities();
+
+            ent.DEPARTAMENTO.Add(dep);
+            ent.SaveChanges();
         }
     }
 }

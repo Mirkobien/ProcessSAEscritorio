@@ -187,6 +187,7 @@
     <Compile Include="ViewModels\Base\BaseVMListHolder.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarRolViewModel.cs" />
+    <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarDepartamentoViewModel.cs" />
     <Compile Include="ViewModels\EjecutivoViewModels\EmpresasViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionFlujoViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionJerarquiasViewModel.cs" />
@@ -206,6 +207,11 @@
     <Compile Include="ViewModels\AppViewModel.cs" />
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Windows\SeleccionarEmpresaVM.cs" />
+    <Compile Include="ViewModels\Windows\WindowBaseVM.cs" />
+    <Compile Include="Views\Windows\SelectView.xaml.cs">
+      <DependentUpon>SelectView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -239,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AnalistaViews\GestionInformeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisenadorViews\Modal\DepartamentoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -298,6 +308,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\SelectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\MainAdminViewModel.cs" />
@@ -318,6 +332,9 @@
     </Compile>
     <Compile Include="Views\AnalistaViews\GestionInformeView.xaml.cs">
       <DependentUpon>GestionInformeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisenadorViews\Modal\DepartamentoView.xaml.cs">
+      <DependentUpon>DepartamentoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DisenadorViews\Modal\RolView.xaml.cs">
       <DependentUpon>RolView.xaml</DependentUpon>

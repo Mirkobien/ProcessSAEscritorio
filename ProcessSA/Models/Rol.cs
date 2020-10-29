@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProcessSA.Models
 {
-    class Rol : ObservableObject
+    public class Rol : ObservableObject
     {
         private int id;
         private string nombre;
