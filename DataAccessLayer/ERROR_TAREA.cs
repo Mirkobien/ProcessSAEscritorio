@@ -14,10 +14,10 @@ namespace DataAccessLayer
     
     public partial class ERROR_TAREA
     {
-        public decimal ID { get; set; }
-        public string DESCRIPCION { get; set; }
+        public decimal IDERR { get; set; }
+        public string JUSTIFICACION { get; set; }
         public System.DateTime FECHA { get; set; }
-        public decimal TAREA_ID_TAREA { get; set; }
+        public Nullable<decimal> TAREA_IDTAR { get; set; }
     
         public virtual TAREA TAREA { get; set; }
     }

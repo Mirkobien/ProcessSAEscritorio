@@ -12,14 +12,12 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class HISTORIAL_FLUJOS
+    public partial class DOCUMENTO
     {
         public decimal ID { get; set; }
-        public string DESCRICINO_HISTORIAL_FLUJO { get; set; }
-        public System.DateTime FECHA_HISTORIAL_FLUJO { get; set; }
-        public System.DateTime FECHA_CREACION { get; set; }
-        public decimal FLUJO_ID_FRUJO { get; set; }
+        public byte[] ARCHIVO { get; set; }
+        public Nullable<decimal> EMPRESA_IDEMP { get; set; }
     
-        public virtual FLUJO FLUJO { get; set; }
+        public virtual EMPRESA EMPRESA { get; set; }
     }
 }

@@ -6,10 +6,16 @@
              xmlns:local="clr-namespace:ProcessSA.Views"
              xmlns:adminviewmodels="clr-namespace:ProcessSA.ViewModels.AdminViewModels"
              xmlns:adminviews="clr-namespace:ProcessSA.Views.AdminViews"
+             xmlns:adminmodalvms="clr-namespace:ProcessSA.ViewModels.AdminViewModels.Modals"
+             xmlns:adminmodalviews="clr-namespace:ProcessSA.Views.AdminViews.Modals"
              xmlns:diseviewmodels="clr-namespace:ProcessSA.ViewModels.DisenadorViewModels"
+             xmlns:disemodalvms="clr-namespace:ProcessSA.ViewModels.DisenadorViewModels.Modals"
+             xmlns:disemodalviews="clr-namespace:ProcessSA.Views.DisenadorViews.Modal"
              xmlns:diseviews="clr-namespace:ProcessSA.Views.DisenadorViews"
              xmlns:ejecviewmodels="clr-namespace:ProcessSA.ViewModels.EjecutivoViewModels"
              xmlns:ejecviews="clr-namespace:ProcessSA.Views.EjecutivoViews"
+             xmlns:ejecmodalvms="clr-namespace:ProcessSA.ViewModels.EjecutivoViewModels.Modals"
+             xmlns:ejecmodalviews="clr-namespace:ProcessSA.Views.EjecutivoViews.Modal"
              xmlns:analisviewmodels="clr-namespace:ProcessSA.ViewModels.AnalistaViewModels"
              xmlns:analisviews="clr-namespace:ProcessSA.Views.AnalistaViews"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
@@ -49,7 +55,7 @@
     <mah:HamburgerMenu SelectedIndex="{Binding Index}" Content="{Binding CurrentViewModel}" x:Name="HamburgerMenuControl"
                        PaneBackground="{DynamicResource MahApps.Brushes.Accent}"
                            ItemTemplate="{StaticResource HamburgerMenuItem}"
-                           DisplayMode="CompactInline"
+                           DisplayMode="CompactOverlay"
                           ItemInvoked="HamburgerMenuControl_OnItemInvoked"
                        ItemsSource="{Binding BaseViewModels}">
         <mah:HamburgerMenu.HamburgerMenuHeaderTemplate>
@@ -72,9 +78,17 @@
             <DataTemplate DataType="{x:Type ejecviewmodels:ContratosViewModel}">
                 <ejecviews:ContratosView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type diseviewmodels:EmpresasViewModel}">
-                <diseviews:EmpresasView/>
+            <DataTemplate DataType="{x:Type ejecviewmodels:EmpresasViewModel}">
+                <ejecviews:EmpresasView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type ejecmodalvms:AgregarEmpresaViewModel}">
+                <ejecmodalviews:AgregarEmpresaView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ejecmodalvms:ModificarEmpresaViewModel}">
+                <ejecmodalviews:AgregarEmpresaView/>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type diseviewmodels:GestionFlujoViewModel}">
                 <diseviews:GestionFlujoView/>
             </DataTemplate>
@@ -87,9 +101,16 @@
             <DataTemplate DataType="{x:Type diseviewmodels:GestionRolesViewModel}">
                 <diseviews:GestionRolesView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type disemodalvms:AgregarRolViewModel}">
+                <disemodalviews:RolView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type diseviewmodels:GestionUsuariosViewModel}">
                 <diseviews:GestionUsuariosView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type disemodalvms:AgregarTareaViewModel}">
+                <disemodalviews:TareaView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type adminviewmodels:ConfiguracionViewModel}">
                 <adminviews:ConfiguracionesView/>
             </DataTemplate>
@@ -99,6 +120,10 @@
             <DataTemplate DataType="{x:Type adminviewmodels:GestionUsuariosViewModel}">
                 <adminviews:GestionUsuariosView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type adminmodalvms:AgregarUsuarioViewModel}">
+                <adminmodalviews:UsuarioView/>
+            </DataTemplate>
+            
         </mah:HamburgerMenu.Resources>
     </mah:HamburgerMenu>
 </UserControl>

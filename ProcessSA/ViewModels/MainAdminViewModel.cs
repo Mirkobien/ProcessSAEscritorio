@@ -18,10 +18,20 @@ namespace ProcessSA.ViewModels
             BaseViewModels.Add(new ConfiguracionViewModel());
             BaseViewModels.Add(new ParametrizacionViewModel());
 
+            foreach(BaseViewModel vm in BaseViewModels)
+            {
+                vm.ChangePage += CambiarPagina;
+            }
+
             CurrentViewModel = BaseViewModels[0];
 
             Name = "MainAdmin";
             DisplayName = "Administrador";
+        }
+
+        public void CambiarPagina(object sender, BaseViewModel a)
+        {
+            CurrentViewModel = a;
         }
     }
 }

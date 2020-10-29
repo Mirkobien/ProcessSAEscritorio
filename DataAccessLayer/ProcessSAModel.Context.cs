@@ -25,23 +25,22 @@ namespace DataAccessLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AUTH_USUARIO> AUTH_USUARIO { get; set; }
+        public virtual DbSet<AUTH_USER> AUTH_USER { get; set; }
         public virtual DbSet<DEPARTAMENTO> DEPARTAMENTO { get; set; }
-        public virtual DbSet<DOCUMENTOS> DOCUMENTOS { get; set; }
+        public virtual DbSet<DOCUMENTO> DOCUMENTO { get; set; }
         public virtual DbSet<EMPRESA> EMPRESA { get; set; }
         public virtual DbSet<ERROR_TAREA> ERROR_TAREA { get; set; }
-        public virtual DbSet<ERRORES> ERRORES { get; set; }
-        public virtual DbSet<ESTADO_FLUJO> ESTADO_FLUJO { get; set; }
+        public virtual DbSet<ESTADO_TAREA> ESTADO_TAREA { get; set; }
         public virtual DbSet<ESTADO_USUARIO> ESTADO_USUARIO { get; set; }
-        public virtual DbSet<ESTADOTAREA> ESTADOTAREA { get; set; }
         public virtual DbSet<FLUJO> FLUJO { get; set; }
-        public virtual DbSet<HISTORIAL_FLUJOS> HISTORIAL_FLUJOS { get; set; }
-        public virtual DbSet<HISTORIAL_TAREA> HISTORIAL_TAREA { get; set; }
+        public virtual DbSet<JERARQUIA_DEP> JERARQUIA_DEP { get; set; }
+        public virtual DbSet<JERARQUIA_USR> JERARQUIA_USR { get; set; }
         public virtual DbSet<ROL_CLIENTE> ROL_CLIENTE { get; set; }
         public virtual DbSet<ROL_SISTEMA> ROL_SISTEMA { get; set; }
         public virtual DbSet<SEXO> SEXO { get; set; }
         public virtual DbSet<TAREA> TAREA { get; set; }
-        public virtual DbSet<USUARIO> USUARIO { get; set; }
+        public virtual DbSet<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
         public virtual DbSet<USUARIO_SISTEMA> USUARIO_SISTEMA { get; set; }
+        public virtual DbSet<ESTADO_FLUJO> ESTADO_FLUJO { get; set; }
     }
 }

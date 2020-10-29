@@ -12,10 +12,18 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class ERRORES
+    public partial class ESTADO_TAREA
     {
-        public decimal ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ESTADO_TAREA()
+        {
+            this.TAREA = new HashSet<TAREA>();
+        }
+    
+        public decimal IDEST { get; set; }
         public string DESCRIPCION { get; set; }
-        public System.DateTime FECHA { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TAREA> TAREA { get; set; }
     }
 }

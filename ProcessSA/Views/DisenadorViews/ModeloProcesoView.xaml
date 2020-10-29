@@ -8,17 +8,16 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="{DynamicResource MahApps.Brushes.Control.Background}">
     <StackPanel>
-        <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Modelo de Tareas"/>
+        <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Tareas"/>
         <Grid Margin="20, 0, 20, 20">
-            <Button HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Tareas" />
-            <Button Width="150" Content="Modificar Tareas" />
-            <Button HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Tareas" />
+            <Button Command="{Binding CrearTareaCommand}" HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Tarea" />
+            <Button Command="{Binding ModificarTareaCommand}" Width="150" Content="Modificar Tarea" />
+            <Button Command="{Binding EliminarTareaCommand}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Tarea" />
         </Grid>
-        <DataGrid Margin="20, 0 , 20, 0">
+        <DataGrid IsReadOnly="True" Margin="20, 0 , 20, 0" SelectionUnit="FullRow" ItemsSource="{Binding Tareas}" SelectedItem="{Binding SelectedTarea}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre Funcionario"/>
-                <DataGridTextColumn Header="Descripcion"/>
-                <DataGridTextColumn Header="Estado"/>
+                <DataGridTextColumn Width="*" Header="Descripcion" Binding="{Binding Descripcion}"/>
+                <DataGridTextColumn Width="*" Header="Estado" Binding="{Binding Estado.Descripcion}"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

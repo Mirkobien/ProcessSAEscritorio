@@ -8,10 +8,10 @@ namespace ProcessSA.Models
 {
     class Rol : ObservableObject
     {
-        private string id;
+        private int id;
         private string nombre;
 
-        public string Id { get => id; set { OnPropertyChanged("Id"); id = value; } }
+        public int Id { get => id; set { OnPropertyChanged("Id"); id = value; } }
         public string Nombre { get => nombre; set { OnPropertyChanged("Nombre"); nombre = value; } }
     }
 }

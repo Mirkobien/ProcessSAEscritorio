@@ -17,14 +17,16 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DEPARTAMENTO()
         {
-            this.USUARIO = new HashSet<USUARIO>();
+            this.JERARQUIA_USR = new HashSet<JERARQUIA_USR>();
         }
     
-        public decimal ID { get; set; }
+        public decimal IDDEP { get; set; }
         public string NOMBRE { get; set; }
         public string DESCRIPCION { get; set; }
+        public decimal JERARQUIA_DEP_IDJER { get; set; }
     
+        public virtual JERARQUIA_DEP JERARQUIA_DEP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
+        public virtual ICollection<JERARQUIA_USR> JERARQUIA_USR { get; set; }
     }
 }

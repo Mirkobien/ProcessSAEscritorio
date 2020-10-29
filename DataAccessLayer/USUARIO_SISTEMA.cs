@@ -17,26 +17,21 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public USUARIO_SISTEMA()
         {
-            this.AUTH_USUARIO = new HashSet<AUTH_USUARIO>();
-            this.FLUJO = new HashSet<FLUJO>();
-            this.TAREA = new HashSet<TAREA>();
+            this.AUTH_USER = new HashSet<AUTH_USER>();
         }
     
-        public decimal ID { get; set; }
+        public decimal IDSIS { get; set; }
         public string NOMBRE { get; set; }
-        public decimal ROL_SISTEMA_ID { get; set; }
-        public decimal ESTADO_USUARIO_ID { get; set; }
+        public string APELLIDO { get; set; }
         public string CORREO { get; set; }
-        public decimal AUTH_USUARIO_ID_AUTH { get; set; }
+        public Nullable<decimal> ESTADO_USUARIO_IDESU { get; set; }
+        public Nullable<decimal> SEXO_IDSEX { get; set; }
+        public Nullable<decimal> ROL_SISTEMA_IDROS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AUTH_USUARIO> AUTH_USUARIO { get; set; }
-        public virtual AUTH_USUARIO AUTH_USUARIO1 { get; set; }
+        public virtual ICollection<AUTH_USER> AUTH_USER { get; set; }
         public virtual ESTADO_USUARIO ESTADO_USUARIO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FLUJO> FLUJO { get; set; }
         public virtual ROL_SISTEMA ROL_SISTEMA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAREA> TAREA { get; set; }
+        public virtual SEXO SEXO { get; set; }
     }
 }

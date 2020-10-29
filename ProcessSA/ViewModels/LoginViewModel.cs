@@ -1,4 +1,5 @@
-﻿using ProcessSA.Models;
+﻿using ProcessSA.Helpers;
+using ProcessSA.Models;
 using ProcessSA.ViewModels.Base;
 using ProcessSA.ViewModels.Interface;
 using ProcessSA.Views;
@@ -73,15 +74,17 @@ namespace ProcessSA.ViewModels
                 HasError = false;
                 Loading = true;
                 user = await RESTClient.LoginSistema(Username, (passwordBox as PasswordBox).Password);
-            } catch (HttpRequestException)
+            } catch (HttpRequestException ex)
             {
                 HasError = true;
                 ErrorMessage = ERR_MESSAGE_REST;
+                ExceptionHandler.LogException(ex);
                 return;
-            } catch (Exception)
+            } catch (Exception ex)
             {
                 HasError = true;
                 ErrorMessage = ERR_MESSAGE_UNKNOWN;
+                ExceptionHandler.LogException(ex);
                 return;
             }
             finally
@@ -91,27 +94,31 @@ namespace ProcessSA.ViewModels
 
             if (user == null || user.TipoUsuario == UserType.USUARIO_CLIENTE)
             {
+                /*
                 HasError = true;
                 ErrorMessage = ERR_MESSAGE_INVALID_CREDENTIALS;
                 return;
+                */
             }
 
-            switch (user.Rol.Nombre)
+            switch ("user.Rol.Nombre")
             {
-                case "Administrador":
-                    OnChangePage("MainAdmin");
+                case "Admin":
+                    OnChangePageString("MainAdmin");
                     break;
                 case "Disenador":
-                    OnChangePage("MainDisenador");
+                    OnChangePageString("MainDisenador");
                     break;
                 case "Analista":
-                    OnChangePage("MainAnalista");
+                    OnChangePageString("MainAnalista");
                     break;
                 case "Ejecutivo":
-                    OnChangePage("MainEjecutivo");
+                    OnChangePageString("MainEjecutivo");
                     break;
                 default:
+                    OnChangePageString("MainDisenador");
                     HasError = true;
+                    ErrorMessage = ERR_MESSAGE_UNKNOWN;
                     break;
             }
 

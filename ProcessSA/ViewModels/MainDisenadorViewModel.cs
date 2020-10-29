@@ -13,7 +13,6 @@ namespace ProcessSA.ViewModels
     {
         public MainDisenadorViewModel()
         {
-            BaseViewModels.Add(new EmpresasViewModel());
             BaseViewModels.Add(new GestionRolesViewModel());
             BaseViewModels.Add(new GestionUnidadesViewModel());
             BaseViewModels.Add(new GestionJerarquiasViewModel());
@@ -21,11 +20,20 @@ namespace ProcessSA.ViewModels
             BaseViewModels.Add(new ModeloProcesoViewModel());
             //BaseViewModels.Add(new GestionUsuariosViewModel());
 
+            foreach(BaseViewModel vm in BaseViewModels)
+            {
+                vm.ChangePage += CambiarPagina;
+            }
 
             CurrentViewModel = BaseViewModels[0];
 
             Name = "MainDisenador";
             DisplayName = "Diseñador";
+        }
+
+        public void CambiarPagina(object sender, BaseViewModel a)
+        {
+            CurrentViewModel = a;
         }
     }
 }

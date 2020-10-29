@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="ProcessSA.Views.EjecutivoViews.EmpresasView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProcessSA.Views.EjecutivoViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{DynamicResource MahApps.Brushes.Control.Background}">
+    <StackPanel>
+        <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Empresas"/>
+        <Grid Margin="20, 0, 20, 20">
+            <Button Command="{Binding CrearEmpresaCommand}" HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Empresa" />
+            <Button Command="{Binding ModificarEmpresaCommand}" Width="150" Content="Modificar Empresa" />
+            <Button Command="{Binding EliminarEmpresaCommand}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Empresa" />
+        </Grid>
+        <DataGrid CanUserAddRows="False" Margin="20, 0 , 20, 0" SelectionUnit="FullRow" ItemsSource="{Binding Empresas}" SelectedItem="{Binding SelectedEmpresa}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Nombre" Binding="{Binding Nombre}"/>
+                <DataGridTextColumn Width="*" Header="Rubro" Binding="{Binding Rubro}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>

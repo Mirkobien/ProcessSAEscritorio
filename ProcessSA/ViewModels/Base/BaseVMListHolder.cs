@@ -42,6 +42,16 @@ namespace ProcessSA.ViewModels.Base
                 {
                     _currentViewModel = value;
                     OnPropertyChanged("CurrentViewModel");
+
+                    int vm = BaseViewModels.FindIndex(p => p.Name == _currentViewModel.Name);
+
+                    if (vm != -1)
+                    {
+                        _index = vm;
+                    }
+
+                    _currentViewModel.OnLoaded();
+
                 }
             }
         }

@@ -20,8 +20,8 @@ namespace DataAccessLayer
             this.USUARIO_SISTEMA = new HashSet<USUARIO_SISTEMA>();
         }
     
-        public decimal ID { get; set; }
-        public string NOMBRE { get; set; }
+        public decimal IDROS { get; set; }
+        public string DESCRIPCION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_SISTEMA> USUARIO_SISTEMA { get; set; }

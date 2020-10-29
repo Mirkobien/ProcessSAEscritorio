@@ -17,21 +17,19 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FLUJO()
         {
-            this.HISTORIAL_FLUJOS = new HashSet<HISTORIAL_FLUJOS>();
+            this.TAREA = new HashSet<TAREA>();
         }
     
-        public decimal ID_FRUJO { get; set; }
+        public decimal IDFLU { get; set; }
         public string NOMBRE { get; set; }
-        public System.DateTime EJECUCION { get; set; }
-        public decimal ESTADO_FLUJO_ID { get; set; }
         public string DESCRIPCION { get; set; }
-        public string USUARIO_ID_USER { get; set; }
-        public Nullable<decimal> USUARIO_SISTEMA_ID { get; set; }
+        public decimal DIAS { get; set; }
+        public System.DateTime INICIO { get; set; }
+        public System.DateTime FIN { get; set; }
+        public Nullable<decimal> ESTADO_FLUJO_ESTADO_FLUJO_ID { get; set; }
     
-        public virtual ESTADO_FLUJO ESTADO_FLUJO { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
-        public virtual USUARIO_SISTEMA USUARIO_SISTEMA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HISTORIAL_FLUJOS> HISTORIAL_FLUJOS { get; set; }
+        public virtual ICollection<TAREA> TAREA { get; set; }
+        public virtual ESTADO_FLUJO ESTADO_FLUJO { get; set; }
     }
 }

@@ -59,28 +59,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AUTH_USUARIO.cs">
+    <Compile Include="AUTH_USER.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DEPARTAMENTO.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DOCUMENTOS.cs">
+    <Compile Include="DOCUMENTO.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EMPRESA.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ERRORES.cs">
-      <DependentUpon>ProcessSAModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ERROR_TAREA.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ESTADOTAREA.cs">
+    <Compile Include="ESTADO_FLUJO.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ESTADO_FLUJO.cs">
+    <Compile Include="ESTADO_TAREA.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ESTADO_USUARIO.cs">
@@ -89,10 +86,10 @@
     <Compile Include="FLUJO.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="HISTORIAL_FLUJOS.cs">
+    <Compile Include="JERARQUIA_DEP.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="HISTORIAL_TAREA.cs">
+    <Compile Include="JERARQUIA_USR.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProcessSAModel.Context.cs">
@@ -123,7 +120,7 @@
     <Compile Include="TAREA.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="USUARIO.cs">
+    <Compile Include="USUARIO_CLIENTE.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="USUARIO_SISTEMA.cs">
@@ -142,6 +139,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ProcessSAModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ProcessSAModel.edmx</DependentUpon>
@@ -152,9 +152,6 @@
       <DependentUpon>ProcessSAModel.edmx</DependentUpon>
       <LastGenOutput>ProcessSAModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

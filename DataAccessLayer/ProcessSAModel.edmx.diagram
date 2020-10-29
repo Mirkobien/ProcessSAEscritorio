@@ -4,48 +4,44 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8c6057ffad3b4c448ca2c0340db9ac48" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.AUTH_USUARIO" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DEPARTAMENTO" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DOCUMENTOS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.EMPRESA" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ERROR_TAREA" Width="1.5" PointX="15" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ERRORES" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ESTADO_FLUJO" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ESTADO_USUARIO" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ESTADOTAREA" Width="1.5" PointX="10.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.FLUJO" Width="1.5" PointX="9.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.HISTORIAL_FLUJOS" Width="1.5" PointX="12" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.HISTORIAL_TAREA" Width="1.5" PointX="15" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ROL_CLIENTE" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ROL_SISTEMA" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SEXO" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TAREA" Width="1.5" PointX="12.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.USUARIO" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.USUARIO_SISTEMA" Width="1.5" PointX="7.5" PointY="4.125" IsExpanded="true" />
-        <AssociationConnector Association="Model.AUTH_USUARIO_SISTEMA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.AUTH_USUARIO_USUARIO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_AUTH_USUARIO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_SISTEMA_AUTH_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_DEPARTAMENTO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_EMPRESA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.ERROR_TAREA_TAREA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FLUJO_ESTADO_FLUJO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_ESTADO_USUARIO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_SISTEMA_ESTADO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.TAREA_ESTADOTAREA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FLUJO_USUARIO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FLUJO_USUARIO_SISTEMA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.HISTORIAL_FLUJOS_FLUJO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.HISTORIAL_TAREA_TAREA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.TAREA_HISTORIAL_TAREA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_ROL_CLIENTE_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_SISTEMA_ROL_SISTEMA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.USUARIO_SEXO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.TAREA_TAREA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.TAREA_USUARIO_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.TAREA_USUARIO_SISTEMA_FK" ManuallyRouted="false" />
-      </Diagram>
+      <Diagram DiagramId="2f6f8aebe19f405fa72b25a8f58f217a" Name="Diagram1" ZoomLevel="48">
+        <EntityTypeShape EntityType="Model.AUTH_USER" Width="1.5" PointX="15" PointY="3.875" />
+        <EntityTypeShape EntityType="Model.DEPARTAMENTO" Width="1.5" PointX="5.25" PointY="4" />
+        <EntityTypeShape EntityType="Model.DOCUMENTO" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.EMPRESA" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="Model.ERROR_TAREA" Width="1.5" PointX="14.25" PointY="7.125" />
+        <EntityTypeShape EntityType="Model.ESTADO_TAREA" Width="1.5" PointX="9.75" PointY="8" />
+        <EntityTypeShape EntityType="Model.ESTADO_USUARIO" Width="1.5" PointX="7.5" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.FLUJO" Width="1.5" PointX="9.75" PointY="14.5" />
+        <EntityTypeShape EntityType="Model.JERARQUIA_DEP" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="Model.JERARQUIA_USR" Width="1.5" PointX="7.5" PointY="4.125" />
+        <EntityTypeShape EntityType="Model.ROL_CLIENTE" Width="1.5" PointX="7.5" PointY="9.875" />
+        <EntityTypeShape EntityType="Model.ROL_SISTEMA" Width="1.5" PointX="10.5" PointY="11.25" />
+        <EntityTypeShape EntityType="Model.SEXO" Width="1.5" PointX="7.5" PointY="7.25" />
+        <EntityTypeShape EntityType="Model.TAREA" Width="1.5" PointX="12" PointY="3.375" />
+        <EntityTypeShape EntityType="Model.USUARIO_CLIENTE" Width="1.5" PointX="9.75" PointY="3" />
+        <EntityTypeShape EntityType="Model.USUARIO_SISTEMA" Width="1.5" PointX="12.75" PointY="10.5" />
+        <AssociationConnector Association="Model.AUTH_USER_USUARIO_CLIENTE_FK" />
+        <AssociationConnector Association="Model.AUTH_USER_USUARIO_SISTEMA_FK" />
+        <AssociationConnector Association="Model.DEPARTAMENTO_JERARQUIA_DEP_FK" />
+        <AssociationConnector Association="Model.JERARQUIA_USR_DEPARTAMENTO_FK" />
+        <AssociationConnector Association="Model.DOCUMENTO_EMPRESA_FK" />
+        <AssociationConnector Association="Model.JERARQUIA_DEP_EMPRESA_FK" />
+        <AssociationConnector Association="Model.ERROR_TAREA_TAREA_FK" />
+        <AssociationConnector Association="Model.TAREA_ESTADO_TAREA_FK" />
+        <AssociationConnector Association="Model.SISTEMA_ESTADO_USUARIO_FK" />
+        <AssociationConnector Association="Model.USUARIO_CLIENTE_ESTADO_FK" />
+        <AssociationConnector Association="Model.CLIENTE_JERARQUIA_USR_FK" />
+        <AssociationConnector Association="Model.USUARIO_CLIENTE_ROL_CLIENTE_FK" />
+        <AssociationConnector Association="Model.USUARIO_SISTEMA_ROL_SISTEMA_FK" />
+        <AssociationConnector Association="Model.USUARIO_CLIENTE_SEXO_FK" />
+        <AssociationConnector Association="Model.USUARIO_SISTEMA_SEXO_FK" />
+        <AssociationConnector Association="Model.TAREA_FLUJO" />
+        <AssociationConnector Association="Model.TAREA_TAREA" />
+        <AssociationConnector Association="Model.USUARIO_TAREA" />
+        <EntityTypeShape EntityType="Model.ESTADO_FLUJO" Width="1.5" PointX="7.5" PointY="15" />
+        <AssociationConnector Association="Model.FLUJO_ESTADO_FLUJO_FK" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

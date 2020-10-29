@@ -12,22 +12,20 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class HISTORIAL_TAREA
+    public partial class JERARQUIA_DEP
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HISTORIAL_TAREA()
+        public JERARQUIA_DEP()
         {
-            this.TAREA1 = new HashSet<TAREA>();
+            this.DEPARTAMENTO = new HashSet<DEPARTAMENTO>();
         }
     
-        public decimal ID { get; set; }
-        public string DESCRIPCION { get; set; }
-        public System.DateTime FECHA_TERMINO { get; set; }
-        public System.DateTime FECHA_CREACION { get; set; }
-        public decimal TAREA_ID_TAREA { get; set; }
+        public decimal IDJER { get; set; }
+        public decimal NIVEL { get; set; }
+        public Nullable<decimal> EMPRESA_IDEMP { get; set; }
     
-        public virtual TAREA TAREA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAREA> TAREA1 { get; set; }
+        public virtual ICollection<DEPARTAMENTO> DEPARTAMENTO { get; set; }
+        public virtual EMPRESA EMPRESA { get; set; }
     }
 }

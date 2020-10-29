@@ -13,6 +13,28 @@ namespace BusinessLogic
         USUARIO_CLIENTE,
         USUARIO_SISTEMA
     }
+
+    [DataContract]
+    public class AuthUser
+    {
+        public AuthUser(AUTH_USER auth)
+        {
+            Id = decimal.ToInt32(auth.IDAUT);
+            Usuario = auth.USERNAME;
+            Contrasenia = auth.PASSWORD;
+        }
+        public AuthUser()
+        {
+
+        }
+
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
+        public string Usuario { get; set; }
+        [DataMember]
+        public string Contrasenia { get; set; }
+    }
     [DataContract]
     public class User
     {
@@ -22,19 +44,34 @@ namespace BusinessLogic
         }
         public User(USUARIO_SISTEMA usuario)
         {
-            Id = decimal.ToInt32(usuario.ID);
+            Id = decimal.ToInt32(usuario.IDSIS);
             Nombre = usuario.NOMBRE;
             Rol = new Rol(usuario.ROL_SISTEMA);
             TipoUsuario = UserType.USUARIO_SISTEMA;
         }
-        public User(USUARIO usuario)
+        public User(USUARIO_CLIENTE usuario)
         {
-            Id = decimal.ToInt32(usuario.ID_USER);
+            Id = decimal.ToInt32(usuario.IDUSU);
             Nombre = usuario.NOMBRE;
             Apellido = usuario.PATERNO;
             Sexo = new Sexo(usuario.SEXO);
             Rol = new Rol(usuario.ROL_CLIENTE);
             TipoUsuario = UserType.USUARIO_CLIENTE;
+        }
+
+        public static List<User> GetAllUsersEmpresa(int v)
+        {
+            Entities ent = new Entities();
+            List<USUARIO_CLIENTE> lista =
+                ent.USUARIO_CLIENTE.Where(p => p.JERARQUIA_USR.DEPARTAMENTO.JERARQUIA_DEP.EMPRESA.IDEMP == v).ToList();
+
+            List<User> listaFinal = new List<User>();
+            
+            foreach(USUARIO_CLIENTE usr in lista)
+            {
+                listaFinal.Add(new User(usr));
+            }
+            return listaFinal;
         }
 
         #region database operations
@@ -56,8 +93,8 @@ namespace BusinessLogic
                 }
             } else if (type == UserType.USUARIO_CLIENTE)
             {
-                List<USUARIO> lista = ent.USUARIO.ToList();
-                foreach (USUARIO user in lista)
+                List<USUARIO_CLIENTE> lista = ent.USUARIO_CLIENTE.ToList();
+                foreach (USUARIO_CLIENTE user in lista)
                 {
                     listaFinal.Add(new User(user));
                 }
@@ -77,7 +114,7 @@ namespace BusinessLogic
             Entities ent = new Entities();
             User user = null;
 
-            AUTH_USUARIO auth = ent.AUTH_USUARIO.Where(p => p.USERNAME == username &&
+            AUTH_USER auth = ent.AUTH_USER.Where(p => p.USERNAME == username &&
             p.PASSWORD == password).FirstOrDefault();
 
             if (auth == null)
@@ -85,7 +122,7 @@ namespace BusinessLogic
 
             if (tipo == UserType.USUARIO_CLIENTE)
             {
-                USUARIO usuario = auth.USUARIO;
+                USUARIO_CLIENTE usuario = auth.USUARIO_CLIENTE;
                 if (usuario == null)
                     return null;
                 user = new User(usuario);
@@ -106,15 +143,15 @@ namespace BusinessLogic
             Entities ent = new Entities();
             User user = null;
 
-            AUTH_USUARIO auth = ent.AUTH_USUARIO.Where(p => p.USERNAME == username &&
+            AUTH_USER auth = ent.AUTH_USER.Where(p => p.USERNAME == username &&
             p.PASSWORD == password).FirstOrDefault();
 
             if (auth == null)
                 return null;
 
-            if (auth.USUARIO != null)
+            if (auth.USUARIO_CLIENTE != null)
             {
-                USUARIO usuario = auth.USUARIO;
+                USUARIO_CLIENTE usuario = auth.USUARIO_CLIENTE;
                 if (usuario == null)
                     return null;
                 user = new User(usuario);
@@ -136,28 +173,41 @@ namespace BusinessLogic
             Entities ent = new Entities();
             if (type == UserType.USUARIO_CLIENTE)
             {
-                USUARIO user = ent.USUARIO.Where(p => p.ID_USER == id).FirstOrDefault();
-                ent.USUARIO.Remove(user);
+                USUARIO_CLIENTE user = ent.USUARIO_CLIENTE.Where(p => p.IDUSU == id).FirstOrDefault();
+                ent.USUARIO_CLIENTE.Remove(user);
                 ent.SaveChanges();
                 return true;
             } else if (type == UserType.USUARIO_SISTEMA)
             {
-                USUARIO_SISTEMA user = ent.USUARIO_SISTEMA.Where(p => decimal.ToInt32(p.ID) == id).FirstOrDefault();
+                USUARIO_SISTEMA user = ent.USUARIO_SISTEMA.Where(p => decimal.ToInt32(p.IDSIS) == id).FirstOrDefault();
                 ent.USUARIO_SISTEMA.Remove(user);
                 ent.SaveChanges();
                 return true;
             }
             return false;
         }
-        public bool Add()
+        public void Guardar()
         {
-            throw new NotImplementedException();
+            Entities ent = new Entities();
+
+            USUARIO_CLIENTE usu = new USUARIO_CLIENTE();
+
+            usu.NOMBRE = this.Nombre;
+            usu.PATERNO = this.Apellido;
+            usu.SEXO_IDSEX = this.Sexo.Id;
+            usu.MATERNO = this.ApellidoMaterno;
+            usu.RUT = this.Rut;
+            usu.TELEFONO = this.Telefono;
+            usu.ROL_CLIENTE_IDROL = this.Rol.Id;
+            
+            ent.USUARIO_CLIENTE.Add(usu);
+            ent.SaveChanges();
         }
 
-        public static List<User> USUARIOToUser(ICollection<USUARIO> col)
+        public static List<User> USUARIOToUser(ICollection<USUARIO_CLIENTE> col)
         {
             List<User> listaFinal = new List<User>();
-            foreach (USUARIO user in col)
+            foreach (USUARIO_CLIENTE user in col)
             {
                 listaFinal.Add(new User(user));
             }
@@ -173,15 +223,29 @@ namespace BusinessLogic
             }
             return listaFinal;
         }
+
+        public static List<User> GetUsuariosFromDepID(int id)
+        {
+            Entities ent = new Entities();
+            return USUARIOToUser(ent.USUARIO_CLIENTE.Where(u => u.JERARQUIA_USR.DEPARTAMENTO_IDDEP == id).ToList());
+        }
         #endregion
 
         #region data members
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public string Rut { get; set; }
+        [DataMember]
         public string Nombre { get; set; }
         [DataMember]
         public string Apellido { get; set; }
+        [DataMember]
+        public string ApellidoMaterno { get; set; }
+        [DataMember]
+        public string Correo { get; set; }
+        [DataMember]
+        public long Telefono { get; set; }
         [DataMember]
         public Sexo Sexo { get; set; }
         [DataMember]

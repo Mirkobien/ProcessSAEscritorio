@@ -53,6 +53,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.2.2.0\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -167,24 +170,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\ExceptionHandler.cs" />
+    <Compile Include="Models\Departamento.cs" />
     <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\Flujo.cs" />
+    <Compile Include="Models\Jerarquias.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Tarea.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Helpers\RESTClient.cs" />
     <Compile Include="ViewModels\AdminViewModels\ConfiguracionViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModels\GestionUsuariosViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModels\Modals\AgregarUsuarioViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModels\ParametrizacionViewModel.cs" />
     <Compile Include="ViewModels\AnalistaViewModels\GestionInformeViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseVMListHolder.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
-    <Compile Include="ViewModels\DisenadorViewModels\EmpresasViewModel.cs" />
+    <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarRolViewModel.cs" />
+    <Compile Include="ViewModels\EjecutivoViewModels\EmpresasViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionFlujoViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionJerarquiasViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionRolesViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionUnidadesViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\GestionUsuariosViewModel.cs" />
-    <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarEmpresaViewModel.cs" />
+    <Compile Include="ViewModels\EjecutivoViewModels\Modals\ModificarEmpresaViewModel.cs" />
+    <Compile Include="ViewModels\EjecutivoViewModels\Modals\AgregarEmpresaViewModel.cs" />
+    <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarTareaViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\ModeloProcesoViewModel.cs" />
     <Compile Include="ViewModels\EjecutivoViewModels\ContratosViewModel.cs" />
     <Compile Include="ViewModels\Interface\IViewModel.cs" />
@@ -207,6 +218,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProcessTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminViews\ConfiguracionesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +229,10 @@
     <Page Include="Views\AdminViews\GestionUsuariosView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AdminViews\Modals\UsuarioView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AdminViews\ParametrizacionView.xaml">
       <SubType>Designer</SubType>
@@ -223,7 +242,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DisenadorViews\EmpresasView.xaml">
+    <Page Include="Views\DisenadorViews\Modal\RolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EjecutivoViews\EmpresasView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +267,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DisenadorViews\GestionUsuariosView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisenadorViews\Modal\TareaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EjecutivoViews\Modals\AgregarEmpresaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,13 +310,19 @@
     <Compile Include="Views\AdminViews\GestionUsuariosView.xaml.cs">
       <DependentUpon>GestionUsuariosView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AdminViews\Modals\UsuarioView.xaml.cs">
+      <DependentUpon>UsuarioView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminViews\ParametrizacionView.xaml.cs">
       <DependentUpon>ParametrizacionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AnalistaViews\GestionInformeView.xaml.cs">
       <DependentUpon>GestionInformeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DisenadorViews\EmpresasView.xaml.cs">
+    <Compile Include="Views\DisenadorViews\Modal\RolView.xaml.cs">
+      <DependentUpon>RolView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EjecutivoViews\EmpresasView.xaml.cs">
       <DependentUpon>EmpresasView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DisenadorViews\GestionFlujoView.xaml.cs">
@@ -302,6 +339,12 @@
     </Compile>
     <Compile Include="Views\DisenadorViews\GestionUsuariosView.xaml.cs">
       <DependentUpon>GestionUsuariosView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisenadorViews\Modal\TareaView.xaml.cs">
+      <DependentUpon>TareaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EjecutivoViews\Modals\AgregarEmpresaView.xaml.cs">
+      <DependentUpon>AgregarEmpresaView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DisenadorViews\ModeloProcesoView.xaml.cs">
       <DependentUpon>ModeloProcesoView.xaml</DependentUpon>
@@ -363,9 +406,7 @@
   <ItemGroup>
     <Resource Include="Resource\ProcessLogo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\DisenadorViews\Modal\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resource\ProcessSAIcon.png" />
   </ItemGroup>

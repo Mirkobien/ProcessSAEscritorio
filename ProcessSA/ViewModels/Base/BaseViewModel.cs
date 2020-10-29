@@ -14,22 +14,30 @@ namespace ProcessSA.ViewModels.Base
 
         public string DisplayName { get; set; }
 
-        public event EventHandler<string> ChangePage;
+        public event EventHandler<string> ChangePageString;
 
-        protected void OnChangePage(string e)
+        public event EventHandler<BaseViewModel> ChangePage;
+
+        protected void OnChangePageString(string e)
         {
-            EventHandler<string> eventHandler = ChangePage;
+            EventHandler<string> eventHandler = ChangePageString;
             eventHandler?.Invoke(this, e);
         }
 
-        public class ChangePageEventArgs : EventArgs
+        protected void OnChangePage(BaseViewModel vm)
         {
-            public string PageName { get; set; }
+            EventHandler<BaseViewModel> eventHandler = ChangePage;
+            eventHandler?.Invoke(this, vm);
         }
 
-        public void OnLoaded()
+        public virtual void OnLoaded()
         {
 
+        }
+
+        public virtual void Volver()
+        {
+            OnChangePage(this);
         }
     }
 }

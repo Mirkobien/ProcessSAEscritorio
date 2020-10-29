@@ -10,16 +10,14 @@
     <StackPanel>
         <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Usuarios"/>
         <Grid Margin="20, 0, 20, 20">
-            <Button HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Usuario" />
+            <Button Command="{Binding CrearUsuarioCommand}" HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Usuario" />
             <Button Width="150" Content="Modificar Usuario" />
-            <Button HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Usuario" />
+            <Button Command="{Binding EliminarUsuarioCommand}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Usuario" />
         </Grid>
-        <DataGrid Margin="20, 0 , 20, 0">
+        <DataGrid IsReadOnly="True" SelectedItem="{Binding SelectedUser}"  AutoGenerateColumns="False" ItemsSource="{Binding Users}" Margin="20, 0 , 20, 0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre"/>
-                <DataGridTextColumn Header="Apellido"/>
-                <DataGridTextColumn Header="Telefono"/>
-                <DataGridTextColumn Header="Área"/>
+                <DataGridTextColumn Width="*" Header="Nombre" Binding="{Binding Nombre}"/>
+                <DataGridTextColumn Width="*" Header="Apellido" Binding="{Binding Apellido}"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

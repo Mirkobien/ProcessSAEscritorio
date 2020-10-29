@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProcessSA.Views.DisenadorViews
+namespace ProcessSA.Views.AdminViews.Modals
 {
     /// <summary>
-    /// Lógica de interacción para EmpresasView.xaml
+    /// Lógica de interacción para UsuarioView.xaml
     /// </summary>
-    public partial class EmpresasView : UserControl
+    public partial class UsuarioView : UserControl
     {
-        public EmpresasView()
+        public UsuarioView()
         {
             InitializeComponent();
         }

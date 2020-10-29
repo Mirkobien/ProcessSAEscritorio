@@ -10,13 +10,13 @@
     <StackPanel>
         <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Roles"/>
         <Grid Margin="20, 0, 20, 20">
-            <Button HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Rol" />
+            <Button Command="{Binding CrearRolCommand}" HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Rol" />
             <Button Width="150" Content="Modificar Rol" />
-            <Button HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Rol" />
+            <Button Command="{Binding EliminarRolCommand}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Rol" />
         </Grid>
-        <DataGrid Margin="20, 0 , 20, 0">
+        <DataGrid IsReadOnly="True" SelectedItem="{Binding SelectedRol, Mode=OneWayToSource}" ItemsSource="{Binding Roles}" AutoGenerateColumns="True" Margin="20, 0 , 20, 0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"/>
                 <DataGridTextColumn Header="Telefono"/>
                 <DataGridTextColumn Header="Rubro"/>
             </DataGrid.Columns>

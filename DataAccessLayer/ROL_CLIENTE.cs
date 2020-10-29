@@ -17,14 +17,13 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ROL_CLIENTE()
         {
-            this.USUARIO = new HashSet<USUARIO>();
+            this.USUARIO_CLIENTE = new HashSet<USUARIO_CLIENTE>();
         }
     
-        public decimal ID { get; set; }
-        public string NOMBRE { get; set; }
-        public string CORREO { get; set; }
+        public decimal IDROL { get; set; }
+        public string DESCRIPCION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
+        public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
     }
 }

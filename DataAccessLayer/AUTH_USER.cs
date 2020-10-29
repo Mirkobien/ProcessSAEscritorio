@@ -12,10 +12,15 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class DOCUMENTOS
+    public partial class AUTH_USER
     {
-        public decimal ID { get; set; }
-        public string DESCRICION_DOCUMENTO { get; set; }
-        public System.DateTime FECHA_DOCUMENTO { get; set; }
+        public decimal IDAUT { get; set; }
+        public string USERNAME { get; set; }
+        public string PASSWORD { get; set; }
+        public Nullable<decimal> USUARIO_CLIENTE_IDUSU { get; set; }
+        public Nullable<decimal> USUARIO_SISTEMA_IDSIS { get; set; }
+    
+        public virtual USUARIO_CLIENTE USUARIO_CLIENTE { get; set; }
+        public virtual USUARIO_SISTEMA USUARIO_SISTEMA { get; set; }
     }
 }

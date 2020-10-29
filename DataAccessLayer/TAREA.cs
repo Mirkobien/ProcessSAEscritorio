@@ -18,31 +18,29 @@ namespace DataAccessLayer
         public TAREA()
         {
             this.ERROR_TAREA = new HashSet<ERROR_TAREA>();
-            this.HISTORIAL_TAREA = new HashSet<HISTORIAL_TAREA>();
+            this.FLUJO = new HashSet<FLUJO>();
             this.TAREA1 = new HashSet<TAREA>();
+            this.TAREA2 = new HashSet<TAREA>();
+            this.USUARIO_CLIENTE = new HashSet<USUARIO_CLIENTE>();
         }
     
-        public decimal ID_TAREA { get; set; }
+        public decimal IDTAR { get; set; }
         public string DESCRIPCION { get; set; }
-        public System.DateTime COMIENZO { get; set; }
-        public System.DateTime TERMINO { get; set; }
-        public string JUSTIFICACION { get; set; }
-        public decimal ESTADOTAREA_ID { get; set; }
-        public string USUARIO_ID_USER { get; set; }
-        public decimal TAREA_ID_TAREA { get; set; }
-        public Nullable<decimal> USUARIO_SISTEMA_ID { get; set; }
-        public decimal HISTORIAL_TAREA_ID { get; set; }
+        public System.DateTime INICIO { get; set; }
+        public System.DateTime FIN { get; set; }
+        public decimal DURACION { get; set; }
+        public Nullable<decimal> ESTADO_TAREA_IDEST { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ERROR_TAREA> ERROR_TAREA { get; set; }
-        public virtual ESTADOTAREA ESTADOTAREA { get; set; }
+        public virtual ESTADO_TAREA ESTADO_TAREA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HISTORIAL_TAREA> HISTORIAL_TAREA { get; set; }
-        public virtual HISTORIAL_TAREA HISTORIAL_TAREA1 { get; set; }
+        public virtual ICollection<FLUJO> FLUJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREA> TAREA1 { get; set; }
-        public virtual TAREA TAREA2 { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
-        public virtual USUARIO_SISTEMA USUARIO_SISTEMA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TAREA> TAREA2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
     }
 }

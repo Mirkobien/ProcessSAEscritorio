@@ -13,7 +13,7 @@ namespace BusinessLogic
     {
         public Sexo(SEXO sex)
         {
-            Id = decimal.ToInt32(sex.ID);
+            Id = decimal.ToInt32(sex.IDSEX);
             Descripcion = sex.DESCRIPCION;
         }
         [DataMember]

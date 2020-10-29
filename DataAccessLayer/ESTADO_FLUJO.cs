@@ -20,8 +20,9 @@ namespace DataAccessLayer
             this.FLUJO = new HashSet<FLUJO>();
         }
     
-        public decimal ID { get; set; }
+        public decimal IDESF { get; set; }
         public string DESCRIPCION { get; set; }
+        public decimal ESTADO_FLUJO_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FLUJO> FLUJO { get; set; }

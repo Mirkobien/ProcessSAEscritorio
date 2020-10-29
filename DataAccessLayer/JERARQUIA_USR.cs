@@ -12,26 +12,20 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class AUTH_USUARIO
+    public partial class JERARQUIA_USR
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AUTH_USUARIO()
+        public JERARQUIA_USR()
         {
-            this.USUARIO1 = new HashSet<USUARIO>();
-            this.USUARIO_SISTEMA1 = new HashSet<USUARIO_SISTEMA>();
+            this.USUARIO_CLIENTE = new HashSet<USUARIO_CLIENTE>();
         }
     
-        public decimal ID_AUTH { get; set; }
-        public string USERNAME { get; set; }
-        public string PASSWORD { get; set; }
-        public string USUARIO_ID_USER { get; set; }
-        public Nullable<decimal> USUARIO_SISTEMA_ID { get; set; }
+        public decimal IDJER { get; set; }
+        public decimal NIVEL { get; set; }
+        public Nullable<decimal> DEPARTAMENTO_IDDEP { get; set; }
     
-        public virtual USUARIO_SISTEMA USUARIO_SISTEMA { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual DEPARTAMENTO DEPARTAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIO1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO_SISTEMA> USUARIO_SISTEMA1 { get; set; }
+        public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
     }
 }

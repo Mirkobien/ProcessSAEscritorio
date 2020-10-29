@@ -1,4 +1,5 @@
-﻿using ProcessSA.ViewModels.EjecutivoViewModels;
+﻿using ProcessSA.ViewModels.Base;
+using ProcessSA.ViewModels.EjecutivoViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,21 @@ namespace ProcessSA.ViewModels
     {
         public MainEjecutivoViewModel()
         {
-            BaseViewModels.Add(new ContratosViewModel());
+            BaseViewModels.Add(new EmpresasViewModel());
             CurrentViewModel = BaseViewModels[0];
+
+            foreach (BaseViewModel vm in BaseViewModels)
+            {
+                vm.ChangePage += CambiarPagina;
+            }
 
             Name = "MainEjecutivo";
             DisplayName = "Ejecutivo";
+        }
+
+        public void CambiarPagina(object sender, BaseViewModel a)
+        {
+            CurrentViewModel = a;
         }
     }
 }

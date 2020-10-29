@@ -17,16 +17,16 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ESTADO_USUARIO()
         {
-            this.USUARIO = new HashSet<USUARIO>();
             this.USUARIO_SISTEMA = new HashSet<USUARIO_SISTEMA>();
+            this.USUARIO_CLIENTE = new HashSet<USUARIO_CLIENTE>();
         }
     
-        public decimal ID { get; set; }
+        public decimal IDESU { get; set; }
         public string DESCRIPCION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_SISTEMA> USUARIO_SISTEMA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
     }
 }

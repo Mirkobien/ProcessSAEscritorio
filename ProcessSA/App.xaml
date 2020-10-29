@@ -10,7 +10,9 @@
         <!-- Theme setting -->
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml">
         </ResourceDictionary>
-      </ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="ProcessTheme.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="btn-primary" Color="#FF0275D8"/>
         </ResourceDictionary>
   </Application.Resources>

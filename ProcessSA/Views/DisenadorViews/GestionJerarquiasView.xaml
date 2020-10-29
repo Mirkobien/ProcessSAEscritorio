@@ -7,20 +7,53 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="{DynamicResource MahApps.Brushes.Control.Background}">
-    <StackPanel>
-        <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Jerarquías"/>
-        <Grid Margin="20, 0, 20, 20">
-            <Button HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Jerarquía" />
-            <Button Width="150" Content="Modificar Jerarquía" />
-            <Button HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Jerarquía" />
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Empresa.JerarquiaDepartamentos}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="10" BorderBrush="Black" BorderThickness="1">
+                            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
+                                <DockPanel LastChildFill="False">
+                                    <ItemsControl ItemsSource="{Binding Departamentos}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Height="100" BorderBrush="Black" BorderThickness="1" Margin="10">
+                                                    <DockPanel>
+                                                        <Label DockPanel.Dock="Top" Content="{Binding Nombre}"></Label>
+                                                        <Button Content="Modificar Departamento"/>
+                                                    </DockPanel>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Margin="10" Orientation="Horizontal">
+                                                </StackPanel>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                    <Button Margin="10" VerticalAlignment="Center" Content="Añadir Departamento"/>
+                                </DockPanel>
+                            </ScrollViewer>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="10"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Label Margin="10, 0, 10, 10" FontSize="26" FontWeight="Bold" Content="Organigramas"/>
         </Grid>
-        <DataGrid Margin="20, 0 , 20, 0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre"/>
-                <DataGridTextColumn Header="Área"/>
-                <DataGridTextColumn Header="Encargado"/>
-                <DataGridTextColumn Header="Número de Empleados"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>

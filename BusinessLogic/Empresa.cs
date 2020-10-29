@@ -12,16 +12,15 @@ namespace BusinessLogic
     {
         public Empresa(EMPRESA emp)
         {
-            Id = (int)emp.ID;
+            Id = (int)emp.IDEMP;
             Nombre = emp.NOMBRE;
             Correo = emp.CORREO;
-            Direccion = emp.DIRECCION;
             Rubro = emp.RUBRO;
 
-            Empleados = new List<User>();
-            foreach(USUARIO user in emp.USUARIO)
+            JerarquiaDepartamentos = new List<JerarquiaDepartamento>();
+            foreach(JERARQUIA_DEP jer in emp.JERARQUIA_DEP)
             {
-                Empleados.Add(new User(user));
+                JerarquiaDepartamentos.Add(new JerarquiaDepartamento(jer));
             }
         }
 
@@ -35,13 +34,14 @@ namespace BusinessLogic
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Rubro { get; set; }
-        public List<User> Empleados { get; set; }
+        public int Telefono { get; set; }
+        public List<JerarquiaDepartamento> JerarquiaDepartamentos { get; set; }
 
         #region database operations
         public static bool Eliminar(int id)
         {
             Entities ent = new Entities();
-            EMPRESA emp = ent.EMPRESA.Where(x => x.ID == id).FirstOrDefault();
+            EMPRESA emp = ent.EMPRESA.Where(x => x.IDEMP == id).FirstOrDefault();
 
             if (emp == null)
                 return false;
@@ -53,7 +53,7 @@ namespace BusinessLogic
         public bool Modificar()
         {
             Entities ent = new Entities();
-            EMPRESA emp = ent.EMPRESA.Where(x => x.ID == Id).FirstOrDefault();
+            EMPRESA emp = ent.EMPRESA.Where(x => x.IDEMP == Id).FirstOrDefault();
 
             if (emp == null)
                 return false;
@@ -68,16 +68,23 @@ namespace BusinessLogic
             Entities ent = new Entities();
             EMPRESA emp = new EMPRESA
             {
-                ID = Id,
                 NOMBRE = Nombre,
                 CORREO = Correo,
-                DIRECCION = Direccion,
-                RUBRO = Rubro
+                RUBRO = Rubro,
+                TELEFONO = Telefono
             };
 
             ent.EMPRESA.Add(emp);
             ent.SaveChanges();
             return true;
+        }
+
+        public static Empresa GetEmpresa(int v)
+        {
+            Entities ent = new Entities();
+
+            EMPRESA emp = ent.EMPRESA.Where(e => e.IDEMP == v).FirstOrDefault();
+            return new Empresa(emp);
         }
 
         public static List<Empresa> GetAllEmpresas()

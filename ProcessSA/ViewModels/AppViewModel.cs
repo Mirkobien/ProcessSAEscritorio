@@ -40,7 +40,7 @@ namespace ProcessSA.ViewModels
 
             foreach (BaseViewModel vm in PageViewModels)
             {
-                vm.ChangePage += Vm_ChangePage;
+                vm.ChangePageString += Vm_ChangePage;
             }
         }
 

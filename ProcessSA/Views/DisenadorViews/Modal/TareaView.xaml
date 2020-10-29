@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ProcessSA.Views.DisenadorViews.Modal.TareaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProcessSA.Views.DisenadorViews.Modal"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{DynamicResource MahApps.Brushes.Control.Background}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Margin="10" Content="Agregar Tarea" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Grid.Row="0" />
+        <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Descripcion"/>
+            <TextBox Text="{Binding Tarea.Descripcion}" mah:TextBoxHelper.Watermark="Descripcion de la Tarea"/>
+        </StackPanel>
+        <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Comienzo"/>
+            <DatePicker SelectedDate="{Binding Tarea.Comienzo, Mode=OneWayToSource}"/>
+        </StackPanel>
+        <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Estado"/>
+            <ComboBox ItemsSource="{Binding Estados}" DisplayMemberPath="Descripcion" SelectedItem="{Binding SelectedEstado}"/>
+        </StackPanel>
+        <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Termino"/>
+            <DatePicker SelectedDate="{Binding Tarea.Termino, Mode=OneWayToSource}"/>
+        </StackPanel>
+        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <Label Margin="0,10,0,0" DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Responsables"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+                <ListBox Padding="10,10,10,10" Background="LightGray" x:Name="Usuarios" DisplayMemberPath="Nombre" ItemsSource="{Binding UsuariosEmpresa}" Margin="10,10,10,10"/>
+                <DockPanel LastChildFill="False" Margin="10,10,10,10" Grid.Column="1">
+                    <Button Command="{Binding AnadirCommand}" CommandParameter="{Binding ElementName=Usuarios, Path=SelectedItem}" DockPanel.Dock="Top" Content="Añadir >>"/>
+                    <Button DockPanel.Dock="Bottom" Content="&lt;&lt; Eliminar"/>
+                </DockPanel>
+                <ListBox Padding="10,10,10,10" Background="LightGray" x:Name="Responsables" DisplayMemberPath="Nombre" ItemsSource="{Binding Tarea.Responsables}" Grid.Column="2" Margin="10,10,10,10"/>
+            </Grid>
+        </DockPanel>
+        <Button VerticalAlignment="Center" Command="{Binding VolverCommand}" Margin="10" Content="Volver" Grid.Column="0" Grid.Row="6" />
+        <Button Command="{Binding GuardarCommand}" VerticalAlignment="Center" Margin="10" Content="Agregar Tarea" Grid.Column="1" Grid.Row="6" />
+
+    </Grid>
+</UserControl>

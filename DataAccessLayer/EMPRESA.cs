@@ -17,17 +17,21 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMPRESA()
         {
-            this.USUARIO = new HashSet<USUARIO>();
+            this.DOCUMENTO = new HashSet<DOCUMENTO>();
+            this.JERARQUIA_DEP = new HashSet<JERARQUIA_DEP>();
         }
     
-        public decimal ID { get; set; }
+        public decimal IDEMP { get; set; }
+        public string RUT { get; set; }
         public string NOMBRE { get; set; }
         public string CORREO { get; set; }
-        public Nullable<decimal> TELEFONO { get; set; }
-        public string DIRECCION { get; set; }
         public string RUBRO { get; set; }
+        public Nullable<decimal> TELEFONO { get; set; }
+        public byte[] CONTRATO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
+        public virtual ICollection<DOCUMENTO> DOCUMENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JERARQUIA_DEP> JERARQUIA_DEP { get; set; }
     }
 }
