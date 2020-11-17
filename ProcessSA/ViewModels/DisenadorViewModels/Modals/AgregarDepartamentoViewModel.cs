@@ -12,10 +12,11 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 {
     class AgregarDepartamentoViewModel : BaseViewModel
     {
-        public AgregarDepartamentoViewModel(BaseViewModel previousVM, JerarquiaDepartamento j)
+        public AgregarDepartamentoViewModel(BaseViewModel previousVM, Departamento j, Empresa empresa)
         {
             PreviousViewModel = previousVM;
-            Jerarquia = j;
+            Padre = j;
+            Empresa = empresa;
             Task.Run(async () => await OnLoaded());
             Departamento = new Departamento();
         }
@@ -24,17 +25,10 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
         private ICommand _volverCommand;
         private ICommand _anadirCommand;
 
-        private ObservableCollection<User> _usuariosEmpresa;
-
         public Empresa Empresa { get; set; }
         public BaseViewModel PreviousViewModel { get; set; }
         public Departamento Departamento { get; set; }
-        public JerarquiaDepartamento Jerarquia { get; set; }
-        public ObservableCollection<User> UsuariosEmpresa 
-        { 
-            get { return _usuariosEmpresa; }
-            set { _usuariosEmpresa = value; OnPropertyChanged("UsuariosEmpresa"); }
-        }
+        public Departamento Padre { get; set; }
         public bool IsCompleted { get; set; }
 
         public ICommand GuardarCommand
@@ -65,18 +59,6 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
             }
         }
 
-        public ICommand AnadirCommand
-        {
-            get
-            {
-                if (_anadirCommand == null)
-                {
-                    _anadirCommand = new RelayCommand(p => Anadir((User)p));
-                }
-                return _anadirCommand;
-            }
-        }
-
         public void Anadir(User p)
         {
             if (Departamento.Usuarios.Contains(p) || p == null)
@@ -87,12 +69,12 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 
         public async Task OnLoaded()
         {
-            UsuariosEmpresa = new ObservableCollection<User>(await RESTClient.GetUsersDeEmpresa(1));
+
         }
 
         public async void GuardarDepartamento()
         {
-            await RESTClient.GuardarDepartamento(Departamento, Jerarquia.Id);
+            await RESTClient.GuardarDepartamento(Departamento, Padre.Id, Empresa.Id);
             IsCompleted = true;
             Volver();
         }

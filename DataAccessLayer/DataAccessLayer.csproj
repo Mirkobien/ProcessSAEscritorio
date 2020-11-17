@@ -65,6 +65,9 @@
     <Compile Include="DEPARTAMENTO.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DEPARTAMENTOS_JERARQUIA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DOCUMENTO.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
@@ -84,12 +87,6 @@
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FLUJO.cs">
-      <DependentUpon>ProcessSAModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JERARQUIA_DEP.cs">
-      <DependentUpon>ProcessSAModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JERARQUIA_USR.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProcessSAModel.Context.cs">

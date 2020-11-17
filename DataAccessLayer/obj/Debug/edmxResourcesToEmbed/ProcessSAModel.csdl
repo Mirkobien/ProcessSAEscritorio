@@ -19,9 +19,12 @@
     <Property Name="IDDEP" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DESCRIPCION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="JERARQUIA_DEP_IDJER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <NavigationProperty Name="JERARQUIA_DEP" Relationship="Self.DEPARTAMENTO_JERARQUIA_DEP_FK" FromRole="DEPARTAMENTO" ToRole="JERARQUIA_DEP" />
-    <NavigationProperty Name="JERARQUIA_USR" Relationship="Self.JERARQUIA_USR_DEPARTAMENTO_FK" FromRole="DEPARTAMENTO" ToRole="JERARQUIA_USR" />
+    <Property Name="DEPARTAMENTO_IDDEP" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="EMPRESA_IDEMP" Type="Decimal" Precision="38" Scale="0" />
+    <NavigationProperty Name="DEPARTAMENTO1" Relationship="Self.DEPARTAMENTO_DEPARTAMENTO_FK" FromRole="DEPARTAMENTO" ToRole="DEPARTAMENTO1" />
+    <NavigationProperty Name="DEPARTAMENTO2" Relationship="Self.DEPARTAMENTO_DEPARTAMENTO_FK" FromRole="DEPARTAMENTO1" ToRole="DEPARTAMENTO" />
+    <NavigationProperty Name="EMPRESA" Relationship="Self.DEPARTAMENTO_EMPRESA_FK" FromRole="DEPARTAMENTO" ToRole="EMPRESA" />
+    <NavigationProperty Name="ROL_CLIENTE" Relationship="Self.ROL_CLIENTE_DEPARTAMENTO_FK" FromRole="DEPARTAMENTO" ToRole="ROL_CLIENTE" />
   </EntityType>
   <EntityType Name="DOCUMENTO">
     <Key>
@@ -43,8 +46,8 @@
     <Property Name="RUBRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="TELEFONO" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="CONTRATO" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="DEPARTAMENTO" Relationship="Self.DEPARTAMENTO_EMPRESA_FK" FromRole="EMPRESA" ToRole="DEPARTAMENTO" />
     <NavigationProperty Name="DOCUMENTO" Relationship="Self.DOCUMENTO_EMPRESA_FK" FromRole="EMPRESA" ToRole="DOCUMENTO" />
-    <NavigationProperty Name="JERARQUIA_DEP" Relationship="Self.JERARQUIA_DEP_EMPRESA_FK" FromRole="EMPRESA" ToRole="JERARQUIA_DEP" />
   </EntityType>
   <EntityType Name="ERROR_TAREA">
     <Key>
@@ -58,11 +61,10 @@
   </EntityType>
   <EntityType Name="ESTADO_FLUJO">
     <Key>
-      <PropertyRef Name="ESTADO_FLUJO_ID" />
+      <PropertyRef Name="IDESF" />
     </Key>
     <Property Name="IDESF" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ESTADO_FLUJO_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <NavigationProperty Name="FLUJO" Relationship="Self.FLUJO_ESTADO_FLUJO_FK" FromRole="ESTADO_FLUJO" ToRole="FLUJO" />
   </EntityType>
   <EntityType Name="ESTADO_TAREA">
@@ -79,8 +81,8 @@
     </Key>
     <Property Name="IDESU" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.CLIENTE_ESTADO_USUARIO_FK" FromRole="ESTADO_USUARIO" ToRole="USUARIO_CLIENTE" />
     <NavigationProperty Name="USUARIO_SISTEMA" Relationship="Self.SISTEMA_ESTADO_USUARIO_FK" FromRole="ESTADO_USUARIO" ToRole="USUARIO_SISTEMA" />
-    <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.USUARIO_CLIENTE_ESTADO_FK" FromRole="ESTADO_USUARIO" ToRole="USUARIO_CLIENTE" />
   </EntityType>
   <EntityType Name="FLUJO">
     <Key>
@@ -92,29 +94,11 @@
     <Property Name="DIAS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="INICIO" Type="DateTime" Nullable="false" />
     <Property Name="FIN" Type="DateTime" Nullable="false" />
-    <Property Name="ESTADO_FLUJO_ESTADO_FLUJO_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ESTADO_FLUJO_IDESF" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ROL_CLIENTE_IDROL" Type="Decimal" Precision="38" Scale="0" />
     <NavigationProperty Name="ESTADO_FLUJO" Relationship="Self.FLUJO_ESTADO_FLUJO_FK" FromRole="FLUJO" ToRole="ESTADO_FLUJO" />
+    <NavigationProperty Name="ROL_CLIENTE" Relationship="Self.FLUJO_ROL_CLIENTE_FK" FromRole="FLUJO" ToRole="ROL_CLIENTE" />
     <NavigationProperty Name="TAREA" Relationship="Self.TAREA_FLUJO" FromRole="FLUJO" ToRole="TAREA" />
-  </EntityType>
-  <EntityType Name="JERARQUIA_DEP">
-    <Key>
-      <PropertyRef Name="IDJER" />
-    </Key>
-    <Property Name="IDJER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="NIVEL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="EMPRESA_IDEMP" Type="Decimal" Precision="38" Scale="0" />
-    <NavigationProperty Name="DEPARTAMENTO" Relationship="Self.DEPARTAMENTO_JERARQUIA_DEP_FK" FromRole="JERARQUIA_DEP" ToRole="DEPARTAMENTO" />
-    <NavigationProperty Name="EMPRESA" Relationship="Self.JERARQUIA_DEP_EMPRESA_FK" FromRole="JERARQUIA_DEP" ToRole="EMPRESA" />
-  </EntityType>
-  <EntityType Name="JERARQUIA_USR">
-    <Key>
-      <PropertyRef Name="IDJER" />
-    </Key>
-    <Property Name="IDJER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="NIVEL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-    <Property Name="DEPARTAMENTO_IDDEP" Type="Decimal" Precision="38" Scale="0" />
-    <NavigationProperty Name="DEPARTAMENTO" Relationship="Self.JERARQUIA_USR_DEPARTAMENTO_FK" FromRole="JERARQUIA_USR" ToRole="DEPARTAMENTO" />
-    <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.CLIENTE_JERARQUIA_USR_FK" FromRole="JERARQUIA_USR" ToRole="USUARIO_CLIENTE" />
   </EntityType>
   <EntityType Name="ROL_CLIENTE">
     <Key>
@@ -122,6 +106,10 @@
     </Key>
     <Property Name="IDROL" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DEPARTAMENTO_IDDEP" Type="Decimal" Precision="38" Scale="0" />
+    <NavigationProperty Name="DEPARTAMENTO" Relationship="Self.ROL_CLIENTE_DEPARTAMENTO_FK" FromRole="ROL_CLIENTE" ToRole="DEPARTAMENTO" />
+    <NavigationProperty Name="FLUJO" Relationship="Self.FLUJO_ROL_CLIENTE_FK" FromRole="ROL_CLIENTE" ToRole="FLUJO" />
+    <NavigationProperty Name="TAREA" Relationship="Self.TAREA_ROL_CLIENTE_FK" FromRole="ROL_CLIENTE" ToRole="TAREA" />
     <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.USUARIO_CLIENTE_ROL_CLIENTE_FK" FromRole="ROL_CLIENTE" ToRole="USUARIO_CLIENTE" />
   </EntityType>
   <EntityType Name="ROL_SISTEMA">
@@ -145,14 +133,16 @@
     <Key>
       <PropertyRef Name="IDTAR" />
     </Key>
-    <Property Name="IDTAR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="IDTAR" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="INICIO" Type="DateTime" Nullable="false" />
     <Property Name="FIN" Type="DateTime" Nullable="false" />
     <Property Name="DURACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="ESTADO_TAREA_IDEST" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ROL_CLIENTE_IDROL" Type="Decimal" Precision="38" Scale="0" />
     <NavigationProperty Name="ERROR_TAREA" Relationship="Self.ERROR_TAREA_TAREA_FK" FromRole="TAREA" ToRole="ERROR_TAREA" />
     <NavigationProperty Name="ESTADO_TAREA" Relationship="Self.TAREA_ESTADO_TAREA_FK" FromRole="TAREA" ToRole="ESTADO_TAREA" />
+    <NavigationProperty Name="ROL_CLIENTE" Relationship="Self.TAREA_ROL_CLIENTE_FK" FromRole="TAREA" ToRole="ROL_CLIENTE" />
     <NavigationProperty Name="FLUJO" Relationship="Self.TAREA_FLUJO" FromRole="TAREA" ToRole="FLUJO" />
     <NavigationProperty Name="TAREA1" Relationship="Self.TAREA_TAREA" FromRole="TAREA" ToRole="TAREA1" />
     <NavigationProperty Name="TAREA2" Relationship="Self.TAREA_TAREA" FromRole="TAREA1" ToRole="TAREA" />
@@ -172,10 +162,8 @@
     <Property Name="ESTADO_USUARIO_IDESU" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="SEXO_IDSEX" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="ROL_CLIENTE_IDROL" Type="Decimal" Precision="38" Scale="0" />
-    <Property Name="JERARQUIA_USR_IDJER" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <NavigationProperty Name="AUTH_USER" Relationship="Self.AUTH_USER_USUARIO_CLIENTE_FK" FromRole="USUARIO_CLIENTE" ToRole="AUTH_USER" />
-    <NavigationProperty Name="ESTADO_USUARIO" Relationship="Self.USUARIO_CLIENTE_ESTADO_FK" FromRole="USUARIO_CLIENTE" ToRole="ESTADO_USUARIO" />
-    <NavigationProperty Name="JERARQUIA_USR" Relationship="Self.CLIENTE_JERARQUIA_USR_FK" FromRole="USUARIO_CLIENTE" ToRole="JERARQUIA_USR" />
+    <NavigationProperty Name="ESTADO_USUARIO" Relationship="Self.CLIENTE_ESTADO_USUARIO_FK" FromRole="USUARIO_CLIENTE" ToRole="ESTADO_USUARIO" />
     <NavigationProperty Name="ROL_CLIENTE" Relationship="Self.USUARIO_CLIENTE_ROL_CLIENTE_FK" FromRole="USUARIO_CLIENTE" ToRole="ROL_CLIENTE" />
     <NavigationProperty Name="SEXO" Relationship="Self.USUARIO_CLIENTE_SEXO_FK" FromRole="USUARIO_CLIENTE" ToRole="SEXO" />
     <NavigationProperty Name="TAREA" Relationship="Self.USUARIO_TAREA" FromRole="USUARIO_CLIENTE" ToRole="TAREA" />
@@ -184,7 +172,7 @@
     <Key>
       <PropertyRef Name="IDSIS" />
     </Key>
-    <Property Name="IDSIS" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDSIS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -220,26 +208,38 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="DEPARTAMENTO_JERARQUIA_DEP_FK">
-    <End Role="JERARQUIA_DEP" Type="Self.JERARQUIA_DEP" Multiplicity="1" />
-    <End Role="DEPARTAMENTO" Type="Self.DEPARTAMENTO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="JERARQUIA_DEP">
-        <PropertyRef Name="IDJER" />
-      </Principal>
-      <Dependent Role="DEPARTAMENTO">
-        <PropertyRef Name="JERARQUIA_DEP_IDJER" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="JERARQUIA_USR_DEPARTAMENTO_FK">
+  <Association Name="DEPARTAMENTO_DEPARTAMENTO_FK">
     <End Role="DEPARTAMENTO" Type="Self.DEPARTAMENTO" Multiplicity="0..1" />
-    <End Role="JERARQUIA_USR" Type="Self.JERARQUIA_USR" Multiplicity="*" />
+    <End Role="DEPARTAMENTO1" Type="Self.DEPARTAMENTO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DEPARTAMENTO">
         <PropertyRef Name="IDDEP" />
       </Principal>
-      <Dependent Role="JERARQUIA_USR">
+      <Dependent Role="DEPARTAMENTO1">
+        <PropertyRef Name="DEPARTAMENTO_IDDEP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DEPARTAMENTO_EMPRESA_FK">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+    <End Role="DEPARTAMENTO" Type="Self.DEPARTAMENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="IDEMP" />
+      </Principal>
+      <Dependent Role="DEPARTAMENTO">
+        <PropertyRef Name="EMPRESA_IDEMP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ROL_CLIENTE_DEPARTAMENTO_FK">
+    <End Role="DEPARTAMENTO" Type="Self.DEPARTAMENTO" Multiplicity="0..1" />
+    <End Role="ROL_CLIENTE" Type="Self.ROL_CLIENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTAMENTO">
+        <PropertyRef Name="IDDEP" />
+      </Principal>
+      <Dependent Role="ROL_CLIENTE">
         <PropertyRef Name="DEPARTAMENTO_IDDEP" />
       </Dependent>
     </ReferentialConstraint>
@@ -252,18 +252,6 @@
         <PropertyRef Name="IDEMP" />
       </Principal>
       <Dependent Role="DOCUMENTO">
-        <PropertyRef Name="EMPRESA_IDEMP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="JERARQUIA_DEP_EMPRESA_FK">
-    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
-    <End Role="JERARQUIA_DEP" Type="Self.JERARQUIA_DEP" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EMPRESA">
-        <PropertyRef Name="IDEMP" />
-      </Principal>
-      <Dependent Role="JERARQUIA_DEP">
         <PropertyRef Name="EMPRESA_IDEMP" />
       </Dependent>
     </ReferentialConstraint>
@@ -285,10 +273,10 @@
     <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ESTADO_FLUJO">
-        <PropertyRef Name="ESTADO_FLUJO_ID" />
+        <PropertyRef Name="IDESF" />
       </Principal>
       <Dependent Role="FLUJO">
-        <PropertyRef Name="ESTADO_FLUJO_ESTADO_FLUJO_ID" />
+        <PropertyRef Name="ESTADO_FLUJO_IDESF" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -304,6 +292,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="CLIENTE_ESTADO_USUARIO_FK">
+    <End Role="ESTADO_USUARIO" Type="Self.ESTADO_USUARIO" Multiplicity="0..1" />
+    <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO_USUARIO">
+        <PropertyRef Name="IDESU" />
+      </Principal>
+      <Dependent Role="USUARIO_CLIENTE">
+        <PropertyRef Name="ESTADO_USUARIO_IDESU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="SISTEMA_ESTADO_USUARIO_FK">
     <End Role="ESTADO_USUARIO" Type="Self.ESTADO_USUARIO" Multiplicity="0..1" />
     <End Role="USUARIO_SISTEMA" Type="Self.USUARIO_SISTEMA" Multiplicity="*" />
@@ -316,27 +316,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="USUARIO_CLIENTE_ESTADO_FK">
-    <End Role="ESTADO_USUARIO" Type="Self.ESTADO_USUARIO" Multiplicity="0..1" />
-    <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="*" />
+  <Association Name="FLUJO_ROL_CLIENTE_FK">
+    <End Role="ROL_CLIENTE" Type="Self.ROL_CLIENTE" Multiplicity="0..1" />
+    <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ESTADO_USUARIO">
-        <PropertyRef Name="IDESU" />
+      <Principal Role="ROL_CLIENTE">
+        <PropertyRef Name="IDROL" />
       </Principal>
-      <Dependent Role="USUARIO_CLIENTE">
-        <PropertyRef Name="ESTADO_USUARIO_IDESU" />
+      <Dependent Role="FLUJO">
+        <PropertyRef Name="ROL_CLIENTE_IDROL" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CLIENTE_JERARQUIA_USR_FK">
-    <End Role="JERARQUIA_USR" Type="Self.JERARQUIA_USR" Multiplicity="1" />
-    <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="*" />
+  <Association Name="TAREA_ROL_CLIENTE_FK">
+    <End Role="ROL_CLIENTE" Type="Self.ROL_CLIENTE" Multiplicity="0..1" />
+    <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="JERARQUIA_USR">
-        <PropertyRef Name="IDJER" />
+      <Principal Role="ROL_CLIENTE">
+        <PropertyRef Name="IDROL" />
       </Principal>
-      <Dependent Role="USUARIO_CLIENTE">
-        <PropertyRef Name="JERARQUIA_USR_IDJER" />
+      <Dependent Role="TAREA">
+        <PropertyRef Name="ROL_CLIENTE_IDROL" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -410,8 +410,6 @@
     <EntitySet Name="ESTADO_TAREA" EntityType="Self.ESTADO_TAREA" />
     <EntitySet Name="ESTADO_USUARIO" EntityType="Self.ESTADO_USUARIO" />
     <EntitySet Name="FLUJO" EntityType="Self.FLUJO" />
-    <EntitySet Name="JERARQUIA_DEP" EntityType="Self.JERARQUIA_DEP" />
-    <EntitySet Name="JERARQUIA_USR" EntityType="Self.JERARQUIA_USR" />
     <EntitySet Name="ROL_CLIENTE" EntityType="Self.ROL_CLIENTE" />
     <EntitySet Name="ROL_SISTEMA" EntityType="Self.ROL_SISTEMA" />
     <EntitySet Name="SEXO" EntityType="Self.SEXO" />
@@ -426,21 +424,21 @@
       <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
       <End Role="AUTH_USER" EntitySet="AUTH_USER" />
     </AssociationSet>
-    <AssociationSet Name="DEPARTAMENTO_JERARQUIA_DEP_FK" Association="Self.DEPARTAMENTO_JERARQUIA_DEP_FK">
-      <End Role="JERARQUIA_DEP" EntitySet="JERARQUIA_DEP" />
+    <AssociationSet Name="DEPARTAMENTO_DEPARTAMENTO_FK" Association="Self.DEPARTAMENTO_DEPARTAMENTO_FK">
+      <End Role="DEPARTAMENTO" EntitySet="DEPARTAMENTO" />
+      <End Role="DEPARTAMENTO1" EntitySet="DEPARTAMENTO" />
+    </AssociationSet>
+    <AssociationSet Name="DEPARTAMENTO_EMPRESA_FK" Association="Self.DEPARTAMENTO_EMPRESA_FK">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
       <End Role="DEPARTAMENTO" EntitySet="DEPARTAMENTO" />
     </AssociationSet>
-    <AssociationSet Name="JERARQUIA_USR_DEPARTAMENTO_FK" Association="Self.JERARQUIA_USR_DEPARTAMENTO_FK">
+    <AssociationSet Name="ROL_CLIENTE_DEPARTAMENTO_FK" Association="Self.ROL_CLIENTE_DEPARTAMENTO_FK">
       <End Role="DEPARTAMENTO" EntitySet="DEPARTAMENTO" />
-      <End Role="JERARQUIA_USR" EntitySet="JERARQUIA_USR" />
+      <End Role="ROL_CLIENTE" EntitySet="ROL_CLIENTE" />
     </AssociationSet>
     <AssociationSet Name="DOCUMENTO_EMPRESA_FK" Association="Self.DOCUMENTO_EMPRESA_FK">
       <End Role="EMPRESA" EntitySet="EMPRESA" />
       <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
-    </AssociationSet>
-    <AssociationSet Name="JERARQUIA_DEP_EMPRESA_FK" Association="Self.JERARQUIA_DEP_EMPRESA_FK">
-      <End Role="EMPRESA" EntitySet="EMPRESA" />
-      <End Role="JERARQUIA_DEP" EntitySet="JERARQUIA_DEP" />
     </AssociationSet>
     <AssociationSet Name="ERROR_TAREA_TAREA_FK" Association="Self.ERROR_TAREA_TAREA_FK">
       <End Role="TAREA" EntitySet="TAREA" />
@@ -454,17 +452,21 @@
       <End Role="ESTADO_TAREA" EntitySet="ESTADO_TAREA" />
       <End Role="TAREA" EntitySet="TAREA" />
     </AssociationSet>
+    <AssociationSet Name="CLIENTE_ESTADO_USUARIO_FK" Association="Self.CLIENTE_ESTADO_USUARIO_FK">
+      <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
+      <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
+    </AssociationSet>
     <AssociationSet Name="SISTEMA_ESTADO_USUARIO_FK" Association="Self.SISTEMA_ESTADO_USUARIO_FK">
       <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
       <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
     </AssociationSet>
-    <AssociationSet Name="USUARIO_CLIENTE_ESTADO_FK" Association="Self.USUARIO_CLIENTE_ESTADO_FK">
-      <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
-      <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
+    <AssociationSet Name="FLUJO_ROL_CLIENTE_FK" Association="Self.FLUJO_ROL_CLIENTE_FK">
+      <End Role="ROL_CLIENTE" EntitySet="ROL_CLIENTE" />
+      <End Role="FLUJO" EntitySet="FLUJO" />
     </AssociationSet>
-    <AssociationSet Name="CLIENTE_JERARQUIA_USR_FK" Association="Self.CLIENTE_JERARQUIA_USR_FK">
-      <End Role="JERARQUIA_USR" EntitySet="JERARQUIA_USR" />
-      <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
+    <AssociationSet Name="TAREA_ROL_CLIENTE_FK" Association="Self.TAREA_ROL_CLIENTE_FK">
+      <End Role="ROL_CLIENTE" EntitySet="ROL_CLIENTE" />
+      <End Role="TAREA" EntitySet="TAREA" />
     </AssociationSet>
     <AssociationSet Name="USUARIO_CLIENTE_ROL_CLIENTE_FK" Association="Self.USUARIO_CLIENTE_ROL_CLIENTE_FK">
       <End Role="ROL_CLIENTE" EntitySet="ROL_CLIENTE" />
@@ -494,5 +496,17 @@
       <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
       <End Role="TAREA" EntitySet="TAREA" />
     </AssociationSet>
+    <EntitySet Name="DEPARTAMENTOS_JERARQUIA" EntityType="Model.DEPARTAMENTOS_JERARQUIA" />
   </EntityContainer>
+  <EntityType Name="DEPARTAMENTOS_JERARQUIA">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="NOMBRE" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PADRE" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="NIVEL" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="EMPRESA" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
 </Schema>

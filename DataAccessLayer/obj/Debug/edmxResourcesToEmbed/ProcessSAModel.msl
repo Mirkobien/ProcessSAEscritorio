@@ -18,7 +18,8 @@
           <ScalarProperty Name="IDDEP" ColumnName="IDDEP" />
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-          <ScalarProperty Name="JERARQUIA_DEP_IDJER" ColumnName="JERARQUIA_DEP_IDJER" />
+          <ScalarProperty Name="DEPARTAMENTO_IDDEP" ColumnName="DEPARTAMENTO_IDDEP" />
+          <ScalarProperty Name="EMPRESA_IDEMP" ColumnName="EMPRESA_IDEMP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -59,7 +60,6 @@
         <MappingFragment StoreEntitySet="ESTADO_FLUJO">
           <ScalarProperty Name="IDESF" ColumnName="IDESF" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-          <ScalarProperty Name="ESTADO_FLUJO_ID" ColumnName="ESTADO_FLUJO_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -88,25 +88,8 @@
           <ScalarProperty Name="DIAS" ColumnName="DIAS" />
           <ScalarProperty Name="INICIO" ColumnName="INICIO" />
           <ScalarProperty Name="FIN" ColumnName="FIN" />
-          <ScalarProperty Name="ESTADO_FLUJO_ESTADO_FLUJO_ID" ColumnName="ESTADO_FLUJO_ESTADO_FLUJO_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="JERARQUIA_DEP">
-      <EntityTypeMapping TypeName="Model.JERARQUIA_DEP">
-        <MappingFragment StoreEntitySet="JERARQUIA_DEP">
-          <ScalarProperty Name="IDJER" ColumnName="IDJER" />
-          <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
-          <ScalarProperty Name="EMPRESA_IDEMP" ColumnName="EMPRESA_IDEMP" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="JERARQUIA_USR">
-      <EntityTypeMapping TypeName="Model.JERARQUIA_USR">
-        <MappingFragment StoreEntitySet="JERARQUIA_USR">
-          <ScalarProperty Name="IDJER" ColumnName="IDJER" />
-          <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
-          <ScalarProperty Name="DEPARTAMENTO_IDDEP" ColumnName="DEPARTAMENTO_IDDEP" />
+          <ScalarProperty Name="ESTADO_FLUJO_IDESF" ColumnName="ESTADO_FLUJO_IDESF" />
+          <ScalarProperty Name="ROL_CLIENTE_IDROL" ColumnName="ROL_CLIENTE_IDROL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -115,6 +98,7 @@
         <MappingFragment StoreEntitySet="ROL_CLIENTE">
           <ScalarProperty Name="IDROL" ColumnName="IDROL" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="DEPARTAMENTO_IDDEP" ColumnName="DEPARTAMENTO_IDDEP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -143,6 +127,7 @@
           <ScalarProperty Name="FIN" ColumnName="FIN" />
           <ScalarProperty Name="DURACION" ColumnName="DURACION" />
           <ScalarProperty Name="ESTADO_TAREA_IDEST" ColumnName="ESTADO_TAREA_IDEST" />
+          <ScalarProperty Name="ROL_CLIENTE_IDROL" ColumnName="ROL_CLIENTE_IDROL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -159,7 +144,6 @@
           <ScalarProperty Name="ESTADO_USUARIO_IDESU" ColumnName="ESTADO_USUARIO_IDESU" />
           <ScalarProperty Name="SEXO_IDSEX" ColumnName="SEXO_IDSEX" />
           <ScalarProperty Name="ROL_CLIENTE_IDROL" ColumnName="ROL_CLIENTE_IDROL" />
-          <ScalarProperty Name="JERARQUIA_USR_IDJER" ColumnName="JERARQUIA_USR_IDJER" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -200,5 +184,16 @@
         <ScalarProperty Name="IDTAR" ColumnName="TAREA_IDTAR" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="DEPARTAMENTOS_JERARQUIA">
+      <EntityTypeMapping TypeName="Model.DEPARTAMENTOS_JERARQUIA">
+        <MappingFragment StoreEntitySet="DEPARTAMENTOS_JERARQUIA">
+          <ScalarProperty Name="EMPRESA" ColumnName="EMPRESA" />
+          <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+          <ScalarProperty Name="PADRE" ColumnName="PADRE" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -1,7 +1,10 @@
 ﻿using ProcessSA.Models;
 using ProcessSA.ViewModels.Base;
+using ProcessSA.ViewModels.Interface;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,18 +12,31 @@ using System.Windows.Input;
 
 namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 {
-    class AgregarRolViewModel : BaseViewModel
+    class AgregarRolViewModel : BaseViewModel, IEmpresaHolder
     {
-        public AgregarRolViewModel(GestionRolesViewModel vm)
+        public AgregarRolViewModel(GestionRolesViewModel vm, Empresa emp)
         {
             DisplayName = "Agregar Rol";
             PreviousVM = vm;
+            Empresa = emp;
 
             Rol = new Rol();
         }
 
-        public Rol Rol;
-        public BaseViewModel PreviousVM;
+        public Empresa Empresa { get; set; }
+        public Rol Rol { get; set; }
+        public BaseViewModel PreviousVM { get; set; }
+
+        private ObservableCollection<Departamento> _departamentos;
+        public ObservableCollection<Departamento> Departamentos
+        {
+            get => _departamentos;
+            set
+            {
+                _departamentos = value;
+                OnPropertyChanged("Departamentos");
+            }
+        }
 
         private ICommand _guardarCommand;
         public ICommand GuardarCommand
@@ -46,6 +62,11 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
                 }
                 return _volverCommand;
             }
+        }
+
+        public async override void OnLoaded()
+        {
+            Departamentos = new ObservableCollection<Departamento>(await RESTClient.GetAllDepartamentosList(Empresa.Id));
         }
 
         private async void Guardar()

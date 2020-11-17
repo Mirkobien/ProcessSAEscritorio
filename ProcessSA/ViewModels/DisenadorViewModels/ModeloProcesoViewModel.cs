@@ -3,6 +3,7 @@ using MahApps.Metro.Controls.Dialogs;
 using ProcessSA.Models;
 using ProcessSA.ViewModels.Base;
 using ProcessSA.ViewModels.DisenadorViewModels.Modals;
+using ProcessSA.ViewModels.Interface;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +15,7 @@ using System.Windows.Input;
 
 namespace ProcessSA.ViewModels.DisenadorViewModels
 {
-    class ModeloProcesoViewModel : BaseViewModel
+    class ModeloProcesoViewModel : BaseViewModel, IEmpresaHolder
     {
         public ModeloProcesoViewModel()
         {
@@ -49,7 +50,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             {
                 if (_crearTareaCommand == null)
                 {
-                    _crearTareaCommand = new RelayCommand(p => { OnChangePage(new AgregarTareaViewModel(this)); });
+                    _crearTareaCommand = new RelayCommand(p => {  });
                 }
 
                 return _crearTareaCommand;
@@ -81,6 +82,8 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
                 return _modificarTareaCommand;
             }
         }
+
+        public Empresa Empresa { get; set; }
 
         public async void EliminarTarea()
         {

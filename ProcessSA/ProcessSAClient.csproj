@@ -170,6 +170,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\BindableSelectedItemBehavior.cs" />
     <Compile Include="Helpers\ExceptionHandler.cs" />
     <Compile Include="Models\Departamento.cs" />
     <Compile Include="Models\Empresa.cs" />
@@ -186,6 +187,8 @@
     <Compile Include="ViewModels\AnalistaViewModels\GestionInformeViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseVMListHolder.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="ViewModels\DisenadorViewModels\ElegirEmpresaVM.cs" />
+    <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarFlujoVM.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarRolViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarDepartamentoViewModel.cs" />
     <Compile Include="ViewModels\EjecutivoViewModels\EmpresasViewModel.cs" />
@@ -199,6 +202,7 @@
     <Compile Include="ViewModels\DisenadorViewModels\Modals\AgregarTareaViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\ModeloProcesoViewModel.cs" />
     <Compile Include="ViewModels\EjecutivoViewModels\ContratosViewModel.cs" />
+    <Compile Include="ViewModels\Interface\IEmpresaHolder.cs" />
     <Compile Include="ViewModels\Interface\IViewModel.cs" />
     <Compile Include="UserFlyout.xaml.cs">
       <DependentUpon>UserFlyout.xaml</DependentUpon>
@@ -209,6 +213,12 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\Windows\SeleccionarEmpresaVM.cs" />
     <Compile Include="ViewModels\Windows\WindowBaseVM.cs" />
+    <Compile Include="Views\DisenadorViews\ElegirEmpresaView.xaml.cs">
+      <DependentUpon>ElegirEmpresaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DisenadorViews\Modal\FlujoView.xaml.cs">
+      <DependentUpon>FlujoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\SelectView.xaml.cs">
       <DependentUpon>SelectView.xaml</DependentUpon>
     </Compile>
@@ -248,7 +258,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DisenadorViews\ElegirEmpresaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DisenadorViews\Modal\DepartamentoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DisenadorViews\Modal\FlujoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

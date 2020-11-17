@@ -21,6 +21,17 @@ namespace BusinessLogic
         public int Id { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
+
+        public static List<EstadoFlujo> GetAllEstadoFlujos()
+        {
+            Entities ent = new Entities();
+            List<EstadoFlujo> listaFinal = new List<EstadoFlujo>();
+            foreach(ESTADO_FLUJO estado in ent.ESTADO_FLUJO)
+            {
+                listaFinal.Add(new EstadoFlujo(estado));
+            }
+            return listaFinal;
+        }
     }
 
     [DataContract]
@@ -31,7 +42,8 @@ namespace BusinessLogic
             Id = decimal.ToInt32(flujo.IDFLU);
             Nombre = flujo.NOMBRE;
             Descripcion = flujo.DESCRIPCION;
-            Ejecucion = flujo.INICIO;
+            Inicio = flujo.INICIO;
+            Fin = flujo.FIN;
             Estado = new EstadoFlujo(flujo.ESTADO_FLUJO);
         }
 
@@ -40,17 +52,24 @@ namespace BusinessLogic
         [DataMember]
         public string Nombre { get; set; }
         [DataMember]
-        public DateTime Ejecucion { get; set; }
+        public DateTime Inicio { get; set; }
+        [DataMember]
+        public DateTime Fin { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
         public EstadoFlujo Estado { get; set; }
+        [DataMember]
+        public List<Tarea> Tareas { get; set; }
+        [DataMember]
+        public Rol Rol { get; set; }
 
-        public static List<Flujo> GetAllFlujos()
+        public static List<Flujo> GetAllFlujos(int id)
         {
             Entities ent = new Entities();
+            
             List<Flujo> listaFinal = new List<Flujo>();
-            foreach(FLUJO flujo in ent.FLUJO)
+            foreach(FLUJO flujo in ent.FLUJO.Where(f=> f.ROL_CLIENTE.DEPARTAMENTO.EMPRESA_IDEMP == id))
             {
                 listaFinal.Add(new Flujo(flujo));
             }
@@ -67,7 +86,13 @@ namespace BusinessLogic
         public void Guardar()
         {
             Entities ent = new Entities();
-            ent.FLUJO.Add(ToFLUJO(ent));
+            FLUJO flujo = ToFLUJO(ent);
+
+            foreach (Tarea tar in Tareas)
+            {
+                flujo.TAREA.Add(tar.GetTAREA(ent));
+            }
+            ent.FLUJO.Add(flujo);
             ent.SaveChanges();
         }
 
@@ -76,8 +101,10 @@ namespace BusinessLogic
             FLUJO flujo = new FLUJO()
             {
                 DESCRIPCION = Descripcion,
-                INICIO = Ejecucion,
-                NOMBRE = Nombre
+                INICIO = Inicio,
+                FIN = Fin,
+                NOMBRE = Nombre,
+                ROL_CLIENTE_IDROL = Rol.Id
             };
             flujo.ESTADO_FLUJO = ent.ESTADO_FLUJO.Where(p => p.IDESF == Estado.Id).FirstOrDefault();
 

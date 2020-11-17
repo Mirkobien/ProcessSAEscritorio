@@ -17,5 +17,6 @@ namespace ProcessSA.Models
         public int Id { get; set; }
         public string Descripcion { get; set; }
         public ObservableCollection<User> Usuarios { get; set; }
+        public ObservableCollection<Departamento> Departamentos { get; set; }
     }
 }

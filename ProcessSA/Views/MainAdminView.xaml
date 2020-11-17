@@ -101,6 +101,9 @@
             <DataTemplate DataType="{x:Type disemodalvms:AgregarDepartamentoViewModel}">
                 <disemodalviews:DepartamentoView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type disemodalvms:AgregarFlujoVM}">
+                <disemodalviews:FlujoView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type diseviewmodels:GestionRolesViewModel}">
                 <diseviews:GestionRolesView/>
             </DataTemplate>
@@ -113,7 +116,10 @@
             <DataTemplate DataType="{x:Type disemodalvms:AgregarTareaViewModel}">
                 <disemodalviews:TareaView/>
             </DataTemplate>
-
+            <DataTemplate DataType="{x:Type diseviewmodels:ElegirEmpresaVM}">
+                <diseviews:ElegirEmpresaView/>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type adminviewmodels:ConfiguracionViewModel}">
                 <adminviews:ConfiguracionesView/>
             </DataTemplate>

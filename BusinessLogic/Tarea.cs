@@ -78,6 +78,8 @@ namespace BusinessLogic
         public List<User> Responsables { get; set; }
         [DataMember]
         public EstadoTarea Estado { get; set; }
+        [DataMember]
+        public Rol Rol { get; set; }
 
         public static List<Tarea> GetAllTarea()
         {
@@ -93,18 +95,9 @@ namespace BusinessLogic
             return listaFinal;
         }
 
-        public static List<Tarea> GetAllTarea(int id)
+        public static List<Tarea> GetAllTarea(int idEmpresa)
         {
             List<Tarea> listaFinal = new List<Tarea>();
-
-            Entities ent = new Entities();
-            List<TAREA> lista = ent.TAREA.Where(p => p.USUARIO_CLIENTE
-                .Any(u => u.JERARQUIA_USR.DEPARTAMENTO.JERARQUIA_DEP.EMPRESA.IDEMP == id)).ToList();
-
-            foreach(TAREA tar in lista)
-            {
-                listaFinal.Add(new Tarea(tar));
-            }
 
             return listaFinal;
         }
@@ -125,6 +118,13 @@ namespace BusinessLogic
             ent.SaveChanges();
         }
 
+        internal TAREA GetTAREA(Entities ent)
+        {
+            TAREA tar = ToTAREA();
+            tar.USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList();
+            return tar;
+        }
+
         public static Tarea GetTarea(int id)
         {
             Entities ent = new Entities();
@@ -136,12 +136,14 @@ namespace BusinessLogic
         public void Guardar()
         {
             Entities ent = new Entities();
+            TAREA tar = ToTAREA();
+            tar.USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList();
 
-            ent.TAREA.Add(ToTAREA(ent));
+            ent.TAREA.Add(ToTAREA());
             ent.SaveChanges();
         }
 
-        private TAREA ToTAREA(Entities ent)
+        private TAREA ToTAREA()
         {
             TAREA tarea = new TAREA
             {
@@ -150,9 +152,20 @@ namespace BusinessLogic
                 FIN = Termino,
                 DESCRIPCION = Descripcion,
                 ESTADO_TAREA_IDEST = Estado.Id,
-                USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList()
+                ROL_CLIENTE_IDROL = Rol.Id
             };
             return tarea;
+        }
+
+        public static List<Tarea> GetAllTareaRol(int v)
+        {
+            Entities ent = new Entities();
+            List<Tarea> tareas = new List<Tarea>();
+            foreach(TAREA tar in ent.TAREA.Where(t => t.ROL_CLIENTE_IDROL == v))
+            {
+                tareas.Add(new Tarea(tar));
+            }
+            return tareas;
         }
 
         public void Eliminar()

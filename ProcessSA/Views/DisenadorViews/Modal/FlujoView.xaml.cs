@@ -1,6 +1,4 @@
-﻿using ProcessSA.Models;
-using ProcessSA.ViewModels.DisenadorViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProcessSA.Views.DisenadorViews
+namespace ProcessSA.Views.DisenadorViews.Modal
 {
     /// <summary>
-    /// Lógica de interacción para GestionJerarquiasView.xaml
+    /// Lógica de interacción para FlujoView.xaml
     /// </summary>
-    public partial class GestionJerarquiasView : UserControl
+    public partial class FlujoView : UserControl
     {
-        public GestionJerarquiasView()
+        public FlujoView()
         {
             InitializeComponent();
         }

@@ -1,6 +1,10 @@
-﻿using ProcessSA.Models;
+﻿using MahApps.Metro.Controls;
+using ProcessSA.Models;
 using ProcessSA.ViewModels.Base;
 using ProcessSA.ViewModels.DisenadorViewModels.Modals;
+using ProcessSA.ViewModels.Interface;
+using ProcessSA.ViewModels.Windows;
+using ProcessSA.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +16,7 @@ using System.Windows.Input;
 
 namespace ProcessSA.ViewModels.DisenadorViewModels
 {
-    class GestionRolesViewModel : BaseViewModel
+    class GestionRolesViewModel : BaseViewModel, IEmpresaHolder
     {
         public GestionRolesViewModel()
         {
@@ -32,6 +36,32 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             }
         }
 
+        private Empresa empresa;
+        public Empresa Empresa
+        {
+            get { return empresa; }
+            set { empresa = value; OnPropertyChanged("Empresa"); }
+        }
+
+        private ICommand _elegirEmpresaCommand;
+        public ICommand ElegirEmpresaCommand
+        {
+            get
+            {
+                if (_elegirEmpresaCommand == null)
+                {
+                    _elegirEmpresaCommand = new RelayCommand(id => {
+                        MetroWindow metro = new SelectView();
+                        SeleccionarEmpresaVM vm = new SeleccionarEmpresaVM();
+                        vm.CloseAction = new Action(metro.Close);
+                        metro.DataContext = vm;
+                        metro.ShowDialog();
+                        Empresa = vm.SelectedItem;
+                    });
+                }
+                return _elegirEmpresaCommand;
+            }
+        }
         public Rol SelectedRol { get; set; }
         private ICommand _crearRolCommand;
         public ICommand CrearRolCommand
@@ -41,7 +71,8 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
                 if (_crearRolCommand == null)
                 {
                     _crearRolCommand = new RelayCommand(p =>
-                        OnChangePage(new AgregarRolViewModel(this))
+                        OnChangePage(new AgregarRolViewModel(this, Empresa)),
+                        p => Empresa != null
                     );
                 }
 
@@ -73,7 +104,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
                 {
                     _modificarRolCommand = new RelayCommand(p =>
                     {
-                        OnChangePage(new AgregarRolViewModel(this));
+                        OnChangePage(new AgregarRolViewModel(this, Empresa));
                     }, p => SelectedRol != null);
                 }
 
@@ -96,7 +127,8 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
 
         private async void ActualizarRoles()
         {
-            Roles = new ObservableCollection<Rol>(await RESTClient.GetAllRoles());
+            if (Empresa != null)
+                Roles = new ObservableCollection<Rol>(await RESTClient.GetAllRoles(Empresa.Id));
         }
 
         public override void Volver()

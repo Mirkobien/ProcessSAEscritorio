@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
@@ -19,6 +20,16 @@ namespace ProcessSAServicio
         public List<User> GetAllUsers()
         {
             return User.GetAllUsers(UserType.USUARIO_CLIENTE);
+        }
+
+        public List<Sexo> GetAllSexos()
+        {
+            return Sexo.GetAllSexo();
+        }
+
+        public List<EstadoUsuario> GetAllEstadoUsuarios()
+        {
+            return EstadoUsuario.GetAllEstadoUsuario();
         }
 
         public List<User> GetAllUsersEmpresa(string id)
@@ -50,9 +61,14 @@ namespace ProcessSAServicio
             }
         }
 
-        public void AddUser(User user)
+        public void AddUser(User Usuario, string Username, string Password)
         {
-            user.Guardar();
+            Usuario.GuardarCliente(Username, Password);
+        }
+
+        public void DeleteUser(string id)
+        {
+            User.Delete(int.Parse(id), UserType.USUARIO_CLIENTE);
         }
 
         #endregion
@@ -67,11 +83,43 @@ namespace ProcessSAServicio
             return Empresa.GetEmpresa(int.Parse(id));
         }
 
-        public void AddEmpresa(Empresa emp)
+        public void AddEmpresa(Empresa emp, string contrato)
         {
+            emp.Contrato = Convert.FromBase64String(contrato);
             emp.Guardar();
         }
 
+        public void EliminarEmpresa(string id)
+        {
+            Empresa.Eliminar(int.Parse(id));
+        }
+
+        public Empresa GetEmpresaDeUsuario(string id)
+        {
+            return Empresa.GetEmpresaDeUsuario(int.Parse(id));
+        }
+
+        #endregion
+        #region Departamentos
+        public List<Departamento> GetDepartamentoDeEmpresa(string id)
+        {
+            return Departamento.GetDepartamentos(int.Parse(id));
+        }
+
+        public List<Departamento> GetDepartamentoDeEmpresaAsList(string id)
+        {
+            return Departamento.GetDepartamentosAsList(int.Parse(id));
+        }
+
+        public Departamento GetDepartamento(string id)
+        {
+            return Departamento.GetDepartamento(int.Parse(id));
+        }
+
+        public void AddDepartamento(Departamento Departamento, int Padre, int Empresa)
+        {
+            Departamento.Guardar(Padre, Empresa);
+        }
         #endregion
         #region Tareas
         public List<Tarea> GetAllTareas()
@@ -88,9 +136,22 @@ namespace ProcessSAServicio
             return Tarea.GetAllTarea(int.Parse(id));
         }
 
+        public List<Tarea> GetAllTareasRol(string id)
+        {
+            return Tarea.GetAllTareaRol(int.Parse(id));
+        }
+
         public void CambiarEstadoTarea(int idTarea, int idEstado)
         {
             Tarea.GetTarea(idTarea).CambiarEstado(idEstado);
+        }
+
+        public void CambiarEstadoTareas(List<int> idTareas, int idEstado)
+        {
+            foreach(int i in idTareas)
+            {
+                Tarea.GetTarea(i).CambiarEstado(idEstado);
+            }
         }
 
         public List<EstadoTarea> GetAllEstadoTareas()
@@ -118,9 +179,9 @@ namespace ProcessSAServicio
             rol.Guardar();
         }
 
-        public List<Rol> GetAllRoles()
+        public List<Rol> GetAllRoles(string id)
         {
-            return Rol.GetAllRol();
+            return Rol.GetAllRol(int.Parse(id));
         }
 
         public void EliminarRol(string id)
@@ -136,9 +197,9 @@ namespace ProcessSAServicio
             flujo.Guardar();
         }
 
-        public List<Flujo> GetAllFlujos()
+        public List<Flujo> GetAllFlujos(string id)
         {
-            return Flujo.GetAllFlujos();
+            return Flujo.GetAllFlujos(int.Parse(id));
         }
 
         public void EliminarFlujo(string id)
@@ -146,26 +207,17 @@ namespace ProcessSAServicio
             Flujo.Eliminar(int.Parse(id));
         }
 
+        public List<EstadoFlujo> GetAllEstadoFlujos()
+        {
+            return EstadoFlujo.GetAllEstadoFlujos();
+        }
+        #endregion
+        #region JerarquiasDepartamento
+
         public void AddTareasToFlujo(List<Tarea> tareas, int id)
         {
             Flujo.AddTareasToFlujo(tareas, id);
         }
-
-        public List<Departamento> GetDepartamentoDeEmpresa(string id)
-        {
-            return Departamento.GetDepartamentos(int.Parse(id));
-        }
-
-        public Departamento GetDepartamento(string id)
-        {
-            return Departamento.GetDepartamento(int.Parse(id));
-        }
-
-        public void AddDepartamento(Departamento Departamento, int Idjer)
-        {
-            Departamento.Guardar(Idjer);
-        }
-
         #endregion
     }
 }

@@ -10,14 +10,16 @@
     <StackPanel>
         <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Flujos"/>
         <Grid Margin="20, 0, 20, 20">
-            <Button HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Flujos" />
-            <Button Width="150" Content="Modificar Flujos" />
-            <Button HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Flujos" />
+            <Button Command="{Binding CrearFlujoCommand}"  HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Flujos" />
+            <Button IsEnabled="False" Width="150" Content="Modificar Flujos" />
+            <Button Command="{Binding EliminarFlujoCommand}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Flujos" />
         </Grid>
-        <DataGrid Margin="20, 0 , 20, 0">
+        <DataGrid SelectedItem="{Binding SelectedFlujo}" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Flujos}" Margin="20, 0 , 20, 0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Descripcion"/>
-                <DataGridTextColumn Header="Responsable"/>
+                <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Inicio, StringFormat=dd-MM-yyyy}" Header="Inicio" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Fin, StringFormat=dd-MM-yyyy}" Header="Fin" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Estado.Descripcion}" Header="Estado" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

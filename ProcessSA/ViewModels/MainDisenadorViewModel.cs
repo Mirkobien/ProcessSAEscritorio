@@ -6,19 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProcessSA.ViewModels.DisenadorViewModels;
+using ProcessSA.Models;
+using ProcessSA.ViewModels.Interface;
 
 namespace ProcessSA.ViewModels
 {
-    class MainDisenadorViewModel : BaseVMListHolder
+    class MainDisenadorViewModel : BaseVMListHolder, IEmpresaHolder
     {
         public MainDisenadorViewModel()
         {
-            BaseViewModels.Add(new GestionRolesViewModel());
-            BaseViewModels.Add(new GestionUnidadesViewModel());
+            BaseViewModels.Add(new ElegirEmpresaVM(this));
+            //BaseViewModels.Add(new GestionRolesViewModel());
+            //BaseViewModels.Add(new GestionUnidadesViewModel());
             BaseViewModels.Add(new GestionJerarquiasViewModel());
             BaseViewModels.Add(new GestionFlujoViewModel());
-            BaseViewModels.Add(new ModeloProcesoViewModel());
+            //BaseViewModels.Add(new ModeloProcesoViewModel());
             //BaseViewModels.Add(new GestionUsuariosViewModel());
+            //Hecho por Mirko
 
             foreach(BaseViewModel vm in BaseViewModels)
             {
@@ -29,6 +33,17 @@ namespace ProcessSA.ViewModels
 
             Name = "MainDisenador";
             DisplayName = "Diseñador";
+        }
+
+        private Empresa _empresa;
+        public Empresa Empresa { get => _empresa; set
+            {
+                _empresa = value;
+                foreach(IEmpresaHolder vm in BaseViewModels)
+                {
+                    vm.Empresa = Empresa;
+                }
+            }
         }
 
         public void CambiarPagina(object sender, BaseViewModel a)

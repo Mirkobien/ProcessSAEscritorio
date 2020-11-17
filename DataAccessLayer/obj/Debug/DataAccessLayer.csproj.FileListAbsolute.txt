@@ -25,3 +25,17 @@ C:\Users\Mirko\source\repos\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAcce
 C:\Users\Mirko\source\repos\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 C:\Users\Mirko\source\repos\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
 C:\Users\Mirko\source\repos\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\Benja MoralesIlabaca\Downloads\ProcessSAServicio\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

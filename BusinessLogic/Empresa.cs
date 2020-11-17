@@ -16,12 +16,9 @@ namespace BusinessLogic
             Nombre = emp.NOMBRE;
             Correo = emp.CORREO;
             Rubro = emp.RUBRO;
+            Rut = emp.RUT;
 
-            JerarquiaDepartamentos = new List<JerarquiaDepartamento>();
-            foreach(JERARQUIA_DEP jer in emp.JERARQUIA_DEP)
-            {
-                JerarquiaDepartamentos.Add(new JerarquiaDepartamento(jer));
-            }
+            Departamentos = new List<Departamento>();
         }
 
         public Empresa()
@@ -30,12 +27,14 @@ namespace BusinessLogic
         }
 
         public int Id { get; set; }
+        public string Rut { get; set; }
         public string Nombre { get; set; }
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Rubro { get; set; }
         public int Telefono { get; set; }
-        public List<JerarquiaDepartamento> JerarquiaDepartamentos { get; set; }
+        public byte[] Contrato { get; set; }
+        public List<Departamento> Departamentos { get; set; }
 
         #region database operations
         public static bool Eliminar(int id)
@@ -47,6 +46,7 @@ namespace BusinessLogic
                 return false;
 
             ent.EMPRESA.Remove(emp);
+            ent.SaveChanges();
             return true;
         }
 
@@ -66,16 +66,33 @@ namespace BusinessLogic
         public bool Guardar()
         {
             Entities ent = new Entities();
-            EMPRESA emp = new EMPRESA
-            {
-                NOMBRE = Nombre,
-                CORREO = Correo,
-                RUBRO = Rubro,
-                TELEFONO = Telefono
-            };
 
-            ent.EMPRESA.Add(emp);
-            ent.SaveChanges();
+            EMPRESA existente = ent.EMPRESA.Where(e => e.IDEMP == this.Id).FirstOrDefault();
+
+            if (existente != null)
+            {
+                existente.NOMBRE = this.Nombre;
+                existente.CORREO = this.Correo;
+                existente.RUBRO = this.Rubro;
+                existente.TELEFONO = Telefono;
+                existente.RUT = Rut;
+                existente.CONTRATO = Contrato;
+                ent.SaveChanges();
+            } else
+            {
+                EMPRESA emp = new EMPRESA
+                {
+                    NOMBRE = Nombre,
+                    CORREO = Correo,
+                    RUBRO = Rubro,
+                    TELEFONO = Telefono,
+                    RUT = Rut,
+                    CONTRATO = Contrato
+                };
+
+                ent.EMPRESA.Add(emp);
+                ent.SaveChanges();
+            }
             return true;
         }
 
@@ -97,6 +114,16 @@ namespace BusinessLogic
             }
 
             return empresas;
+        }
+
+        public static Empresa GetEmpresaDeUsuario(int v)
+        {
+            Entities ent = new Entities();
+            return new Empresa(ent.EMPRESA.Where(e => 
+            e.IDEMP == ent.USUARIO_CLIENTE.Where(u => 
+            u.IDUSU == v).FirstOrDefault().ROL_CLIENTE.DEPARTAMENTO.IDDEP)
+                .FirstOrDefault()
+            );
         }
 
         #endregion

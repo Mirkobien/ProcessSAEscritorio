@@ -12,25 +12,27 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 {
     class AgregarTareaViewModel : BaseViewModel
     {
-        public AgregarTareaViewModel(ModeloProcesoViewModel previousVM)
-        {
-            PreviousViewModel = previousVM;
 
+        public AgregarTareaViewModel(AgregarFlujoVM agregarFlujoVM, Empresa emp)
+        {
+            PreviousViewModel = agregarFlujoVM;
+            Empresa = emp;
             Task.Run(async () => await OnLoaded());
             Tarea = new Tarea();
         }
 
         private ICommand _guardarCommand;
         private ICommand _volverCommand;
-        private ICommand _anadirCommand;
+        private ICommand _elegirRolCommand;
 
         private ObservableCollection<User> _usuariosEmpresa;
 
+        public int Dias { get; set; }
+
+        public List<Rol> Roles { get; set; }
         public Empresa Empresa { get; set; }
-        public ModeloProcesoViewModel PreviousViewModel { get; set; }
+        public AgregarFlujoVM PreviousViewModel { get; set; }
         public Tarea Tarea { get; set; }
-        public List<EstadoTarea> Estados { get; set; }
-        public EstadoTarea SelectedEstado { get; set; }
         public ObservableCollection<User> UsuariosEmpresa 
         { 
             get { return _usuariosEmpresa; }
@@ -66,15 +68,15 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
             }
         }
 
-        public ICommand AnadirCommand
+        public ICommand ElegirRolCommand
         {
             get
             {
-                if (_anadirCommand == null)
+                if (_elegirRolCommand == null)
                 {
-                    _anadirCommand = new RelayCommand(p => Anadir((User)p));
+                    _elegirRolCommand = new RelayCommand(p => Anadir((User)p));
                 }
-                return _anadirCommand;
+                return _elegirRolCommand;
             }
         }
 
@@ -88,21 +90,20 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 
         public async Task OnLoaded()
         {
-            Estados = await RESTClient.GetAllEstadoTareas();
-            UsuariosEmpresa = new ObservableCollection<User>(await RESTClient.GetUsersDeEmpresa(0));
+            UsuariosEmpresa = new ObservableCollection<User>(await RESTClient.GetUsersDeEmpresa(1));
         }
 
-        public async void GuardarTarea()
+        public void GuardarTarea()
         {
-            Tarea.Estado = SelectedEstado;
-            await RESTClient.GuardarTarea(Tarea);
-            IsCompleted = true;
+            Tarea.Estado = new EstadoTarea { Id = 1 };
+            Tarea.Termino = Tarea.Comienzo.AddDays(Dias);
+            PreviousViewModel.Flujo.Tareas.Add(Tarea);
             Volver();
         }
 
-        public void Volver()
+        public override void Volver()
         {
-            PreviousViewModel.Volver();
+            PreviousViewModel.Volver(this);
         }
     }
 }

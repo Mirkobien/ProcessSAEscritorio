@@ -9,6 +9,25 @@ using System.Threading.Tasks;
 
 namespace ProcessSA.Models
 {
+    public class EstadoUsuario : ObservableObject
+    {
+        public EstadoUsuario()
+        {
+
+        }
+
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+    }
+    public class Sexo : ObservableObject
+    {
+        public Sexo()
+        {
+
+        }
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
+    }
     public enum UserType
     {
         USUARIO_CLIENTE,
@@ -20,9 +39,12 @@ namespace ProcessSA.Models
         private string nombre;
         private string rut;
         private Rol rol;
-        private string unidad;
         private string apellido;
         private string apellidoMaterno;
+        private string telefono;
+        private string correo;
+        private Sexo sexo;
+        private EstadoUsuario estado;
 
         public int Id { get => id; set { id = value; OnPropertyChanged("Id"); } }
         public string Rut { get => rut; set { rut = value; OnPropertyChanged("Rut"); } }
@@ -30,7 +52,10 @@ namespace ProcessSA.Models
         public string Apellido { get => apellido; set { apellido = value; OnPropertyChanged("Apellido"); } }
         public string ApellidoMaterno { get => apellidoMaterno; set { apellidoMaterno = value; OnPropertyChanged("ApellidoMaterno"); } }
         public Rol Rol { get => rol; set { rol = value; OnPropertyChanged("Rol"); } }
-        public string Unidad { get => unidad; set { unidad = value; OnPropertyChanged("Unidad"); } }
+        public string Correo { get => correo; set { correo = value; OnPropertyChanged("Correo"); } }
+        public string Telefono { get => telefono; set { telefono = value; OnPropertyChanged("Telefono"); } }
+        public Sexo Sexo { get => sexo; set { sexo = value; OnPropertyChanged("Sexo"); } }
+        public EstadoUsuario Estado { get => estado; set { estado = value; OnPropertyChanged("Estado"); } }
         public UserType TipoUsuario { get; set; }
 
         public User()

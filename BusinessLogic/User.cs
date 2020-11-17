@@ -12,6 +12,32 @@ namespace BusinessLogic
     }
 
     [DataContract]
+    public class EstadoUsuario
+    {
+        public EstadoUsuario(ESTADO_USUARIO estado)
+        {
+            Id = decimal.ToInt32(estado.IDESU);
+            Nombre = estado.DESCRIPCION;
+        }
+
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
+        public string Nombre { get; set; }
+
+        public static List<EstadoUsuario> GetAllEstadoUsuario()
+        {
+            List<EstadoUsuario> estadoUsuarios = new List<EstadoUsuario>();
+            Entities ent = new Entities();
+            foreach(ESTADO_USUARIO est in ent.ESTADO_USUARIO)
+            {
+                estadoUsuarios.Add(new EstadoUsuario(est));
+            }
+            return estadoUsuarios;
+        }
+    }
+
+    [DataContract]
     public class AuthUser
     {
         public AuthUser(AUTH_USER auth)
@@ -51,8 +77,12 @@ namespace BusinessLogic
             Id = decimal.ToInt32(usuario.IDUSU);
             Nombre = usuario.NOMBRE;
             Apellido = usuario.PATERNO;
+            ApellidoMaterno = usuario.MATERNO;
+            Rut = usuario.RUT;
+            Correo = usuario.CORREO;
             Sexo = new Sexo(usuario.SEXO);
             Rol = new Rol(usuario.ROL_CLIENTE);
+            Estado = new EstadoUsuario(usuario.ESTADO_USUARIO);
             TipoUsuario = UserType.USUARIO_CLIENTE;
         }
 
@@ -60,7 +90,7 @@ namespace BusinessLogic
         {
             Entities ent = new Entities();
             List<USUARIO_CLIENTE> lista =
-                ent.USUARIO_CLIENTE.Where(p => p.JERARQUIA_USR.DEPARTAMENTO.JERARQUIA_DEP.EMPRESA.IDEMP == v).ToList();
+                ent.USUARIO_CLIENTE.Where(p => p.ROL_CLIENTE.DEPARTAMENTO.EMPRESA.IDEMP == v).ToList();
 
             List<User> listaFinal = new List<User>();
             
@@ -171,19 +201,21 @@ namespace BusinessLogic
             if (type == UserType.USUARIO_CLIENTE)
             {
                 USUARIO_CLIENTE user = ent.USUARIO_CLIENTE.Where(p => p.IDUSU == id).FirstOrDefault();
+                ent.AUTH_USER.Remove(ent.AUTH_USER.Where(a => a.USUARIO_CLIENTE_IDUSU == user.IDUSU).FirstOrDefault());
                 ent.USUARIO_CLIENTE.Remove(user);
                 ent.SaveChanges();
                 return true;
             } else if (type == UserType.USUARIO_SISTEMA)
             {
                 USUARIO_SISTEMA user = ent.USUARIO_SISTEMA.Where(p => decimal.ToInt32(p.IDSIS) == id).FirstOrDefault();
+                ent.AUTH_USER.Remove(ent.AUTH_USER.Where(a => a.USUARIO_SISTEMA_IDSIS == id).FirstOrDefault());
                 ent.USUARIO_SISTEMA.Remove(user);
                 ent.SaveChanges();
                 return true;
             }
             return false;
         }
-        public void Guardar()
+        public void GuardarCliente(string usuario, string contrasena)
         {
             Entities ent = new Entities();
 
@@ -196,8 +228,17 @@ namespace BusinessLogic
             usu.RUT = this.Rut;
             usu.TELEFONO = this.Telefono;
             usu.ROL_CLIENTE_IDROL = this.Rol.Id;
+            usu.ESTADO_USUARIO_IDESU = this.Estado.Id;
+            usu.CORREO = this.Correo;
             
             ent.USUARIO_CLIENTE.Add(usu);
+
+            AUTH_USER auth = new AUTH_USER();
+            auth.USERNAME = usuario;
+            auth.PASSWORD = contrasena;
+            auth.USUARIO_CLIENTE_IDUSU = usu.IDUSU;
+            ent.AUTH_USER.Add(auth);
+
             ent.SaveChanges();
         }
 
@@ -224,7 +265,7 @@ namespace BusinessLogic
         public static List<User> GetUsuariosFromDepID(int id)
         {
             Entities ent = new Entities();
-            return USUARIOToUser(ent.USUARIO_CLIENTE.Where(u => u.JERARQUIA_USR.DEPARTAMENTO_IDDEP == id).ToList());
+            return new List<User>();
         }
         #endregion
 
@@ -249,6 +290,8 @@ namespace BusinessLogic
         public Rol Rol { get; set; }
         [DataMember]
         public UserType TipoUsuario { get; set; }
+        [DataMember]
+        public EstadoUsuario Estado { get; set; }
         #endregion
     }
 }

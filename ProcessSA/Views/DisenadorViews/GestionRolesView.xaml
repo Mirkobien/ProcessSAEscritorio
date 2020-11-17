@@ -8,17 +8,25 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="{DynamicResource MahApps.Brushes.Control.Background}">
     <StackPanel>
-        <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Roles"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Roles"/>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center">
+                <Run Text="Empresa: " FontWeight="Bold" FontSize="18"/>
+                <Run Text="{Binding Empresa.Nombre}"/>
+            </TextBlock>
+        </Grid>
         <Grid Margin="20, 0, 20, 20">
             <Button Command="{Binding CrearRolCommand}" HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Rol" />
-            <Button Width="150" Content="Modificar Rol" />
+            <Button Command="{Binding ModificarRolCommand}" Width="150" Content="Modificar Rol" />
             <Button Command="{Binding EliminarRolCommand}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Rol" />
         </Grid>
-        <DataGrid IsReadOnly="True" SelectedItem="{Binding SelectedRol, Mode=OneWayToSource}" ItemsSource="{Binding Roles}" AutoGenerateColumns="True" Margin="20, 0 , 20, 0">
+        <DataGrid IsReadOnly="True" SelectedItem="{Binding SelectedRol, Mode=OneWayToSource}" ItemsSource="{Binding Roles}" AutoGenerateColumns="False" Margin="20, 0 , 20, 0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"/>
-                <DataGridTextColumn Header="Telefono"/>
-                <DataGridTextColumn Header="Rubro"/>
+                <DataGridTextColumn Width="*" Header="Nombre" Binding="{Binding Nombre}"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

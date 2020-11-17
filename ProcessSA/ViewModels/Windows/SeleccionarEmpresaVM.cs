@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ProcessSA.ViewModels.Windows
 {
@@ -24,8 +25,25 @@ namespace ProcessSA.ViewModels.Windows
             get { return _empresa; }
             set { _empresa = value; OnPropertyChanged("ListaSource"); }
         }
+        public Action CloseAction { get; set; }
 
+        private ICommand _volverCommand;
+        public ICommand VolverCommand
+        {
+            get
+            {
+                if (_volverCommand == null)
+                {
+                    _volverCommand = new RelayCommand(v => Volver());
+                }
+                return _volverCommand;
+            }
+        }
 
+        public void Volver()
+        {
+            CloseAction();
+        }
         public async void Load()
         {
             ListaSource = await RESTClient.GetAllEmpresas();

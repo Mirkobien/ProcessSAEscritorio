@@ -2,6 +2,7 @@
 using ProcessSA.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,13 @@ namespace ProcessSA.ViewModels.EjecutivoViewModels.Modals
             Empresa = new Empresa();
 
             PreviousViewModel = vm;
+            FilePath = "No hay archivo seleccionado.";
         }
 
         public EmpresasViewModel PreviousViewModel { get; set; }
         public Empresa Empresa { get; set; }
         public bool IsCompleted { get; set; }
+        public string FilePath { get; set; }
 
         public ICommand GuardarCommand
         {
@@ -56,9 +59,11 @@ namespace ProcessSA.ViewModels.EjecutivoViewModels.Modals
 
         public async void GuardarEmpresa(Empresa emp)
         {
-            await RESTClient.GuardarEmpresa(emp);
-            IsCompleted = true;
-            Volver();
+            if (await RESTClient.GuardarEmpresa(emp, File.ReadAllBytes(FilePath)))
+            {
+                IsCompleted = true;
+                Volver();
+            };
         }
 
         public void Volver()

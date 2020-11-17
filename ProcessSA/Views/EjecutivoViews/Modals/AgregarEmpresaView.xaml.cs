@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using ProcessSA.ViewModels.EjecutivoViewModels.Modals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,13 @@ namespace ProcessSA.Views.EjecutivoViews.Modal
         public AgregarEmpresaView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.ShowDialog();
+            ((AgregarEmpresaViewModel)this.DataContext).FilePath = dialog.FileName;
         }
     }
 }

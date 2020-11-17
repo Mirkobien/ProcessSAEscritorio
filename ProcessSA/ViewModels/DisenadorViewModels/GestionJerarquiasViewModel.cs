@@ -1,7 +1,9 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using ProcessSA.Models;
 using ProcessSA.ViewModels.Base;
 using ProcessSA.ViewModels.DisenadorViewModels.Modals;
+using ProcessSA.ViewModels.Interface;
 using ProcessSA.ViewModels.Windows;
 using ProcessSA.Views.Windows;
 using System;
@@ -15,7 +17,7 @@ using System.Windows.Input;
 
 namespace ProcessSA.ViewModels.DisenadorViewModels
 {
-    class GestionJerarquiasViewModel : BaseViewModel
+    class GestionJerarquiasViewModel : BaseViewModel, IEmpresaHolder
     {
         public GestionJerarquiasViewModel()
         {
@@ -23,7 +25,6 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             Name = "GestionJerarquias";
 
             Icon = "Chapters";
-            Task.Run(() => OnLoaded());
         }
 
         private Empresa _empresa;
@@ -36,11 +37,12 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             }
         }
 
-        private List<Empresa> empresas;
-        public List<Empresa> Empresas
+        public Departamento SelectedDepartamento { get; set; }
+        private ObservableCollection<Departamento> _departamentos;
+        public ObservableCollection<Departamento> Departamentos
         {
-            get { return empresas; }
-            set { empresas = value; OnPropertyChanged("Empresas"); }
+            get { return _departamentos; }
+            set { _departamentos = value; OnPropertyChanged("Departamentos"); }
         }
 
         private ICommand _modificarDepartamentoCommand;
@@ -50,7 +52,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             {
                 if (_modificarDepartamentoCommand == null)
                 {
-                    _modificarDepartamentoCommand = new RelayCommand(id => ModificarDepartamento((int)id));
+                    _modificarDepartamentoCommand = new RelayCommand(id => ModificarDepartamento((int)id), p => false);
                 }
                 return _modificarDepartamentoCommand;
             }
@@ -63,7 +65,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             {
                 if (_crearDepartamentoCommand == null)
                 {
-                    _crearDepartamentoCommand = new RelayCommand(id => CrearDepartamento((JerarquiaDepartamento)id));
+                    _crearDepartamentoCommand = new RelayCommand(id => CrearDepartamento((Departamento)id), p => p != null);
                 }
                 return _crearDepartamentoCommand;
             }
@@ -76,31 +78,36 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             {
                 if (_elegirEmpresaCommand == null)
                 {
-                    _elegirEmpresaCommand = new RelayCommand(id => ElegirEmpresa());
+                    _elegirEmpresaCommand = new RelayCommand(id => {
+                        MetroWindow metro = new SelectView();
+                        SeleccionarEmpresaVM vm = new SeleccionarEmpresaVM();
+                        vm.CloseAction = new Action(metro.Close);
+                        metro.DataContext = vm;
+                        metro.ShowDialog();
+                        Empresa = vm.SelectedItem;
+                    });
                 }
                 return _elegirEmpresaCommand;
             }
         }
         public string Icon { get; set; }
-        public void CrearDepartamento(JerarquiaDepartamento jerarquia)
+        public void CrearDepartamento(Departamento idPadre)
         {
-            OnChangePage(new AgregarDepartamentoViewModel(this, jerarquia));
+            OnChangePage(new AgregarDepartamentoViewModel(this, idPadre, Empresa));
         }
         public void ModificarDepartamento(int id)
         {
 
         }
-        public void ElegirEmpresa()
-        {
-            MetroWindow metro = new SelectView();
-            SeleccionarEmpresaVM vm = new SeleccionarEmpresaVM();
-            metro.DataContext = vm;
-            metro.ShowDialog();
-            Empresa = vm.SelectedItem;
-        }
         public async override void OnLoaded()
         {
-            Empresa = await RESTClient.GetEmpresa(1);
+            Actualizar();
+        }
+
+        public async void Actualizar()
+        {
+            if (Empresa != null)
+                Departamentos = new ObservableCollection<Departamento>(await RESTClient.GetAllDepartamentosJerarquia(Empresa.Id));
         }
     }
 }

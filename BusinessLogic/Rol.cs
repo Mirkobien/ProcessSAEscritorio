@@ -26,16 +26,23 @@ namespace BusinessLogic
         public int Id { get; set; }
         [DataMember]
         public string Nombre { get; set; }
+        [DataMember]
+        public Departamento Departamento { get; set; }
 
-        public static List<Rol> GetAllRol()
+        public static List<Rol> GetAllRol(int v)
         {
             Entities ent = new Entities();
 
             List<Rol> listaFinal = new List<Rol>();
 
-            foreach (ROL_CLIENTE rol in ent.ROL_CLIENTE)
+            ICollection<DEPARTAMENTO> depas = ent.EMPRESA.Where(emp => emp.IDEMP == v).FirstOrDefault().DEPARTAMENTO;
+
+            foreach (DEPARTAMENTO dep in depas)
             {
-                listaFinal.Add(new Rol(rol));
+                foreach (ROL_CLIENTE rol in dep.ROL_CLIENTE)
+                {
+                    listaFinal.Add(new Rol(rol));
+                }
             }
 
             return listaFinal;
@@ -50,10 +57,11 @@ namespace BusinessLogic
 
         private ROL_CLIENTE ToROL_CLIENTE()
         {
-            
+
             ROL_CLIENTE rol = new ROL_CLIENTE
             {
-                DESCRIPCION = Nombre
+                DESCRIPCION = Nombre,
+                DEPARTAMENTO_IDDEP = this.Departamento.Id
             };
             if (Id != 0)
                 rol.IDROL = Id;

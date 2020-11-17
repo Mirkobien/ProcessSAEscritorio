@@ -46,7 +46,6 @@
     <Compile Include="Departamento.cs" />
     <Compile Include="Empresa.cs" />
     <Compile Include="Flujo.cs" />
-    <Compile Include="Jerarquias.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Sexo.cs" />
     <Compile Include="Tarea.cs" />

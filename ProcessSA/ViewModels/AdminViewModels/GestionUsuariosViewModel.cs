@@ -1,6 +1,7 @@
 ﻿using ProcessSA.Models;
 using ProcessSA.ViewModels.AdminViewModels.Modals;
 using ProcessSA.ViewModels.Base;
+using ProcessSA.ViewModels.Interface;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ using System.Windows.Input;
 
 namespace ProcessSA.ViewModels.AdminViewModels
 {
-    class GestionUsuariosViewModel : BaseViewModel
+    class GestionUsuariosViewModel : BaseViewModel, IEmpresaHolder
     {
         public GestionUsuariosViewModel()
         {
@@ -21,7 +22,13 @@ namespace ProcessSA.ViewModels.AdminViewModels
             Icon = "User";
         }
 
-        public ObservableCollection<User> Users { get; set; }
+        private ObservableCollection<User> _users;
+        public ObservableCollection<User> Users { get => _users; set
+            {
+                _users = value;
+                OnPropertyChanged("Users");
+            }
+        }
 
         public string Icon { get; set; }
 
@@ -38,18 +45,17 @@ namespace ProcessSA.ViewModels.AdminViewModels
             }
         }
 
+        public Empresa Empresa { get; set; }
+
         public async override void OnLoaded()
         {
-            Users = new ObservableCollection<User>(
-                new ObservableCollection<User>(
-                    await RESTClient.GetUsersAsync())
-                .Where(u => u.TipoUsuario == UserType.USUARIO_CLIENTE)
-                .ToList());
+            if(Empresa != null)
+                Users = new ObservableCollection<User>(await RESTClient.GetUsersDeEmpresa(Empresa.Id));
         }
 
         public void CrearUsuario()
         {
-            OnChangePage(new AgregarUsuarioViewModel(this));
+            OnChangePage(new AgregarUsuarioViewModel(this, Empresa));
         }
     }
 }

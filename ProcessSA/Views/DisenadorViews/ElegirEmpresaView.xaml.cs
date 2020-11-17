@@ -1,6 +1,4 @@
-﻿using ProcessSA.Models;
-using ProcessSA.ViewModels.DisenadorViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +16,11 @@ using System.Windows.Shapes;
 namespace ProcessSA.Views.DisenadorViews
 {
     /// <summary>
-    /// Lógica de interacción para GestionJerarquiasView.xaml
+    /// Lógica de interacción para ElegirEmpresaView.xaml
     /// </summary>
-    public partial class GestionJerarquiasView : UserControl
+    public partial class ElegirEmpresaView : UserControl
     {
-        public GestionJerarquiasView()
+        public ElegirEmpresaView()
         {
             InitializeComponent();
         }

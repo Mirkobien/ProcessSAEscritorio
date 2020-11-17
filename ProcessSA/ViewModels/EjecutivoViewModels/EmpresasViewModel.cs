@@ -90,8 +90,10 @@ namespace ProcessSA.ViewModels.EjecutivoViewModels
 
             if (result == MessageDialogResult.Affirmative)
             {
-                RESTClient.EliminarEmpresa(SelectedEmpresa);
-                Empresas.Remove(SelectedEmpresa);
+                if (await RESTClient.EliminarEmpresa(SelectedEmpresa.Id))
+                {
+                    Empresas.Remove(SelectedEmpresa);
+                }
             }
 
         }

@@ -8,7 +8,66 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="{DynamicResource MahApps.Brushes.Control.Background}">
     <Grid>
-        <Button Content="Volver" Command="{Binding VolverCommand}"></Button>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Crear Usuario" Style="{DynamicResource Titulo}" VerticalAlignment="Center"/>
+        <TextBlock Margin="10,0,10,0" Grid.Column="1" VerticalAlignment="Center">
+            <Run Text="Empresa: " FontSize="18"/>
+            <Run Text="{Binding Empresa.Nombre}"/>
+        </TextBlock>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Rut" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Usuario.Rut}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Nombre" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Usuario.Nombre}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Apellido Paterno" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Usuario.Apellido}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Apellido Materno" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Usuario.ApellidoMaterno}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Correo" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Usuario.Correo}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Teléfono" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Usuario.Telefono}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Usuario" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Username}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Contraseña" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Password}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Rol" HorizontalAlignment="Center"/>
+            <ComboBox IsTextSearchEnabled="True" ItemsSource="{Binding Roles}" SelectedItem="{Binding Usuario.Rol}" DisplayMemberPath="Nombre"></ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Sexo" HorizontalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding Sexos}" SelectedItem="{Binding Usuario.Sexo}" DisplayMemberPath="Descripcion"></ComboBox>
+        </StackPanel>
+        <Button VerticalAlignment="Center" Margin="10,0,10,0" Content="Volver" Command="{Binding VolverCommand}" Grid.Column="0" Grid.Row="6"></Button>
+        <Button Style="{DynamicResource BlueButton}" VerticalAlignment="Center" Margin="10,0,10,0" Content="Guardar" Command="{Binding GuardarCommand}" Grid.Column="1" Grid.Row="6"></Button>
+
     </Grid>
 </UserControl>

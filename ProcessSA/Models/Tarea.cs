@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProcessSA.Models
 {
-    class EstadoTarea : ObservableObject
+    public class EstadoTarea : ObservableObject
     {
         public EstadoTarea()
         {
@@ -17,7 +17,7 @@ namespace ProcessSA.Models
         public int Id { get; set; }
         public string Descripcion { get; set; }
     }
-    class Tarea
+    public class Tarea
     {
         public Tarea()
         {
@@ -30,5 +30,6 @@ namespace ProcessSA.Models
         public DateTime Termino { get; set; }
         public EstadoTarea Estado { get; set; }
         public ObservableCollection<User> Responsables { get; set; }
+        public Rol Rol { get; set; }
     }
 }

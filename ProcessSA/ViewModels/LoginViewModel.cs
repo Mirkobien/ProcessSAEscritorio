@@ -23,6 +23,7 @@ namespace ProcessSA.ViewModels
         public const string ERR_MESSAGE_REST = "Ocurrió un error al conectarse con el Servicio Web. Verifique con su superior.";
         public const string ERR_MESSAGE_INVALID_CREDENTIALS = "Las credenciales son incorrectas. Si está seguro de ellas, contacte con su administrador.";
         public const string ERR_MESSAGE_UNKNOWN = "Ocurrió un error desconocido.";
+        public const string ERR_NONEXISTEN_ROLE = "Su Rol asociado no existe en la aplicación.";
 
         private User user;
 
@@ -94,19 +95,19 @@ namespace ProcessSA.ViewModels
 
             if (user == null || user.TipoUsuario == UserType.USUARIO_CLIENTE)
             {
-                /*
+                
                 HasError = true;
                 ErrorMessage = ERR_MESSAGE_INVALID_CREDENTIALS;
                 return;
-                */
+                
             }
 
-            switch ("user.Rol.Nombre")
+            switch (user.Rol.Nombre)
             {
-                case "Admin":
+                case "Administrador":
                     OnChangePageString("MainAdmin");
                     break;
-                case "Disenador":
+                case "Diseñador":
                     OnChangePageString("MainDisenador");
                     break;
                 case "Analista":
@@ -116,9 +117,8 @@ namespace ProcessSA.ViewModels
                     OnChangePageString("MainEjecutivo");
                     break;
                 default:
-                    OnChangePageString("MainDisenador");
                     HasError = true;
-                    ErrorMessage = ERR_MESSAGE_UNKNOWN;
+                    ErrorMessage = ERR_NONEXISTEN_ROLE;
                     break;
             }
 

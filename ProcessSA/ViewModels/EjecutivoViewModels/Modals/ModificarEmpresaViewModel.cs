@@ -57,11 +57,11 @@ namespace ProcessSA.ViewModels.EjecutivoViewModels.Modals
 
         public async void ActualizarEmpresa(Empresa emp)
         {
-            await RESTClient.ActualizarEmpresa(emp);
+            await RESTClient.GuardarEmpresa(emp, new byte[1] { 0x1 });
             IsCompleted = true;
         }
 
-        public void Volver()
+        public override void Volver()
         {
             PreviousViewModel.Volver();
         }

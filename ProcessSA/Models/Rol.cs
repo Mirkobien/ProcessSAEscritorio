@@ -10,8 +10,10 @@ namespace ProcessSA.Models
     {
         private int id;
         private string nombre;
+        private Departamento departamento;
 
         public int Id { get => id; set { OnPropertyChanged("Id"); id = value; } }
         public string Nombre { get => nombre; set { OnPropertyChanged("Nombre"); nombre = value; } }
+        public Departamento Departamento { get => departamento; set { OnPropertyChanged("Departamento"); departamento = value; } }
     }
 }

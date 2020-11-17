@@ -25,23 +25,27 @@
         <Label Content="Agregar Empresa" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Grid.Row="0" />
         <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Center">
             <Label HorizontalAlignment="Center" Content="Nombre"/>
-            <TextBox Text="{Binding Empresa.Nombre}" mah:TextBoxHelper.Watermark="Nombre de la Empresa"/>
+            <TextBox Text="{Binding Empresa.Nombre, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" mah:TextBoxHelper.Watermark="Nombre de la Empresa"/>
         </StackPanel>
         <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Center">
             <Label HorizontalAlignment="Center" Content="Rubro"/>
             <TextBox Text="{Binding Empresa.Rubro}" mah:TextBoxHelper.Watermark="Rubro de la Empresa"/>
         </StackPanel>
         <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <Label HorizontalAlignment="Center" Content="Correo"/>
-            <TextBox Text="{Binding Empresa.Correo}" mah:TextBoxHelper.Watermark="Correo de la Empresa"/>
+            <Label HorizontalAlignment="Center" Content="Rut"/>
+            <TextBox Text="{Binding Empresa.Rut}" mah:TextBoxHelper.Watermark="Rut de la Empresa"/>
         </StackPanel>
         <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-            <Label HorizontalAlignment="Center" Content="Dirección"/>
-            <TextBox Text="{Binding Empresa.Direccion}" mah:TextBoxHelper.Watermark="Dirección de la Empresa"/>
+            <Label HorizontalAlignment="Center" Content="Correo"/>
+            <TextBox Text="{Binding Empresa.Correo}" mah:TextBoxHelper.Watermark="Correo de la Empresa"/>
         </StackPanel>
         <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Center">
             <Label HorizontalAlignment="Center" Content="Telefono"/>
             <TextBox Text="{Binding Empresa.Telefono}" mah:TextBoxHelper.Watermark="Telefono de la Empresa"/>
+        </StackPanel>
+        <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" Content="Contrato"/>
+            <Button Content="{Binding FilePath}" Click="Button_Click"/>
         </StackPanel>
         <Button Command="{Binding VolverCommand}" Margin="10,10,10,10" Content="Volver" Grid.Column="0" Grid.Row="5" />
         <Button Command="{Binding GuardarCommand}" Margin="10,10,10,10" Content="Agregar Empresa" Grid.Column="1" Grid.Row="5" />

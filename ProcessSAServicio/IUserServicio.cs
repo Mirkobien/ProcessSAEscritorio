@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -25,6 +26,18 @@ namespace ProcessSAServicio
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Sexos/")]
+        List<Sexo> GetAllSexos();
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/EstadoUsuario/")]
+        List<EstadoUsuario> GetAllEstadoUsuarios();
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/UsersEmpresa/{id}")]
         List<User> GetAllUsersEmpresa(string id);
 
@@ -43,8 +56,15 @@ namespace ProcessSAServicio
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/AddUser/")]
-        void AddUser(User data);
+            BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/AddUser/")]
+        void AddUser(User Usuario, string Username, string Password);
+
+        [OperationContract]
+        [WebInvoke(Method = "DELETE", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/EliminarUser/{id}")]
+
+        void DeleteUser(string id);
 
         #endregion
         #region Empresas
@@ -62,10 +82,23 @@ namespace ProcessSAServicio
         Empresa GetEmpresa(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/AddEmpresa/")]
-        void AddEmpresa(Empresa emp);
+            BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/AddEmpresa/")]
+        void AddEmpresa(Empresa Empresa, string Contrato);
+
+        [OperationContract]
+        [WebInvoke(Method = "DELETE", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/EliminarEmpresa/{id}")]
+        void EliminarEmpresa(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Empresa/Usuario/{id}")]
+        Empresa GetEmpresaDeUsuario(string id);
+
         #endregion
         #region Departamentos
         [OperationContract]
@@ -77,6 +110,12 @@ namespace ProcessSAServicio
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/DepartamentosList/Empresa/{id}")]
+        List<Departamento> GetDepartamentoDeEmpresaAsList(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Departamentos/{id}")]
         Departamento GetDepartamento(string id);
 
@@ -84,7 +123,7 @@ namespace ProcessSAServicio
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/AddDepartamento/")]
-        void AddDepartamento(Departamento Departamento, int Idjer);
+        void AddDepartamento(Departamento Departamento, int Padre, int Empresa);
         #endregion
         #region Tareas
         [OperationContract]
@@ -106,10 +145,22 @@ namespace ProcessSAServicio
         List<Tarea> GetAllTareasEmpresa(string id);
 
         [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/TareasDeRol/{id}")]
+        List<Tarea> GetAllTareasRol(string id);
+
+        [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/CambiarEstado/")]
+            BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/CambiarEstadoTarea/")]
         void CambiarEstadoTarea(int idTarea, int idEstado);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/CambiarEstadoTareas/")]
+        void CambiarEstadoTareas(List<int> idTareas, int idEstado);
 
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
@@ -134,8 +185,8 @@ namespace ProcessSAServicio
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
-        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Roles/")]
-        List<Rol> GetAllRoles();
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Roles/{id}")]
+        List<Rol> GetAllRoles(string id);
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", RequestFormat = WebMessageFormat.Json,
@@ -154,8 +205,14 @@ namespace ProcessSAServicio
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
-        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Flujos/")]
-        List<Flujo> GetAllFlujos();
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Flujos/Empresa/{id}")]
+        List<Flujo> GetAllFlujos(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/EstadoFlujos/")]
+        List<EstadoFlujo> GetAllEstadoFlujos();
 
         [OperationContract]
         [WebInvoke(Method = "DELETE", RequestFormat = WebMessageFormat.Json,

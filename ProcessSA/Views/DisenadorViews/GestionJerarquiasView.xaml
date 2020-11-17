@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:local="clr-namespace:ProcessSA.Views.DisenadorViews"
+             xmlns:models="clr-namespace:ProcessSA.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="{DynamicResource MahApps.Brushes.Control.Background}">
-    <ScrollViewer>
-        <Grid>
+    <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
@@ -18,45 +19,20 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button VerticalAlignment="Center" Content="Elegir Empresa" Command="{Binding ElegirEmpresaCommand}" Grid.Column="1"/>
-            <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Empresa.JerarquiaDepartamentos}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Margin="10" BorderBrush="Black" BorderThickness="1">
-                            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto">
-                                <DockPanel LastChildFill="False">
-                                    <ItemsControl ItemsSource="{Binding Departamentos}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border Height="100" BorderBrush="Black" BorderThickness="1" Margin="10">
-                                                    <DockPanel>
-                                                        <Label DockPanel.Dock="Top" Content="{Binding Nombre}"></Label>
-                                                        <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ModificarDepCommand}" Content="Modificar Departamento"/>
-                                                    </DockPanel>
-                                                </Border>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Margin="10" Orientation="Horizontal">
-                                                </StackPanel>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                    </ItemsControl>
-                                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.CrearDepartamentoCommand}" CommandParameter="{Binding}" Margin="10" VerticalAlignment="Center" Content="Añadir Departamento"/>
-                                </DockPanel>
-                            </ScrollViewer>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Margin="10"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <Label Margin="10, 0, 10, 10" FontSize="26" FontWeight="Bold" Content="Organigramas"/>
-            <Button Style="{StaticResource BlueButton}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="Añadir nivel"/>
+            <TreeView x:Name="Jerarquia" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Departamentos}">
+
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Departamentos}" DataType="{x:Type models:Departamento}">
+                        <TextBlock Text="{Binding Nombre}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+            <Label VerticalAlignment="Center" Margin="10, 0, 10, 10" FontSize="26" FontWeight="Bold" Content="Organigramas"/>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="18" FontWeight="Bold">
+                    <Run Text="Empresa: "/>
+                    <Run Text="{Binding Empresa.Nombre}"/>
+            </TextBlock>
+            <Button Command="{Binding EliminarDepartamentoCommand}" CommandParameter="{Binding ElementName=Jerarquia, Path=SelectedItem}" Margin="10" Style="{StaticResource BlueButton}" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Eliminar Departamento"/>
+            <Button Command="{Binding CrearDepartamentoCommand}" CommandParameter="{Binding ElementName=Jerarquia, Path=SelectedItem}" Margin="10" Style="{StaticResource BlueButton}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="Añadir Departamento"/>
         </Grid>
-    </ScrollViewer>
 </UserControl>
