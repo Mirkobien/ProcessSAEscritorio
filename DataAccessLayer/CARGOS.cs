@@ -12,26 +12,31 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class DEPARTAMENTO
+    public partial class CARGOS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DEPARTAMENTO()
+        public CARGOS()
         {
-            this.DEPARTAMENTO1 = new HashSet<DEPARTAMENTO>();
-            this.ROL_CLIENTE = new HashSet<ROL_CLIENTE>();
+            this.CARGOS1 = new HashSet<CARGOS>();
+            this.USUARIO_CLIENTE = new HashSet<USUARIO_CLIENTE>();
+            this.FLUJO = new HashSet<FLUJO>();
+            this.TAREA = new HashSet<TAREA>();
         }
     
         public decimal IDDEP { get; set; }
         public string NOMBRE { get; set; }
-        public string DESCRIPCION { get; set; }
-        public Nullable<decimal> DEPARTAMENTO_IDDEP { get; set; }
         public Nullable<decimal> EMPRESA_IDEMP { get; set; }
+        public Nullable<decimal> CARGOS_IDDEP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DEPARTAMENTO> DEPARTAMENTO1 { get; set; }
-        public virtual DEPARTAMENTO DEPARTAMENTO2 { get; set; }
+        public virtual ICollection<CARGOS> CARGOS1 { get; set; }
+        public virtual CARGOS CARGOS2 { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROL_CLIENTE> ROL_CLIENTE { get; set; }
+        public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FLUJO> FLUJO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TAREA> TAREA { get; set; }
     }
 }

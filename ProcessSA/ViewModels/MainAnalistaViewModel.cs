@@ -12,14 +12,24 @@ namespace ProcessSA.ViewModels
 {
     class MainAnalistaViewModel : Base.BaseVMListHolder, IEmpresaHolder
     {
-        public MainAnalistaViewModel()
+        public MainAnalistaViewModel(AppViewModel app)
         {
-            BaseViewModels.Add(new ElegirEmpresaVM(this));
+            app.PropertyChanged += App_PropertyChanged;
+
             BaseViewModels.Add(new AnalistaViewModels.GestionInformeViewModel());
             CurrentViewModel = BaseViewModels[0];
 
             Name = "MainAnalista";
             DisplayName = "Analista";
+        }
+
+        private void App_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Empresa")
+            {
+                Empresa = ((AppViewModel)sender).Empresa;
+                Index = 0;
+            }
         }
 
         public Empresa Empresa { get; set; }

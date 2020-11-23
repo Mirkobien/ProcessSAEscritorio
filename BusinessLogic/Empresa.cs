@@ -18,7 +18,7 @@ namespace BusinessLogic
             Rubro = emp.RUBRO;
             Rut = emp.RUT;
 
-            Departamentos = new List<Departamento>();
+            Cargos = new List<Rol>();
         }
 
         public Empresa()
@@ -34,7 +34,7 @@ namespace BusinessLogic
         public string Rubro { get; set; }
         public int Telefono { get; set; }
         public byte[] Contrato { get; set; }
-        public List<Departamento> Departamentos { get; set; }
+        public List<Rol> Cargos { get; set; }
 
         #region database operations
         public static bool Eliminar(int id)
@@ -119,11 +119,10 @@ namespace BusinessLogic
         public static Empresa GetEmpresaDeUsuario(int v)
         {
             Entities ent = new Entities();
-            return new Empresa(ent.EMPRESA.Where(e => 
-            e.IDEMP == ent.USUARIO_CLIENTE.Where(u => 
-            u.IDUSU == v).FirstOrDefault().ROL_CLIENTE.DEPARTAMENTO.IDDEP)
+            return new Empresa(ent.EMPRESA
+                .Where(e => e.IDEMP == ent.USUARIO_CLIENTE.Where(u => u.IDUSU == v).FirstOrDefault().CARGOS.EMPRESA_IDEMP)
                 .FirstOrDefault()
-            );
+                );
         }
 
         #endregion

@@ -22,17 +22,25 @@
             <TreeView x:Name="Jerarquia" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Departamentos}">
 
                 <TreeView.Resources>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Departamentos}" DataType="{x:Type models:Departamento}">
+                    <HierarchicalDataTemplate ItemsSource="{Binding Cargos}" DataType="{x:Type models:Cargo}">
                         <TextBlock Text="{Binding Nombre}"/>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
             </TreeView>
             <Label VerticalAlignment="Center" Margin="10, 0, 10, 10" FontSize="26" FontWeight="Bold" Content="Organigramas"/>
-            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="18" FontWeight="Bold">
+            <!--<TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="18" FontWeight="Bold">
                     <Run Text="Empresa: "/>
                     <Run Text="{Binding Empresa.Nombre}"/>
-            </TextBlock>
-            <Button Command="{Binding EliminarDepartamentoCommand}" CommandParameter="{Binding ElementName=Jerarquia, Path=SelectedItem}" Margin="10" Style="{StaticResource BlueButton}" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Eliminar Departamento"/>
-            <Button Command="{Binding CrearDepartamentoCommand}" CommandParameter="{Binding ElementName=Jerarquia, Path=SelectedItem}" Margin="10" Style="{StaticResource BlueButton}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="Añadir Departamento"/>
+            </TextBlock>-->
+        <Grid Grid.ColumnSpan="2" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding EliminarCargoCommand}" CommandParameter="{Binding ElementName=Jerarquia, Path=SelectedItem}" Margin="10" Style="{StaticResource BlueButton}" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Eliminar Cargo"/>
+            <Button Command="{Binding CrearDepartamentoCommand}" CommandParameter="{Binding ElementName=Jerarquia, Path=SelectedItem}" Margin="10" Style="{StaticResource BlueButton}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="Añadir Cargo"/>
+            <Button Command="{Binding CrearCargoRootCommand}" CommandParameter="{Binding ElementName=Jerarquia, Path=SelectedItem}" Margin="10" Style="{StaticResource BlueButton}" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Content="Añadir Cargo a nivel base"/>
         </Grid>
+    </Grid>
 </UserControl>

@@ -54,12 +54,12 @@ namespace ProcessSA.ViewModels.AdminViewModels.Modals
             }
         }
 
-        private ObservableCollection<Rol> _roles;
-        public ObservableCollection<Rol> Roles
+        private ObservableCollection<Cargo> _cargos;
+        public ObservableCollection<Cargo> Cargos
         {
-            get => _roles; set
+            get => _cargos; set
             {
-                _roles = value;
+                _cargos = value;
                 OnPropertyChanged("Roles");
             }
         }
@@ -71,6 +71,16 @@ namespace ProcessSA.ViewModels.AdminViewModels.Modals
             {
                 _sexos = value;
                 OnPropertyChanged("Sexos");
+            }
+        }
+
+        private ObservableCollection<Rol> _roles;
+        public ObservableCollection<Rol> Roles
+        {
+            get => _roles; set
+            {
+                _roles = value;
+                OnPropertyChanged("Roles");
             }
         }
 
@@ -87,9 +97,12 @@ namespace ProcessSA.ViewModels.AdminViewModels.Modals
         public async override void OnLoaded()
         {
             Sexos = new ObservableCollection<Sexo>(await RESTClient.GetAllSexos());
+            Cargos = new ObservableCollection<Cargo>(await RESTClient.GetAllDepartamentosList(Empresa.Id));
             Roles = new ObservableCollection<Rol>(await RESTClient.GetAllRoles(Empresa.Id));
             Usuario.Sexo = Sexos[0];
+            Usuario.Cargo = Cargos[0];
             Usuario.Rol = Roles[0];
+
         }
 
         public override void Volver()

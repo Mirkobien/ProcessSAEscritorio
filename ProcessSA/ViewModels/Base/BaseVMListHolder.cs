@@ -67,6 +67,7 @@ namespace ProcessSA.ViewModels.Base
                 {
                     CurrentViewModel = BaseViewModels[value];
                     _index = value;
+                    OnPropertyChanged("Index");
                 }
             }
         }

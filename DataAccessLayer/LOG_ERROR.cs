@@ -12,12 +12,10 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class DEPARTAMENTOS_JERARQUIA
+    public partial class LOG_ERROR
     {
-        public decimal ID { get; set; }
-        public string NOMBRE { get; set; }
-        public Nullable<decimal> PADRE { get; set; }
-        public Nullable<decimal> NIVEL { get; set; }
-        public Nullable<decimal> EMPRESA { get; set; }
+        public decimal IDLOG { get; set; }
+        public string DESCRIPCION { get; set; }
+        public Nullable<System.DateTime> FECHA { get; set; }
     }
 }

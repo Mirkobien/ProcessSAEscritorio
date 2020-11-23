@@ -13,15 +13,12 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 {
     class AgregarFlujoVM : BaseViewModel, IEmpresaHolder
     {
-        public AgregarFlujoVM(BaseViewModel bas, Empresa emp)
+        public AgregarFlujoVM(BaseViewModel bas, Empresa emp, Flujo flujo)
         {
             Empresa = emp;
             PreviousViewModel = bas;
-            Flujo = new Flujo
-            {
-                Inicio = DateTime.Today
-            };
-            Roles = new ObservableCollection<Rol>();
+            Flujo = flujo;
+            Cargos = new ObservableCollection<Cargo>();
 
             Flujo.Tareas = new ObservableCollection<Tarea>();
 
@@ -31,10 +28,10 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
             });
         }
 
-        private ObservableCollection<Rol> roles;
-        public ObservableCollection<Rol> Roles { get => roles; set
+        private ObservableCollection<Cargo> cargos;
+        public ObservableCollection<Cargo> Cargos { get => cargos; set
             {
-                roles = value;
+                cargos = value;
                 OnPropertyChanged("Roles");
             }
         }
@@ -114,7 +111,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
         }
         public void CrearTarea()
         {
-            OnChangePage(new AgregarTareaViewModel(this, Empresa) { Roles = Roles.ToList() });
+            OnChangePage(new AgregarTareaViewModel(this, Empresa) { Cargos = Cargos.ToList() });
         }
         public override void Volver()
         {
@@ -123,8 +120,8 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 
         public async override void OnLoaded()
         {
-            if (Roles.Count < 1)
-                Roles = new ObservableCollection<Rol>(await RESTClient.GetAllRoles(Empresa.Id));
+            if (Cargos.Count < 1)
+                Cargos = new ObservableCollection<Cargo>(await RESTClient.GetAllDepartamentosList(Empresa.Id));
         }
 
         internal void Volver(AgregarTareaViewModel agregarTareaViewModel)

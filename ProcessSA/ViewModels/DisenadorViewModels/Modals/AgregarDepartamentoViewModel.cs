@@ -12,13 +12,13 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 {
     class AgregarDepartamentoViewModel : BaseViewModel
     {
-        public AgregarDepartamentoViewModel(BaseViewModel previousVM, Departamento j, Empresa empresa)
+        public AgregarDepartamentoViewModel(BaseViewModel previousVM, Cargo j, Empresa empresa)
         {
             PreviousViewModel = previousVM;
             Padre = j;
             Empresa = empresa;
             Task.Run(async () => await OnLoaded());
-            Departamento = new Departamento();
+            Departamento = new Cargo();
         }
 
         private ICommand _guardarCommand;
@@ -27,8 +27,8 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 
         public Empresa Empresa { get; set; }
         public BaseViewModel PreviousViewModel { get; set; }
-        public Departamento Departamento { get; set; }
-        public Departamento Padre { get; set; }
+        public Cargo Departamento { get; set; }
+        public Cargo Padre { get; set; }
         public bool IsCompleted { get; set; }
 
         public ICommand GuardarCommand
@@ -74,7 +74,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 
         public async void GuardarDepartamento()
         {
-            await RESTClient.GuardarDepartamento(Departamento, Padre.Id, Empresa.Id);
+            await RESTClient.GuardarCargo(Departamento, Padre.Id, Empresa.Id);
             IsCompleted = true;
             Volver();
         }

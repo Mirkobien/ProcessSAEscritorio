@@ -17,7 +17,7 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMPRESA()
         {
-            this.DEPARTAMENTO = new HashSet<DEPARTAMENTO>();
+            this.CARGOS = new HashSet<CARGOS>();
             this.DOCUMENTO = new HashSet<DOCUMENTO>();
         }
     
@@ -30,7 +30,7 @@ namespace DataAccessLayer
         public byte[] CONTRATO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DEPARTAMENTO> DEPARTAMENTO { get; set; }
+        public virtual ICollection<CARGOS> CARGOS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DOCUMENTO> DOCUMENTO { get; set; }
     }

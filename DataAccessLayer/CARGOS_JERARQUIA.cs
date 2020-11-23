@@ -12,18 +12,12 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class ROL_CLIENTE
+    public partial class CARGOS_JERARQUIA
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ROL_CLIENTE()
-        {
-            this.USUARIO_CLIENTE = new HashSet<USUARIO_CLIENTE>();
-        }
-    
-        public decimal IDROLC { get; set; }
+        public decimal ID { get; set; }
         public string NOMBRE { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
+        public Nullable<decimal> PADRE_ID { get; set; }
+        public Nullable<decimal> NIVEL { get; set; }
+        public Nullable<decimal> EMPRESA_ID { get; set; }
     }
 }

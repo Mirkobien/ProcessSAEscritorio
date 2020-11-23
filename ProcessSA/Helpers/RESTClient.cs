@@ -79,6 +79,12 @@ namespace ProcessSA.Models
             return false;
         }
 
+        public async static Task<bool> EliminarCargo(int id)
+        {
+            HttpResponseMessage response = await client.DeleteAsync(USER_URL + "EliminarCargo/" + id.ToString());
+            return response.IsSuccessStatusCode;
+        }
+
         public async static Task<List<Sexo>> GetAllSexos()
         {
             List<Sexo> sexos = new List<Sexo>();
@@ -90,9 +96,10 @@ namespace ProcessSA.Models
             return sexos;
         }
 
-        public async static Task EliminarFlujo(int id)
+        public async static Task<bool> EliminarFlujo(int id)
         {
             HttpResponseMessage responseMessage = await client.DeleteAsync(USER_URL + "EliminarFlujo/" + id.ToString());
+            return responseMessage.IsSuccessStatusCode;
         }
 
         public static void InitClient()
@@ -152,9 +159,9 @@ namespace ProcessSA.Models
             return null;
         }
 
-        public async static Task<bool> GuardarDepartamento(Departamento departamento, int idjer, int empresaid)
+        public async static Task<bool> GuardarCargo(Cargo departamento, int idjer, int empresaid)
         {
-            string jsonData = JsonConvert.SerializeObject(new { Departamento = departamento, Padre = idjer, Empresa = empresaid });
+            string jsonData = JsonConvert.SerializeObject(new { Cargo = departamento, Padre = idjer, Empresa = empresaid });
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             HttpResponseMessage message = await client.PostAsync(USER_URL + "AddDepartamento", content);
             if (message.IsSuccessStatusCode)
@@ -164,25 +171,26 @@ namespace ProcessSA.Models
             return false;
         }
 
-        public async static Task<List<Departamento>> GetAllDepartamentosJerarquia(int id)
+        public async static Task<List<Cargo>> GetAllDepartamentosJerarquia(int id)
         {
 
             HttpResponseMessage responseMessage = await client.GetAsync(USER_URL + "/Departamentos/Empresa/" + id.ToString());
             if (responseMessage.IsSuccessStatusCode)
             {
-                return await responseMessage.Content.ReadAsAsync<List<Departamento>>();
+                return await responseMessage.Content.ReadAsAsync<List<Cargo>>();
             }
             return null;
         }
-        public async static Task<List<Departamento>> GetAllDepartamentosList(int id)
+        public async static Task<List<Cargo>> GetAllDepartamentosList(int id)
         {
 
-            HttpResponseMessage responseMessage = await client.GetAsync(USER_URL + "/DepartamentosList/Empresa/" + id.ToString());
+            HttpResponseMessage responseMessage = await client.GetAsync(USER_URL + "/Departamentos/Empresa/" + id.ToString());
             if (responseMessage.IsSuccessStatusCode)
             {
-                return await responseMessage.Content.ReadAsAsync<List<Departamento>>();
+                List<Cargo> cargos = await responseMessage.Content.ReadAsAsync<List<Cargo>>();
+                return Cargo.Traverse(cargos.FirstOrDefault()).ToList();
             }
-            return null;
+            throw new NullReferenceException("No existe.");
         }
 
         internal static Task ActualizarEmpresa(Empresa emp)

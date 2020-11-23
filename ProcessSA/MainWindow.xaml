@@ -11,7 +11,7 @@
         xmlns:adminviewModels="clr-namespace:ProcessSA.ViewModels.AdminViewModels"
         mc:Ignorable="d"
         ResizeMode="CanResizeWithGrip"
-        MinHeight="500"
+        MinHeight="550"
         MinWidth="500"
         Title="Process S.A." Height="450" Width="800">
     <mah:MetroWindow.RightWindowCommands>
@@ -26,9 +26,22 @@
     </mah:MetroWindow.Resources>
     <DockPanel Margin="10, 10, 10, 10">
         <Grid DockPanel.Dock="Top" Margin="0, 0, 0, 10">
-            <Image HorizontalAlignment="Center" MaxWidth="200" Source="/Resource/ProcessLogo.png" />
-            <Button Command="{Binding LogoutCommand}" Visibility="{Binding LoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}" Content="Cerrar Sesión" HorizontalAlignment="Right" Margin="0,0,33,0" VerticalAlignment="Center"/>
-            <Label Content="" HorizontalAlignment="Right" Margin="0,0,166,0" VerticalAlignment="Center"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" HorizontalAlignment="Left" MaxWidth="200" Source="/Resource/ProcessLogo.png" />
+            <ComboBox Grid.Column="1" SelectedItem="{Binding Empresa, Mode=TwoWay}" HorizontalAlignment="Center" ItemsSource="{Binding Empresas}" Visibility="{Binding VerEmpresas, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" Width="200" DisplayMemberPath="Nombre"/>
+            <DockPanel Grid.Column="2" Margin="10,0,10,0" Visibility="{Binding LoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Button DockPanel.Dock="Left" Command="{Binding LogoutCommand}"  Content="Cerrar Sesión" HorizontalAlignment="Right" Margin="0,0,33,0" VerticalAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" DockPanel.Dock="Right">
+                    <Run Text="{Binding LoggedUser.Nombre}"/>
+                    <Run Text="{Binding LoggedUser.Apellido}"/>
+                    <Run Text="-"/>
+                    <Run Text="{Binding LoggedUser.Rol.Nombre}"/>
+                </TextBlock>
+            </DockPanel>
         </Grid>
         <mah:TransitioningContentControl x:Name="Contenido" Content="{Binding CurrentPageViewModel}"
                                          RestartTransitionOnContentChange="True"

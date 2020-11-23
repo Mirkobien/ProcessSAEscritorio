@@ -14,9 +14,11 @@ namespace ProcessSA.ViewModels
 {
     class MainAdminViewModel : BaseVMListHolder, IEmpresaHolder
     {
-        public MainAdminViewModel()
+        public MainAdminViewModel(AppViewModel app)
         {
-            BaseViewModels.Add(new ElegirEmpresaVM(this));
+            app.PropertyChanged += App_PropertyChanged;
+
+            //BaseViewModels.Add(new ElegirEmpresaVM(this));
             BaseViewModels.Add(new AdminViewModels.GestionUsuariosViewModel());
             //BaseViewModels.Add(new ConfiguracionViewModel());
             //BaseViewModels.Add(new ParametrizacionViewModel());
@@ -30,6 +32,15 @@ namespace ProcessSA.ViewModels
 
             Name = "MainAdmin";
             DisplayName = "Administrador";
+        }
+
+        private void App_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Empresa")
+            {
+                Empresa = ((AppViewModel)sender).Empresa;
+                Index = 0;
+            }
         }
 
         private Empresa _empresa;

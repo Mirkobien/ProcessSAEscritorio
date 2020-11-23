@@ -27,7 +27,7 @@
         </StackPanel>
         <StackPanel Margin="10,0,10,0" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
             <Label Content="Cargo del flujo"></Label>
-            <ComboBox DisplayMemberPath="Nombre" ItemsSource="{Binding Roles}" SelectedItem="{Binding Flujo.Rol}"/>
+            <ComboBox DisplayMemberPath="Nombre" ItemsSource="{Binding Cargos}" SelectedItem="{Binding Flujo.Cargo}"/>
         </StackPanel>
         <StackPanel Margin="10,0,10,0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
             <Label Content="Descripcion del flujo"></Label>

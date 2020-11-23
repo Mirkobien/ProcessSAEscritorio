@@ -100,30 +100,30 @@ namespace ProcessSAServicio
         Empresa GetEmpresaDeUsuario(string id);
 
         #endregion
-        #region Departamentos
+        #region Cargos
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Departamentos/Empresa/{id}")]
-        List<Departamento> GetDepartamentoDeEmpresa(string id);
-
-        [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
-        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/DepartamentosList/Empresa/{id}")]
-        List<Departamento> GetDepartamentoDeEmpresaAsList(string id);
+        List<Cargo> GetCargosDeEmpresa(string id);
 
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Departamentos/{id}")]
-        Departamento GetDepartamento(string id);
+        Cargo GetCargo(string id);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/AddDepartamento/")]
-        void AddDepartamento(Departamento Departamento, int Padre, int Empresa);
+        void AddCargo(Cargo Cargo, int Padre, int Empresa);
+
+        [OperationContract]
+        [WebInvoke(Method = "DELETE", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/EliminarCargo/{id}")]
+        void EliminarCargo(string id);
         #endregion
         #region Tareas
         [OperationContract]

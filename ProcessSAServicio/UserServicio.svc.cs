@@ -100,25 +100,25 @@ namespace ProcessSAServicio
         }
 
         #endregion
-        #region Departamentos
-        public List<Departamento> GetDepartamentoDeEmpresa(string id)
+        #region Cargos
+        public List<Cargo> GetCargosDeEmpresa(string id)
         {
-            return Departamento.GetDepartamentos(int.Parse(id));
+            return Cargo.GetCargosDeEmpresa(int.Parse(id));
         }
 
-        public List<Departamento> GetDepartamentoDeEmpresaAsList(string id)
+        public Cargo GetCargo(string id)
         {
-            return Departamento.GetDepartamentosAsList(int.Parse(id));
+            return Cargo.GetCargo(int.Parse(id));
         }
 
-        public Departamento GetDepartamento(string id)
+        public void AddCargo(Cargo Cargo, int Padre, int Empresa)
         {
-            return Departamento.GetDepartamento(int.Parse(id));
+            Cargo.Guardar(Padre, Empresa);
         }
 
-        public void AddDepartamento(Departamento Departamento, int Padre, int Empresa)
+        public void EliminarCargo(string id)
         {
-            Departamento.Guardar(Padre, Empresa);
+            Cargo.Eliminar(int.Parse(id));
         }
         #endregion
         #region Tareas
@@ -138,7 +138,7 @@ namespace ProcessSAServicio
 
         public List<Tarea> GetAllTareasRol(string id)
         {
-            return Tarea.GetAllTareaRol(int.Parse(id));
+            return Tarea.GetAllTareaCargo(int.Parse(id));
         }
 
         public void CambiarEstadoTarea(int idTarea, int idEstado)

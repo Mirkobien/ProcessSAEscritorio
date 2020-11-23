@@ -12,14 +12,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DEPARTAMENTO">
-      <EntityTypeMapping TypeName="Model.DEPARTAMENTO">
-        <MappingFragment StoreEntitySet="DEPARTAMENTO">
+    <EntitySetMapping Name="CARGOS">
+      <EntityTypeMapping TypeName="Model.CARGOS">
+        <MappingFragment StoreEntitySet="CARGOS">
           <ScalarProperty Name="IDDEP" ColumnName="IDDEP" />
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-          <ScalarProperty Name="DEPARTAMENTO_IDDEP" ColumnName="DEPARTAMENTO_IDDEP" />
           <ScalarProperty Name="EMPRESA_IDEMP" ColumnName="EMPRESA_IDEMP" />
+          <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -82,6 +81,7 @@
     <EntitySetMapping Name="FLUJO">
       <EntityTypeMapping TypeName="Model.FLUJO">
         <MappingFragment StoreEntitySet="FLUJO">
+          <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
           <ScalarProperty Name="IDFLU" ColumnName="IDFLU" />
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
@@ -89,16 +89,23 @@
           <ScalarProperty Name="INICIO" ColumnName="INICIO" />
           <ScalarProperty Name="FIN" ColumnName="FIN" />
           <ScalarProperty Name="ESTADO_FLUJO_IDESF" ColumnName="ESTADO_FLUJO_IDESF" />
-          <ScalarProperty Name="ROL_CLIENTE_IDROL" ColumnName="ROL_CLIENTE_IDROL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG_ERROR">
+      <EntityTypeMapping TypeName="Model.LOG_ERROR">
+        <MappingFragment StoreEntitySet="LOG_ERROR">
+          <ScalarProperty Name="IDLOG" ColumnName="IDLOG" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ROL_CLIENTE">
       <EntityTypeMapping TypeName="Model.ROL_CLIENTE">
         <MappingFragment StoreEntitySet="ROL_CLIENTE">
-          <ScalarProperty Name="IDROL" ColumnName="IDROL" />
-          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-          <ScalarProperty Name="DEPARTAMENTO_IDDEP" ColumnName="DEPARTAMENTO_IDDEP" />
+          <ScalarProperty Name="IDROLC" ColumnName="IDROLC" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -121,13 +128,13 @@
     <EntitySetMapping Name="TAREA">
       <EntityTypeMapping TypeName="Model.TAREA">
         <MappingFragment StoreEntitySet="TAREA">
+          <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
           <ScalarProperty Name="IDTAR" ColumnName="IDTAR" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
           <ScalarProperty Name="INICIO" ColumnName="INICIO" />
           <ScalarProperty Name="FIN" ColumnName="FIN" />
           <ScalarProperty Name="DURACION" ColumnName="DURACION" />
           <ScalarProperty Name="ESTADO_TAREA_IDEST" ColumnName="ESTADO_TAREA_IDEST" />
-          <ScalarProperty Name="ROL_CLIENTE_IDROL" ColumnName="ROL_CLIENTE_IDROL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -143,7 +150,8 @@
           <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
           <ScalarProperty Name="ESTADO_USUARIO_IDESU" ColumnName="ESTADO_USUARIO_IDESU" />
           <ScalarProperty Name="SEXO_IDSEX" ColumnName="SEXO_IDSEX" />
-          <ScalarProperty Name="ROL_CLIENTE_IDROL" ColumnName="ROL_CLIENTE_IDROL" />
+          <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
+          <ScalarProperty Name="ROL_CLIENTE_IDROLC" ColumnName="ROL_CLIENTE_IDROLC" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -184,12 +192,12 @@
         <ScalarProperty Name="IDTAR" ColumnName="TAREA_IDTAR" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="DEPARTAMENTOS_JERARQUIA">
-      <EntityTypeMapping TypeName="Model.DEPARTAMENTOS_JERARQUIA">
-        <MappingFragment StoreEntitySet="DEPARTAMENTOS_JERARQUIA">
-          <ScalarProperty Name="EMPRESA" ColumnName="EMPRESA" />
+    <EntitySetMapping Name="CARGOS_JERARQUIA">
+      <EntityTypeMapping TypeName="Model.CARGOS_JERARQUIA">
+        <MappingFragment StoreEntitySet="CARGOS_JERARQUIA">
+          <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
           <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
-          <ScalarProperty Name="PADRE" ColumnName="PADRE" />
+          <ScalarProperty Name="PADRE_ID" ColumnName="PADRE_ID" />
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>

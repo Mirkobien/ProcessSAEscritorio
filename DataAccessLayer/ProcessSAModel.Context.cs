@@ -26,7 +26,7 @@ namespace DataAccessLayer
         }
     
         public virtual DbSet<AUTH_USER> AUTH_USER { get; set; }
-        public virtual DbSet<DEPARTAMENTO> DEPARTAMENTO { get; set; }
+        public virtual DbSet<CARGOS> CARGOS { get; set; }
         public virtual DbSet<DOCUMENTO> DOCUMENTO { get; set; }
         public virtual DbSet<EMPRESA> EMPRESA { get; set; }
         public virtual DbSet<ERROR_TAREA> ERROR_TAREA { get; set; }
@@ -34,12 +34,13 @@ namespace DataAccessLayer
         public virtual DbSet<ESTADO_TAREA> ESTADO_TAREA { get; set; }
         public virtual DbSet<ESTADO_USUARIO> ESTADO_USUARIO { get; set; }
         public virtual DbSet<FLUJO> FLUJO { get; set; }
+        public virtual DbSet<LOG_ERROR> LOG_ERROR { get; set; }
         public virtual DbSet<ROL_CLIENTE> ROL_CLIENTE { get; set; }
         public virtual DbSet<ROL_SISTEMA> ROL_SISTEMA { get; set; }
         public virtual DbSet<SEXO> SEXO { get; set; }
         public virtual DbSet<TAREA> TAREA { get; set; }
         public virtual DbSet<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
         public virtual DbSet<USUARIO_SISTEMA> USUARIO_SISTEMA { get; set; }
-        public virtual DbSet<DEPARTAMENTOS_JERARQUIA> DEPARTAMENTOS_JERARQUIA { get; set; }
+        public virtual DbSet<CARGOS_JERARQUIA> CARGOS_JERARQUIA { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace ProcessSA.Models
         public string Descripcion { get; set; }
         public EstadoFlujo Estado { get; set; }
         public ObservableCollection<Tarea> Tareas { get; set; }
-        public Rol Rol { get; set; }
+        public Cargo Cargo { get; set; }
 
     }
 }

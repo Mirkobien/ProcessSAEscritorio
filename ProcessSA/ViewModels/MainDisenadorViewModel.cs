@@ -13,9 +13,11 @@ namespace ProcessSA.ViewModels
 {
     class MainDisenadorViewModel : BaseVMListHolder, IEmpresaHolder
     {
-        public MainDisenadorViewModel()
+        public MainDisenadorViewModel(AppViewModel app)
         {
-            BaseViewModels.Add(new ElegirEmpresaVM(this));
+            app.PropertyChanged += App_PropertyChanged;
+
+            //BaseViewModels.Add(new ElegirEmpresaVM(this));
             //BaseViewModels.Add(new GestionRolesViewModel());
             //BaseViewModels.Add(new GestionUnidadesViewModel());
             BaseViewModels.Add(new GestionJerarquiasViewModel());
@@ -33,6 +35,15 @@ namespace ProcessSA.ViewModels
 
             Name = "MainDisenador";
             DisplayName = "Diseñador";
+        }
+
+        private void App_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Empresa")
+            {
+                Empresa = ((AppViewModel)sender).Empresa;
+                Index = 0;
+            }
         }
 
         private Empresa _empresa;

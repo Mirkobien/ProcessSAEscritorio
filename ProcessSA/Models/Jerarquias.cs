@@ -24,6 +24,6 @@ namespace ProcessSA.Models
         }
         public int Id { get; set; }
         public int Nivel { get; set; }
-        public List<Departamento> Departamentos { get; set; }
+        public List<Cargo> Departamentos { get; set; }
     }
 }

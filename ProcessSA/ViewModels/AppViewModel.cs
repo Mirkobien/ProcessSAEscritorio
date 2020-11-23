@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace ProcessSA.ViewModels
 {
-    class AppViewModel : BaseViewModel
+    class AppViewModel : BaseViewModel, IEmpresaHolder
     {
         private ICommand _changePageCommand;
         private ICommand _changePageCommandByName;
@@ -31,11 +31,11 @@ namespace ProcessSA.ViewModels
         public AppViewModel()
         {
             LoggedIn = false;
-            PageViewModels.Add(new LoginViewModel());
-            PageViewModels.Add(new MainAdminViewModel());
-            PageViewModels.Add(new MainDisenadorViewModel());
+            PageViewModels.Add(new LoginViewModel(this));
+            PageViewModels.Add(new MainAdminViewModel(this));
+            PageViewModels.Add(new MainDisenadorViewModel(this));
             PageViewModels.Add(new MainEjecutivoViewModel());
-            PageViewModels.Add(new MainAnalistaViewModel());
+            PageViewModels.Add(new MainAnalistaViewModel(this));
             CurrentPageViewModel = PageViewModels[0];
 
             foreach (BaseViewModel vm in PageViewModels)
@@ -45,7 +45,6 @@ namespace ProcessSA.ViewModels
         }
 
         #region propiedades
-
         public ICommand ChangePageCommand
         {
             get
@@ -135,6 +134,28 @@ namespace ProcessSA.ViewModels
 
         public bool LoggedIn { get => _loggedIn; set { _loggedIn = value; OnPropertyChanged("LoggedIn"); } }
 
+        private Empresa _empresa;
+        public Empresa Empresa { get => _empresa; set
+            {
+                _empresa = value;
+                OnPropertyChanged("Empresa");
+            }
+        }
+        private bool _verEmpresas;
+        public bool VerEmpresas { get => _verEmpresas; set
+            {
+                _verEmpresas = value;
+                OnPropertyChanged("VerEmpresas");
+            }
+        }
+        private List<Empresa> _empresas;
+        public List<Empresa> Empresas { get => _empresas; set
+            {
+                _empresas = value;
+                OnPropertyChanged("Empresas");
+            }
+        }
+
         #endregion
 
         #region methods
@@ -144,6 +165,7 @@ namespace ProcessSA.ViewModels
             if (sender is LoginViewModel)
             {
                 LoggedUser = ((LoginViewModel)sender).User;
+                LoggedIn = true;
             }
             ChangeViewModel(e);
         }
@@ -166,10 +188,17 @@ namespace ProcessSA.ViewModels
                 {
                     LoggedIn = false;
                     LoggedUser = null;
+                    VerEmpresas = false;
                 } else
                 {
+                    Task.Run(async () => {
+                        Empresas = await RESTClient.GetAllEmpresas();
+                        Empresa = Empresas[0];
+                        VerEmpresas = vm.GetType() != typeof(MainEjecutivoViewModel);
+                    });
                     LoggedIn = true;
                 }
+
                 CurrentPageViewModel = vm;
             }
         }

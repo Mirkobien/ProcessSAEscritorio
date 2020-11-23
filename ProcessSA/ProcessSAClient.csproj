@@ -172,7 +172,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\BindableSelectedItemBehavior.cs" />
     <Compile Include="Helpers\ExceptionHandler.cs" />
-    <Compile Include="Models\Departamento.cs" />
+    <Compile Include="Models\Cargo.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Flujo.cs" />
     <Compile Include="Models\Jerarquias.cs" />

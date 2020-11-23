@@ -19,6 +19,8 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
             Empresa = emp;
             Task.Run(async () => await OnLoaded());
             Tarea = new Tarea();
+            Cargos = agregarFlujoVM.Cargos.ToList();
+            Tarea.Cargo = Cargos[0];
         }
 
         private ICommand _guardarCommand;
@@ -29,7 +31,12 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 
         public int Dias { get; set; }
 
-        public List<Rol> Roles { get; set; }
+        private List<Cargo> cargos;
+        public List<Cargo> Cargos { get => cargos; set {
+                cargos = value;
+                OnPropertyChanged("Cargos");
+            }
+        }
         public Empresa Empresa { get; set; }
         public AgregarFlujoVM PreviousViewModel { get; set; }
         public Tarea Tarea { get; set; }

@@ -27,8 +27,8 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
         public Rol Rol { get; set; }
         public BaseViewModel PreviousVM { get; set; }
 
-        private ObservableCollection<Departamento> _departamentos;
-        public ObservableCollection<Departamento> Departamentos
+        private ObservableCollection<Cargo> _departamentos;
+        public ObservableCollection<Cargo> Departamentos
         {
             get => _departamentos;
             set
@@ -66,7 +66,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
 
         public async override void OnLoaded()
         {
-            Departamentos = new ObservableCollection<Departamento>(await RESTClient.GetAllDepartamentosList(Empresa.Id));
+            Departamentos = new ObservableCollection<Cargo>(await RESTClient.GetAllDepartamentosList(Empresa.Id));
         }
 
         private async void Guardar()

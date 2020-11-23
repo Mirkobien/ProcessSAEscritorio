@@ -45,7 +45,34 @@ namespace ProcessSA.ViewModels.AdminViewModels
             }
         }
 
-        public Empresa Empresa { get; set; }
+        private ICommand _eliminarUsuarioCommand;
+
+        public ICommand EliminarUsuarioCommand
+        {
+            get 
+            { 
+                if(_eliminarUsuarioCommand == null)
+                {
+                    _eliminarUsuarioCommand = new RelayCommand(p => EliminarUsuario((User)p), p => p != null);
+                }
+                return _eliminarUsuarioCommand;
+            }
+        }
+
+
+        private Empresa empresa { get; set; }
+        public Empresa Empresa { get => empresa; set
+            {
+                empresa = value;
+                OnPropertyChanged("Empresa");
+                OnLoaded();
+            }
+        }
+
+        public void EliminarUsuario(User usuario)
+        {
+
+        }
 
         public async override void OnLoaded()
         {

@@ -62,10 +62,10 @@
     <Compile Include="AUTH_USER.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DEPARTAMENTO.cs">
+    <Compile Include="CARGOS.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DEPARTAMENTOS_JERARQUIA.cs">
+    <Compile Include="CARGOS_JERARQUIA.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DOCUMENTO.cs">
@@ -87,6 +87,9 @@
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FLUJO.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOG_ERROR.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProcessSAModel.Context.cs">

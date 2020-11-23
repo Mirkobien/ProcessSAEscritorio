@@ -45,6 +45,7 @@ namespace BusinessLogic
             Inicio = flujo.INICIO;
             Fin = flujo.FIN;
             Estado = new EstadoFlujo(flujo.ESTADO_FLUJO);
+            Cargo = new Cargo(flujo.CARGOS);
         }
 
         [DataMember]
@@ -62,14 +63,14 @@ namespace BusinessLogic
         [DataMember]
         public List<Tarea> Tareas { get; set; }
         [DataMember]
-        public Rol Rol { get; set; }
+        public Cargo Cargo { get; set; }
 
         public static List<Flujo> GetAllFlujos(int id)
         {
             Entities ent = new Entities();
             
             List<Flujo> listaFinal = new List<Flujo>();
-            foreach(FLUJO flujo in ent.FLUJO.Where(f=> f.ROL_CLIENTE.DEPARTAMENTO.EMPRESA_IDEMP == id))
+            foreach(FLUJO flujo in ent.FLUJO.Where(f=> f.CARGOS.EMPRESA_IDEMP == id))
             {
                 listaFinal.Add(new Flujo(flujo));
             }
@@ -79,7 +80,12 @@ namespace BusinessLogic
         public static void Eliminar(int id)
         {
             Entities ent = new Entities();
-            ent.FLUJO.Remove(ent.FLUJO.Where(p => p.IDFLU == id).FirstOrDefault());
+            FLUJO flujo = ent.FLUJO.Where(p => p.IDFLU == id).FirstOrDefault();
+            foreach(TAREA tarea in flujo.TAREA.ToList())
+            {
+                flujo.TAREA.Remove(tarea);
+            }
+            ent.FLUJO.Remove(flujo);
             ent.SaveChanges();
         }
 
@@ -87,6 +93,21 @@ namespace BusinessLogic
         {
             Entities ent = new Entities();
             FLUJO flujo = ToFLUJO(ent);
+            FLUJO flujoExistente = ent.FLUJO.Where(f => f.IDFLU == flujo.IDFLU).FirstOrDefault();
+
+            if (flujoExistente != null)
+            {
+                flujo.ESTADO_FLUJO_IDESF = flujoExistente.ESTADO_FLUJO_IDESF;
+                flujo.NOMBRE = flujoExistente.NOMBRE;
+                flujo.CARGOS = flujoExistente.CARGOS;
+                flujo.TAREA.Clear();
+                foreach(Tarea tar in Tareas)
+                {
+                    flujo.TAREA.Add(tar.GetTAREA(ent));
+                }
+                ent.SaveChanges();
+                return;
+            }
 
             foreach (Tarea tar in Tareas)
             {
@@ -104,7 +125,7 @@ namespace BusinessLogic
                 INICIO = Inicio,
                 FIN = Fin,
                 NOMBRE = Nombre,
-                ROL_CLIENTE_IDROL = Rol.Id
+                CARGOS_IDDEP = Cargo.Id
             };
             flujo.ESTADO_FLUJO = ent.ESTADO_FLUJO.Where(p => p.IDESF == Estado.Id).FirstOrDefault();
 

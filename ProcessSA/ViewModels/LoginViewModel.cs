@@ -35,7 +35,7 @@ namespace ProcessSA.ViewModels
         private bool _hasError;
         private string _errorMessage;
 
-        public LoginViewModel()
+        public LoginViewModel(AppViewModel app)
         {
 
             Name = "Login";

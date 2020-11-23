@@ -75,7 +75,14 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
 
         public void AgregarFlujo()
         {
-            AgregarFlujoVM vm = new AgregarFlujoVM(this, Empresa);
+            AgregarFlujoVM vm = new AgregarFlujoVM(this, Empresa, new Flujo());
+            vm.ChangePage += Vm_ChangePage;
+            OnChangePage(vm);
+        }
+
+        public void ModificarFlujo()
+        {
+            AgregarFlujoVM vm = new AgregarFlujoVM(this, Empresa, SelectedFlujo);
             vm.ChangePage += Vm_ChangePage;
             OnChangePage(vm);
         }
@@ -93,7 +100,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             MessageDialogResult result = await (Application.Current.MainWindow as MetroWindow)
                 .ShowMessageAsync(
                 "Eliminar flujo",
-                "¿Está seguro que desea eliminar el flujo? ",
+                "¿Está seguro que desea eliminar el flujo seleccionado?",
                 MessageDialogStyle.AffirmativeAndNegative);
 
             if (result == MessageDialogResult.Affirmative)

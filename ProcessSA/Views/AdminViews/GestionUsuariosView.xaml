@@ -21,10 +21,10 @@
         </Grid>
         <Grid Margin="20, 0, 20, 20">
             <Button Command="{Binding CrearUsuarioCommand}" HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Usuario" />
-            <Button Width="150" Content="Modificar Usuario" />
-            <Button Command="{Binding EliminarUsuarioCommand}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Usuario" />
+            <Button Width="150" Content="Modificar Usuario"/>
+            <Button Command="{Binding EliminarUsuarioCommand}" CommandParameter="{Binding ElementName=usuarios, Path=SelectedItem}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Usuario" />
         </Grid>
-        <DataGrid IsReadOnly="True" SelectedItem="{Binding SelectedUser}"  AutoGenerateColumns="False" ItemsSource="{Binding Users}" Margin="20, 0 , 20, 0">
+        <DataGrid x:Name="usuarios" IsReadOnly="True" SelectedItem="{Binding SelectedUser}"  AutoGenerateColumns="False" ItemsSource="{Binding Users}" Margin="20, 0 , 20, 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="Nombre" Binding="{Binding Nombre}"/>
                 <DataGridTextColumn Width="*" Header="Apellido" Binding="{Binding Apellido}"/>

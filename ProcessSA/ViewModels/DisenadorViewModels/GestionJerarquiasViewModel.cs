@@ -9,6 +9,7 @@ using ProcessSA.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,27 +35,27 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             {
                 _empresa = value;
                 OnPropertyChanged("Empresa");
+                Actualizar();
             }
         }
-
-        public Departamento SelectedDepartamento { get; set; }
-        private ObservableCollection<Departamento> _departamentos;
-        public ObservableCollection<Departamento> Departamentos
+        public Cargo SelectedDepartamento { get; set; }
+        private ObservableCollection<Cargo> _departamentos;
+        public ObservableCollection<Cargo> Departamentos
         {
             get { return _departamentos; }
             set { _departamentos = value; OnPropertyChanged("Departamentos"); }
         }
 
-        private ICommand _modificarDepartamentoCommand;
-        public ICommand ModificarDepartamentoCommand
+        private ICommand _eliminarCargoCommand;
+        public ICommand EliminarCargoCommand
         {
             get
             {
-                if (_modificarDepartamentoCommand == null)
+                if (_eliminarCargoCommand == null)
                 {
-                    _modificarDepartamentoCommand = new RelayCommand(id => ModificarDepartamento((int)id), p => false);
+                    _eliminarCargoCommand = new RelayCommand(cargo => EliminarCargo((Cargo)cargo), p => p != null);
                 }
-                return _modificarDepartamentoCommand;
+                return _eliminarCargoCommand;
             }
         }
 
@@ -65,39 +66,46 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
             {
                 if (_crearDepartamentoCommand == null)
                 {
-                    _crearDepartamentoCommand = new RelayCommand(id => CrearDepartamento((Departamento)id), p => p != null);
+                    _crearDepartamentoCommand = new RelayCommand(id => CrearDepartamento((Cargo)id), p => p != null);
                 }
                 return _crearDepartamentoCommand;
             }
         }
 
-        private ICommand _elegirEmpresaCommand;
-        public ICommand ElegirEmpresaCommand
+        private ICommand crearCargoRootCommand;
+
+        public ICommand CrearCargoRootCommand
         {
-            get
+            get 
             {
-                if (_elegirEmpresaCommand == null)
+                if (crearCargoRootCommand == null)
                 {
-                    _elegirEmpresaCommand = new RelayCommand(id => {
-                        MetroWindow metro = new SelectView();
-                        SeleccionarEmpresaVM vm = new SeleccionarEmpresaVM();
-                        vm.CloseAction = new Action(metro.Close);
-                        metro.DataContext = vm;
-                        metro.ShowDialog();
-                        Empresa = vm.SelectedItem;
-                    });
+                    crearCargoRootCommand = new RelayCommand(cargo => CrearCargoRoot());
                 }
-                return _elegirEmpresaCommand;
+                return crearCargoRootCommand;
             }
         }
+
+
         public string Icon { get; set; }
-        public void CrearDepartamento(Departamento idPadre)
+        public void CrearDepartamento(Cargo idPadre)
         {
             OnChangePage(new AgregarDepartamentoViewModel(this, idPadre, Empresa));
         }
-        public void ModificarDepartamento(int id)
+        public void CrearCargoRoot()
         {
-
+            Cargo cargo = new Cargo();
+            cargo.Nombre = "Ninguno";
+            cargo.Id = 0;
+            OnChangePage(new AgregarDepartamentoViewModel(this, cargo, Empresa));
+        }
+        public async void EliminarCargo(Cargo cargo)
+        {
+            bool res = await RESTClient.EliminarCargo(cargo.Id);
+            if (res)
+            {
+                Actualizar();
+            }
         }
         public async override void OnLoaded()
         {
@@ -107,7 +115,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels
         public async void Actualizar()
         {
             if (Empresa != null)
-                Departamentos = new ObservableCollection<Departamento>(await RESTClient.GetAllDepartamentosJerarquia(Empresa.Id));
+                Departamentos = new ObservableCollection<Cargo>(await RESTClient.GetAllDepartamentosJerarquia(Empresa.Id));
         }
     }
 }

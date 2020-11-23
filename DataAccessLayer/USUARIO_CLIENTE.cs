@@ -30,10 +30,12 @@ namespace DataAccessLayer
         public Nullable<decimal> TELEFONO { get; set; }
         public Nullable<decimal> ESTADO_USUARIO_IDESU { get; set; }
         public Nullable<decimal> SEXO_IDSEX { get; set; }
-        public Nullable<decimal> ROL_CLIENTE_IDROL { get; set; }
+        public Nullable<decimal> CARGOS_IDDEP { get; set; }
+        public Nullable<decimal> ROL_CLIENTE_IDROLC { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AUTH_USER> AUTH_USER { get; set; }
+        public virtual CARGOS CARGOS { get; set; }
         public virtual ESTADO_USUARIO ESTADO_USUARIO { get; set; }
         public virtual ROL_CLIENTE ROL_CLIENTE { get; set; }
         public virtual SEXO SEXO { get; set; }

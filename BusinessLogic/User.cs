@@ -69,6 +69,7 @@ namespace BusinessLogic
         {
             Id = decimal.ToInt32(usuario.IDSIS);
             Nombre = usuario.NOMBRE;
+            Apellido = usuario.APELLIDO;
             Rol = new Rol(usuario.ROL_SISTEMA);
             TipoUsuario = UserType.USUARIO_SISTEMA;
         }
@@ -82,6 +83,7 @@ namespace BusinessLogic
             Correo = usuario.CORREO;
             Sexo = new Sexo(usuario.SEXO);
             Rol = new Rol(usuario.ROL_CLIENTE);
+            Cargo = new Cargo(usuario.CARGOS);
             Estado = new EstadoUsuario(usuario.ESTADO_USUARIO);
             TipoUsuario = UserType.USUARIO_CLIENTE;
         }
@@ -90,7 +92,7 @@ namespace BusinessLogic
         {
             Entities ent = new Entities();
             List<USUARIO_CLIENTE> lista =
-                ent.USUARIO_CLIENTE.Where(p => p.ROL_CLIENTE.DEPARTAMENTO.EMPRESA.IDEMP == v).ToList();
+                ent.USUARIO_CLIENTE.Where(p => p.CARGOS.EMPRESA_IDEMP == v).ToList();
 
             List<User> listaFinal = new List<User>();
             
@@ -227,7 +229,8 @@ namespace BusinessLogic
             usu.MATERNO = this.ApellidoMaterno;
             usu.RUT = this.Rut;
             usu.TELEFONO = this.Telefono;
-            usu.ROL_CLIENTE_IDROL = this.Rol.Id;
+            usu.ROL_CLIENTE_IDROLC = this.Rol.Id;
+            usu.CARGOS_IDDEP = this.Cargo.Id;
             usu.ESTADO_USUARIO_IDESU = this.Estado.Id;
             usu.CORREO = this.Correo;
             
@@ -288,6 +291,8 @@ namespace BusinessLogic
         public Sexo Sexo { get; set; }
         [DataMember]
         public Rol Rol { get; set; }
+        [DataMember]
+        public Cargo Cargo { get; set; }
         [DataMember]
         public UserType TipoUsuario { get; set; }
         [DataMember]

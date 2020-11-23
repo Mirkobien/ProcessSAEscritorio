@@ -50,6 +50,26 @@
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
+            <DataTemplate x:Key="HamburgerOptionsMenuItem" DataType="{x:Type mah:HamburgerMenuIconItem}">
+                <DockPanel Height="48" LastChildFill="True">
+                    <ContentControl x:Name="IconPart"
+                        Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type mah:HamburgerMenu}}, Path=CompactPaneLength}"
+                        Content="{Binding Icon}"
+                        DockPanel.Dock="Left"
+                        Focusable="False"
+                        IsTabStop="False" />
+                    <TextBlock x:Name="TextPart"
+                   VerticalAlignment="Center"
+                   FontSize="16"
+                   Text="{Binding Label}" />
+                </DockPanel>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type mah:HamburgerMenu}}, Path=PanePlacement}" Value="Right">
+                        <Setter TargetName="IconPart" Property="DockPanel.Dock" Value="Right" />
+                        <Setter TargetName="TextPart" Property="Margin" Value="8 0 0 0" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <mah:HamburgerMenu SelectedIndex="{Binding Index}" Content="{Binding CurrentViewModel}" x:Name="HamburgerMenuControl"
@@ -65,9 +85,10 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="16"
-                        Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainAdminView}}, Path=DataContext.DisplayName}"/>
+                        Text="Menú"/>
             </DataTemplate>
         </mah:HamburgerMenu.HamburgerMenuHeaderTemplate>
+
         <mah:HamburgerMenu.Resources>
             <DataTemplate DataType="{x:Type diseviewmodels:ModeloProcesoViewModel}">
                 <diseviews:ModeloProcesoView/>

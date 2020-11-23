@@ -53,6 +53,7 @@ namespace BusinessLogic
             Comienzo = tarea.INICIO;
             Termino = tarea.FIN;
             Responsables = new List<User>();
+            Cargo = new Cargo(tarea.CARGOS);
             foreach(USUARIO_CLIENTE usr in tarea.USUARIO_CLIENTE)
             {
                 Responsables.Add(new User(usr));
@@ -79,7 +80,7 @@ namespace BusinessLogic
         [DataMember]
         public EstadoTarea Estado { get; set; }
         [DataMember]
-        public Rol Rol { get; set; }
+        public Cargo Cargo { get; set; }
 
         public static List<Tarea> GetAllTarea()
         {
@@ -120,6 +121,11 @@ namespace BusinessLogic
 
         internal TAREA GetTAREA(Entities ent)
         {
+            TAREA tareaExistente = ent.TAREA.Where(t => this.Id == t.IDTAR).FirstOrDefault();
+            if (tareaExistente != null)
+            {
+                return tareaExistente;
+            }
             TAREA tar = ToTAREA();
             tar.USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList();
             return tar;
@@ -152,16 +158,16 @@ namespace BusinessLogic
                 FIN = Termino,
                 DESCRIPCION = Descripcion,
                 ESTADO_TAREA_IDEST = Estado.Id,
-                ROL_CLIENTE_IDROL = Rol.Id
+                CARGOS_IDDEP = Cargo.Id
             };
             return tarea;
         }
 
-        public static List<Tarea> GetAllTareaRol(int v)
+        public static List<Tarea> GetAllTareaCargo(int v)
         {
             Entities ent = new Entities();
             List<Tarea> tareas = new List<Tarea>();
-            foreach(TAREA tar in ent.TAREA.Where(t => t.ROL_CLIENTE_IDROL == v))
+            foreach(TAREA tar in ent.TAREA.Where(t => t.CARGOS_IDDEP == v))
             {
                 tareas.Add(new Tarea(tar));
             }

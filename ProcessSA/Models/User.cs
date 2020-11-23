@@ -45,6 +45,7 @@ namespace ProcessSA.Models
         private string correo;
         private Sexo sexo;
         private EstadoUsuario estado;
+        private Cargo cargo;
 
         public int Id { get => id; set { id = value; OnPropertyChanged("Id"); } }
         public string Rut { get => rut; set { rut = value; OnPropertyChanged("Rut"); } }
@@ -56,6 +57,8 @@ namespace ProcessSA.Models
         public string Telefono { get => telefono; set { telefono = value; OnPropertyChanged("Telefono"); } }
         public Sexo Sexo { get => sexo; set { sexo = value; OnPropertyChanged("Sexo"); } }
         public EstadoUsuario Estado { get => estado; set { estado = value; OnPropertyChanged("Estado"); } }
+        public Cargo Cargo { get => cargo; set { cargo = value; OnPropertyChanged("Cargo"); } }
+
         public UserType TipoUsuario { get; set; }
 
         public User()

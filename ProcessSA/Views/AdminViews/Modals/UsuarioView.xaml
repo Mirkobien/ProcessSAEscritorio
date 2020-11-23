@@ -20,12 +20,10 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Label Content="Crear Usuario" Style="{DynamicResource Titulo}" VerticalAlignment="Center"/>
-        <TextBlock Margin="10,0,10,0" Grid.Column="1" VerticalAlignment="Center">
-            <Run Text="Empresa: " FontSize="18"/>
-            <Run Text="{Binding Empresa.Nombre}"/>
-        </TextBlock>
+        
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Rut" HorizontalAlignment="Center"/>
             <TextBox Text="{Binding Usuario.Rut}"/>
@@ -60,14 +58,18 @@
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Rol" HorizontalAlignment="Center"/>
-            <ComboBox IsTextSearchEnabled="True" ItemsSource="{Binding Roles}" SelectedItem="{Binding Usuario.Rol}" DisplayMemberPath="Nombre"></ComboBox>
+            <ComboBox IsTextSearchEnabled="True" ItemsSource="{Binding Cargos}" SelectedItem="{Binding Usuario.Cargo}" DisplayMemberPath="Nombre"></ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Sexo" HorizontalAlignment="Center"/>
             <ComboBox ItemsSource="{Binding Sexos}" SelectedItem="{Binding Usuario.Sexo}" DisplayMemberPath="Descripcion"></ComboBox>
         </StackPanel>
-        <Button VerticalAlignment="Center" Margin="10,0,10,0" Content="Volver" Command="{Binding VolverCommand}" Grid.Column="0" Grid.Row="6"></Button>
-        <Button Style="{DynamicResource BlueButton}" VerticalAlignment="Center" Margin="10,0,10,0" Content="Guardar" Command="{Binding GuardarCommand}" Grid.Column="1" Grid.Row="6"></Button>
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="10,0,10,0">
+            <Label Content="Rol" HorizontalAlignment="Center"/>
+            <ComboBox DisplayMemberPath="Nombre" VerticalAlignment="Center" ItemsSource="{Binding Roles}" SelectedItem="{Binding Usuario.Rol}" Grid.Row="6" Grid.ColumnSpan="2"/>
+        </StackPanel>
+        <Button VerticalAlignment="Center" Margin="10,0,10,0" Content="Volver" Command="{Binding VolverCommand}" Grid.Column="0" Grid.Row="7"></Button>
+        <Button Style="{DynamicResource BlueButton}" VerticalAlignment="Center" Margin="10,0,10,0" Content="Guardar" Command="{Binding GuardarCommand}" Grid.Column="1" Grid.Row="7"></Button>
 
     </Grid>
 </UserControl>
