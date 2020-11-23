@@ -24,11 +24,23 @@ namespace ProcessSA.Models
                         if (string.IsNullOrEmpty(Nombre))
                             result = "No puede estar vacío.";
                         break;
+                    case "Rubro":
+                        if (string.IsNullOrEmpty(Rubro))
+                            result = "El Rubro no puede estar vacio";
+                        break;
                     default:
                         break;
                 }
 
                 return result;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                return "Errorsito";
             }
         }
 
@@ -40,13 +52,5 @@ namespace ProcessSA.Models
         public string Direccion { get; set; }
         public int Telefono { get; set; }
         public List<JerarquiaDepartamento> JerarquiaDepartamentos { get; set; }
-
-        public string Error
-        {
-            get
-            {
-                return "Errorsito";
-            }
-        }
     }
 }
