@@ -20,13 +20,25 @@ namespace ProcessSA.Models
                 string result = null;
                 switch (columnName)
                 {
-                    case "Nombre":
-                        if (string.IsNullOrEmpty(Nombre))
-                            result = "No puede estar vacío.";
+                    case "Rut":
+                        if (string.IsNullOrEmpty(Rut))
+                            result = "El Rut de la Empresa no puede estar vacio.";
                         break;
                     case "Rubro":
                         if (string.IsNullOrEmpty(Rubro))
-                            result = "El Rubro no puede estar vacio";
+                            result = "El Rubro de la Empresa no puede estar vacio";
+                        break;
+                    case "Nombre":
+                        if (string.IsNullOrEmpty(Nombre))
+                            result = "El Nombre de la Empresa no puede estar vacio";
+                        break;
+                    case "Correo":
+                        if (string.IsNullOrEmpty(Correo))
+                            result = "El Correo de la Empresa no puede estar vacio";
+                        break;
+                    case "Direccion":
+                        if (string.IsNullOrEmpty(Direccion))
+                            result = "La Dirección de la Empresa no puede estar vacio";
                         break;
                     default:
                         break;

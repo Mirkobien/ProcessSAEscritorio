@@ -9,22 +9,77 @@ using System.Threading.Tasks;
 
 namespace ProcessSA.Models
 {
-    public class EstadoUsuario : ObservableObject
+    public class EstadoUsuario : ObservableObject, IDataErrorInfo
     {
         public EstadoUsuario()
         {
 
         }
 
+        public string this[string columnName]
+        {
+            get
+            {
+                string result = null;
+                switch (columnName)
+                {
+                    case "Nombre":
+                        if (string.IsNullOrEmpty("Nombre"))
+                            result = "El Nombre del Estado Usuario no puede estar vacio.";
+                        break;
+                    default:
+                        break;
+                }
+
+                return result;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                return "Errorsito";
+            }
+        }
+
         public int Id { get; set; }
         public string Nombre { get; set; }
     }
-    public class Sexo : ObservableObject
+    public class Sexo : ObservableObject, IDataErrorInfo
     {
         public Sexo()
         {
 
         }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string result = null;
+                switch (columnName)
+                {
+                    case "Descripcion":
+                        if (string.IsNullOrEmpty("Descripcion"))
+                            result = "La Descripción del Sexo no puede estar vacio.";
+                        break;
+                    default:
+                        break;
+                }
+
+                return result;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                return "Errorsito";
+            }
+        }
+
         public int Id { get; set; }
         public string Descripcion { get; set; }
     }
@@ -33,7 +88,7 @@ namespace ProcessSA.Models
         USUARIO_CLIENTE,
         USUARIO_SISTEMA
     }
-    public class User : ObservableObject
+    public class User : ObservableObject, IDataErrorInfo
     {
         private int id;
         private string nombre;
@@ -46,6 +101,55 @@ namespace ProcessSA.Models
         private Sexo sexo;
         private EstadoUsuario estado;
         private Cargo cargo;
+
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string result = null;
+                switch (columnName)
+                {
+                    case "Rut":
+                        if (string.IsNullOrEmpty(Rut))
+                            result = "El Rut del Usuario no puede estar vacio.";
+                        break;
+                    case "Nombre":
+                        if (string.IsNullOrEmpty(Nombre))
+                            result = "El Nombre del Usuario no puede estar vacio";
+                        break;
+                    case "Apellido":
+                        if (string.IsNullOrEmpty(Apellido))
+                            result = "El Apellido Paterno del Usuario no puede estar vacio";
+                        break;
+                    case "ApellidoMaterno":
+                        if (string.IsNullOrEmpty(ApellidoMaterno))
+                            result = "El Apellido Materno del Usuario no puede estar vacio";
+                        break;
+                    case "Correo":
+                        if (string.IsNullOrEmpty(Correo))
+                            result = "El Correo del Usuario no puede estar vacio";
+                        break;
+                    case "Telefono":
+                        if (string.IsNullOrEmpty(Telefono))
+                            result = "El Telefono del Usuario no puede estar vacio";
+                        break;
+                    default:
+                        break;
+                }
+
+                return result;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                return "Errorsito";
+            }
+        }
+
 
         public int Id { get => id; set { id = value; OnPropertyChanged("Id"); } }
         public string Rut { get => rut; set { rut = value; OnPropertyChanged("Rut"); } }

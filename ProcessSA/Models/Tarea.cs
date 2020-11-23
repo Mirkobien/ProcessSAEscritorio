@@ -32,13 +32,9 @@ namespace ProcessSA.Models
                 string result = null;
                 switch (columnName)
                 {
-                    case "Nombre":
+                    case "Descripcion":
                         if (string.IsNullOrEmpty("Descripcion"))
-                            result = "No puede estar vacío.";
-                        break;
-                    case "Rubro":
-                        if (string.IsNullOrEmpty("Termino"))
-                            result = "El Rubro no puede estar vacio";
+                            result = "La descripción de la Tarea no puede estar vacio.";
                         break;
                     default:
                         break;
