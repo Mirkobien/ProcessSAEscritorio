@@ -83,7 +83,7 @@ namespace BusinessLogic
             Correo = usuario.CORREO;
             Sexo = new Sexo(usuario.SEXO);
             Rol = new Rol(usuario.ROL_CLIENTE);
-            if (Rol.Id == 3)
+            //if (Rol.Id == 3)
                 Cargo = new Cargo(usuario.CARGOS);
             Estado = new EstadoUsuario(usuario.ESTADO_USUARIO);
             TipoUsuario = UserType.USUARIO_CLIENTE;

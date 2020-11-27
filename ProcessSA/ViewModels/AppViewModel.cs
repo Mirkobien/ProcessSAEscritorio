@@ -42,6 +42,11 @@ namespace ProcessSA.ViewModels
             {
                 vm.ChangePageString += Vm_ChangePage;
             }
+
+            Task.Run(async () => {
+                Empresas = await RESTClient.GetAllEmpresas();
+                Empresa = Empresas[0];
+            });
         }
 
         #region propiedades
@@ -191,11 +196,9 @@ namespace ProcessSA.ViewModels
                     VerEmpresas = false;
                 } else
                 {
-                    Task.Run(async () => {
-                        Empresas = await RESTClient.GetAllEmpresas();
-                        Empresa = Empresas[0];
-                        VerEmpresas = vm.GetType() != typeof(MainEjecutivoViewModel);
-                    });
+                    
+
+                    VerEmpresas = vm.GetType() != typeof(MainEjecutivoViewModel);
                     LoggedIn = true;
                 }
 
