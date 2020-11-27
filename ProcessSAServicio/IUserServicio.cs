@@ -107,6 +107,13 @@ namespace ProcessSAServicio
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Departamentos/Empresa/{id}")]
         List<Cargo> GetCargosDeEmpresa(string id);
 
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Departamentos/Empresa/Flat/{id}")]
+        List<Cargo> GetCargosDeEmpresaFlat(string id);
+
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
@@ -124,6 +131,13 @@ namespace ProcessSAServicio
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/EliminarCargo/{id}")]
         void EliminarCargo(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/CargosFuncionario/Empresa/{id}")]
+        List<Cargo> CargosFuncionario(string id);
+
         #endregion
         #region Tareas
         [OperationContract]
@@ -225,6 +239,12 @@ namespace ProcessSAServicio
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/AddFlujoToTarea/")]
         void AddTareasToFlujo(List<Tarea> tareas, int id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/CambiarEstadoFlujo/")]
+        void CambiarEstadoFlujo(int idFlujo, int idEstado);
         #endregion
     }
 

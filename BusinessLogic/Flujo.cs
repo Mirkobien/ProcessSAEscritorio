@@ -44,6 +44,7 @@ namespace BusinessLogic
             Descripcion = flujo.DESCRIPCION;
             Inicio = flujo.INICIO;
             Fin = flujo.FIN;
+            Dias = decimal.ToInt32(flujo.DIAS);
             Estado = new EstadoFlujo(flujo.ESTADO_FLUJO);
             Cargo = new Cargo(flujo.CARGOS);
         }
@@ -56,6 +57,8 @@ namespace BusinessLogic
         public DateTime Inicio { get; set; }
         [DataMember]
         public DateTime Fin { get; set; }
+        [DataMember]
+        public int Dias { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
@@ -91,6 +94,11 @@ namespace BusinessLogic
 
         public void Guardar()
         {
+            if (this.Inicio.Year < 1990)
+                this.Inicio = DateTime.Today;
+            if (this.Fin.Year < 1990)
+                this.Fin = DateTime.Today;
+
             Entities ent = new Entities();
             FLUJO flujo = ToFLUJO(ent);
             FLUJO flujoExistente = ent.FLUJO.Where(f => f.IDFLU == flujo.IDFLU).FirstOrDefault();
@@ -111,7 +119,7 @@ namespace BusinessLogic
 
             foreach (Tarea tar in Tareas)
             {
-                flujo.TAREA.Add(tar.GetTAREA(ent));
+                tar.Guardar(flujo);
             }
             ent.FLUJO.Add(flujo);
             ent.SaveChanges();
@@ -147,6 +155,13 @@ namespace BusinessLogic
                     flujo.TAREA.Add(tar);
             }
 
+            ent.SaveChanges();
+        }
+
+        public static void CambiarEstado(int idFlujo, int idEstado)
+        {
+            Entities ent = new Entities();
+            ent.FLUJO.Where(f => f.IDFLU == idFlujo).FirstOrDefault().ESTADO_FLUJO_IDESF = idEstado;
             ent.SaveChanges();
         }
     }

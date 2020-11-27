@@ -15,18 +15,25 @@ namespace BusinessLogic
         {
             Id = decimal.ToInt32(cargo.IDDEP);
             Nombre = cargo.NOMBRE;
+            Padre = cargo.CARGOS_IDDEP == null ? 0 : decimal.ToInt32((decimal)cargo.CARGOS_IDDEP);
         }
 
         public Cargo(CARGOS_JERARQUIA cargos)
         {
             Id = decimal.ToInt32(cargos.ID);
             Nombre = cargos.NOMBRE;
+            Nivel = decimal.ToInt32(cargos.NIVEL == null ? 0 : (decimal)cargos.NIVEL);
+            Padre = decimal.ToInt32(cargos.PADRE_ID == null ? 0 : (decimal)cargos.PADRE_ID);
         }
 
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public int Padre { get; set; }
+        [DataMember]
         public string Nombre { get; set; }
+        [DataMember]
+        public int Nivel { get; set; }
         [DataMember]
         public List<Cargo> Cargos { get; set; }
 
@@ -60,6 +67,20 @@ namespace BusinessLogic
             return listaFinal;
         }
 
+        public static List<Cargo> GetCargosDeFuncionario(int empresaId)
+        {
+            Entities ent = new Entities();
+            IQueryable<CARGOS> carg = ent.CARGOS.Where(c => c.EMPRESA_IDEMP == empresaId);
+            List<CARGOS> cargos = carg.Where(c => c.USUARIO_CLIENTE.Where(u => u.ROL_CLIENTE_IDROLC != 3).Count() < 1).ToList();
+            List<Cargo> listaFinal = new List<Cargo>();
+            foreach(CARGOS cargo in cargos)
+            {
+                listaFinal.Add(new Cargo(cargo));
+            }
+            return listaFinal;
+
+        }
+
         public static Cargo GetCargo(int v)
         {
             return new Cargo(new Entities().CARGOS.Where(c => c.IDDEP == v).FirstOrDefault());
@@ -90,6 +111,18 @@ namespace BusinessLogic
             ent.CARGOS.Remove(cargo);
             ent.SaveChanges();
             return true;
+        }
+
+        public static List<Cargo> GetCargosDeEmpresaFlat(int v)
+        {
+            Entities ent = new Entities();
+            List<Cargo> listaFinal = new List<Cargo>();
+            List<CARGOS_JERARQUIA> cargos = ent.CARGOS_JERARQUIA.Where(c => c.EMPRESA_ID == v).ToList();
+            foreach(CARGOS_JERARQUIA cargo in cargos)
+            {
+                listaFinal.Add(new Cargo(cargo));
+            }
+            return listaFinal;
         }
     }
     [DataContract]

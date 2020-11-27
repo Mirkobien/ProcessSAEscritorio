@@ -105,7 +105,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
                 dias += (tar.Termino - tar.Comienzo).Days;
             }
             Flujo.Fin = Flujo.Inicio.AddDays(dias);
-            Flujo.Estado = new EstadoFlujo { Id = 1 };
+            Flujo.Estado = new EstadoFlujo { Id = 5 };
             await RESTClient.GuardarFlujo(Flujo);
             Volver();
         }
@@ -122,6 +122,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
         {
             if (Cargos.Count < 1)
                 Cargos = new ObservableCollection<Cargo>(await RESTClient.GetAllDepartamentosList(Empresa.Id));
+            Flujo.Cargo = Cargos[0];
         }
 
         internal void Volver(AgregarTareaViewModel agregarTareaViewModel)

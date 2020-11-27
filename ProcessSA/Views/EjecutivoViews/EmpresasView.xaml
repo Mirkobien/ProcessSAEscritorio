@@ -14,7 +14,7 @@
             <Button Command="{Binding ModificarEmpresaCommand}" Width="150" Content="Modificar Empresa" />
             <Button Command="{Binding EliminarEmpresaCommand}" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Empresa" />
         </Grid>
-        <DataGrid CanUserAddRows="False" Margin="20, 0 , 20, 0" SelectionUnit="FullRow" ItemsSource="{Binding Empresas}" SelectedItem="{Binding SelectedEmpresa}" AutoGenerateColumns="False">
+        <DataGrid IsReadOnly="True" Margin="20, 0 , 20, 0" SelectionUnit="FullRow" ItemsSource="{Binding Empresas}" SelectedItem="{Binding SelectedEmpresa}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="Nombre" Binding="{Binding Nombre}"/>
                 <DataGridTextColumn Width="*" Header="Rubro" Binding="{Binding Rubro}"/>

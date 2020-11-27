@@ -105,6 +105,10 @@ namespace ProcessSAServicio
         {
             return Cargo.GetCargosDeEmpresa(int.Parse(id));
         }
+        public List<Cargo> GetCargosDeEmpresaFlat(string id)
+        {
+            return Cargo.GetCargosDeEmpresaFlat(int.Parse(id));
+        }
 
         public Cargo GetCargo(string id)
         {
@@ -119,6 +123,11 @@ namespace ProcessSAServicio
         public void EliminarCargo(string id)
         {
             Cargo.Eliminar(int.Parse(id));
+        }
+
+        public List<Cargo> CargosFuncionario(string id)
+        {
+            return Cargo.GetCargosDeFuncionario(int.Parse(id));
         }
         #endregion
         #region Tareas
@@ -211,12 +220,15 @@ namespace ProcessSAServicio
         {
             return EstadoFlujo.GetAllEstadoFlujos();
         }
-        #endregion
-        #region JerarquiasDepartamento
 
         public void AddTareasToFlujo(List<Tarea> tareas, int id)
         {
             Flujo.AddTareasToFlujo(tareas, id);
+        }
+
+        public void CambiarEstadoFlujo(int idFlujo, int idEstado)
+        {
+            Flujo.CambiarEstado(idFlujo, idEstado);
         }
         #endregion
     }

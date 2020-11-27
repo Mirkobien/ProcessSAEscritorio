@@ -52,6 +52,7 @@ namespace BusinessLogic
             Descripcion = tarea.DESCRIPCION;
             Comienzo = tarea.INICIO;
             Termino = tarea.FIN;
+            Duracion = decimal.ToInt32(tarea.DURACION);
             Responsables = new List<User>();
             Cargo = new Cargo(tarea.CARGOS);
             foreach(USUARIO_CLIENTE usr in tarea.USUARIO_CLIENTE)
@@ -71,6 +72,8 @@ namespace BusinessLogic
         public int Id { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
+        [DataMember]
+        public int Duracion { get; set; }
         [DataMember]
         public DateTime Comienzo { get; set; }
         [DataMember]
@@ -121,6 +124,11 @@ namespace BusinessLogic
 
         internal TAREA GetTAREA(Entities ent)
         {
+            if (this.Comienzo.Year < 1990)
+                this.Comienzo = DateTime.Today;
+            if (this.Termino.Year < 1990)
+                this.Termino = DateTime.Today;
+
             TAREA tareaExistente = ent.TAREA.Where(t => this.Id == t.IDTAR).FirstOrDefault();
             if (tareaExistente != null)
             {
@@ -141,12 +149,32 @@ namespace BusinessLogic
 
         public void Guardar()
         {
+
+            if (this.Comienzo.Year < 1990)
+                this.Comienzo = DateTime.Today;
+            if (this.Termino.Year < 1990)
+                this.Termino = DateTime.Today;
+
             Entities ent = new Entities();
             TAREA tar = ToTAREA();
             tar.USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList();
 
             ent.TAREA.Add(ToTAREA());
             ent.SaveChanges();
+        }
+        public void Guardar(FLUJO flujo)
+        {
+
+            if (this.Comienzo.Year < 1990)
+                this.Comienzo = DateTime.Today;
+            if (this.Termino.Year < 1990)
+                this.Termino = DateTime.Today;
+
+            Entities ent = new Entities();
+            TAREA tar = ToTAREA();
+            tar.USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList();
+
+            flujo.TAREA.Add(ToTAREA());
         }
 
         private TAREA ToTAREA()
