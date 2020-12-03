@@ -21,7 +21,7 @@
         <Label VerticalAlignment="Center" Content="Crear Rol" Style="{StaticResource Titulo}"/>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Nombre del rol" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Rol.Nombre}"/>
+            <TextBox Text="{Binding Rol.Nombre, ValidatesOnDataErrors=True, NotifyOnValidationError=True,UpdateSourceTrigger=LostFocus}"/>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Departamento del rol" HorizontalAlignment="Center"/>

@@ -25,7 +25,7 @@
         </TextBlock>
         <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Center">
             <Label HorizontalAlignment="Center" Content="Descripcion"/>
-            <TextBox Text="{Binding Tarea.Descripcion}" mah:TextBoxHelper.Watermark="Descripcion de la Tarea"/>
+            <TextBox Text="{Binding Tarea.Descripcion, ValidatesOnDataErrors=True, NotifyOnValidationError=True,UpdateSourceTrigger=LostFocus}" mah:TextBoxHelper.Watermark="Descripcion de la Tarea"/>
         </StackPanel>
         <StackPanel Margin="10,0,10,0" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
             <Label HorizontalAlignment="Center" Content="Cargo"/>
