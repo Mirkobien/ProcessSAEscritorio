@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="Model.CARGOS" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.DOCUMENTO" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.EMPRESA" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ERROR_TAREA" Width="1.5" PointX="12.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ESTADO_FLUJO" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ESTADO_TAREA" Width="1.5" PointX="10.5" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ESTADO_USUARIO" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
@@ -32,7 +31,6 @@
         <AssociationConnector Association="Model.TAREA_CARGOS_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.USUARIO_CLIENTE_CARGOS_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.DOCUMENTO_EMPRESA_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.ERROR_TAREA_TAREA_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FLUJO_INSTANCIA_ESTADO" ManuallyRouted="false" />
         <AssociationConnector Association="Model.TAREA_ESTADO" ManuallyRouted="false" />
         <AssociationConnector Association="Model.CLIENTE_ESTADO_USUARIO_FK" ManuallyRouted="false" />
@@ -50,7 +48,9 @@
         <AssociationConnector Association="Model.TAREA_TAREA" ManuallyRouted="false" />
         <AssociationConnector Association="Model.USUARIO_TAREA" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Model.MAS_FLUJOS_CREADOS" Width="1.5" PointX="10.375" PointY="10.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="Model.ERROR_TAREA" Width="1.5" PointX="15" PointY="3.25" />
+        <AssociationConnector Association="Model.ERROR_TAREA_TAREA_FK" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -50,16 +50,6 @@
     <NavigationProperty Name="CARGOS" Relationship="Self.CARGOS_EMPRESA_FK" FromRole="EMPRESA" ToRole="CARGOS" />
     <NavigationProperty Name="DOCUMENTO" Relationship="Self.DOCUMENTO_EMPRESA_FK" FromRole="EMPRESA" ToRole="DOCUMENTO" />
   </EntityType>
-  <EntityType Name="ERROR_TAREA">
-    <Key>
-      <PropertyRef Name="IDERR" />
-    </Key>
-    <Property Name="IDERR" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="JUSTIFICACION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="FECHA" Type="DateTime" Nullable="false" />
-    <Property Name="TAREA_IDTAR" Type="Decimal" Precision="38" Scale="0" />
-    <NavigationProperty Name="TAREA" Relationship="Self.ERROR_TAREA_TAREA_FK" FromRole="ERROR_TAREA" ToRole="TAREA" />
-  </EntityType>
   <EntityType Name="ESTADO_FLUJO">
     <Key>
       <PropertyRef Name="IDESF" />
@@ -153,7 +143,6 @@
     <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CARGOS_IDDEP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
     <NavigationProperty Name="CARGOS" Relationship="Self.TAREA_CARGOS_FK" FromRole="TAREA" ToRole="CARGOS" />
-    <NavigationProperty Name="ERROR_TAREA" Relationship="Self.ERROR_TAREA_TAREA_FK" FromRole="TAREA" ToRole="ERROR_TAREA" />
     <NavigationProperty Name="TAREA_INSTANCIA" Relationship="Self.TAREA_PLANTILLA" FromRole="TAREA" ToRole="TAREA_INSTANCIA" />
     <NavigationProperty Name="FLUJO" Relationship="Self.TAREA_FLUJO" FromRole="TAREA" ToRole="FLUJO" />
     <NavigationProperty Name="TAREA1" Relationship="Self.TAREA_TAREA" FromRole="TAREA" ToRole="TAREA1" />
@@ -176,6 +165,7 @@
     <NavigationProperty Name="FLUJO_INSTANCIA" Relationship="Self.TAREA_DE_FLUJO" FromRole="TAREA_INSTANCIA" ToRole="FLUJO_INSTANCIA" />
     <NavigationProperty Name="TAREA" Relationship="Self.TAREA_PLANTILLA" FromRole="TAREA_INSTANCIA" ToRole="TAREA" />
     <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.TAREA_RESPONSABLE" FromRole="TAREA_INSTANCIA" ToRole="USUARIO_CLIENTE" />
+    <NavigationProperty Name="ERROR_TAREA" Relationship="Model.ERROR_TAREA_TAREA_FK" FromRole="TAREA_INSTANCIA" ToRole="ERROR_TAREA" />
   </EntityType>
   <EntityType Name="USUARIO_CLIENTE">
     <Key>
@@ -321,18 +311,6 @@
       </Principal>
       <Dependent Role="DOCUMENTO">
         <PropertyRef Name="EMPRESA_IDEMP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ERROR_TAREA_TAREA_FK">
-    <End Role="TAREA" Type="Self.TAREA" Multiplicity="0..1" />
-    <End Role="ERROR_TAREA" Type="Self.ERROR_TAREA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TAREA">
-        <PropertyRef Name="IDTAR" />
-      </Principal>
-      <Dependent Role="ERROR_TAREA">
-        <PropertyRef Name="TAREA_IDTAR" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -509,7 +487,6 @@
     <EntitySet Name="CARGOS" EntityType="Self.CARGOS" />
     <EntitySet Name="DOCUMENTO" EntityType="Self.DOCUMENTO" />
     <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
-    <EntitySet Name="ERROR_TAREA" EntityType="Self.ERROR_TAREA" />
     <EntitySet Name="ESTADO_FLUJO" EntityType="Self.ESTADO_FLUJO" />
     <EntitySet Name="ESTADO_TAREA" EntityType="Self.ESTADO_TAREA" />
     <EntitySet Name="ESTADO_USUARIO" EntityType="Self.ESTADO_USUARIO" />
@@ -555,10 +532,6 @@
     <AssociationSet Name="DOCUMENTO_EMPRESA_FK" Association="Self.DOCUMENTO_EMPRESA_FK">
       <End Role="EMPRESA" EntitySet="EMPRESA" />
       <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
-    </AssociationSet>
-    <AssociationSet Name="ERROR_TAREA_TAREA_FK" Association="Self.ERROR_TAREA_TAREA_FK">
-      <End Role="TAREA" EntitySet="TAREA" />
-      <End Role="ERROR_TAREA" EntitySet="ERROR_TAREA" />
     </AssociationSet>
     <AssociationSet Name="FLUJO_INSTANCIA_ESTADO" Association="Self.FLUJO_INSTANCIA_ESTADO">
       <End Role="ESTADO_FLUJO" EntitySet="ESTADO_FLUJO" />
@@ -629,6 +602,11 @@
       <Parameter Name="PROGRESO_IN" Mode="In" Type="Decimal" />
     </FunctionImport>
     <EntitySet Name="MAS_FLUJOS_CREADOS" EntityType="Model.MAS_FLUJOS_CREADOS" />
+    <EntitySet Name="ERROR_TAREA" EntityType="Model.ERROR_TAREA" />
+    <AssociationSet Name="ERROR_TAREA_TAREA_FK" Association="Model.ERROR_TAREA_TAREA_FK">
+      <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
+      <End Role="ERROR_TAREA" EntitySet="ERROR_TAREA" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="MAS_FLUJOS_CREADOS">
     <Key>
@@ -640,4 +618,26 @@
     <Property Name="FLUJOS" Type="Decimal" Precision="38" Scale="0" />
     <Property Name="EMPRESA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="ERROR_TAREA">
+    <Key>
+      <PropertyRef Name="IDERR" />
+    </Key>
+    <Property Name="IDERR" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JUSTIFICACION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FECHA" Type="DateTime" Nullable="false" />
+    <Property Name="TAREA_IDTAR" Type="Decimal" Precision="38" Scale="0" />
+    <NavigationProperty Name="TAREA_INSTANCIA" Relationship="Model.ERROR_TAREA_TAREA_FK" FromRole="ERROR_TAREA" ToRole="TAREA_INSTANCIA" />
+  </EntityType>
+  <Association Name="ERROR_TAREA_TAREA_FK">
+    <End Type="Model.TAREA_INSTANCIA" Role="TAREA_INSTANCIA" Multiplicity="0..1" />
+    <End Type="Model.ERROR_TAREA" Role="ERROR_TAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TAREA_INSTANCIA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ERROR_TAREA">
+        <PropertyRef Name="TAREA_IDTAR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

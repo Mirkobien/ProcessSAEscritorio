@@ -17,7 +17,6 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TAREA()
         {
-            this.ERROR_TAREA = new HashSet<ERROR_TAREA>();
             this.TAREA_INSTANCIA = new HashSet<TAREA_INSTANCIA>();
             this.FLUJO = new HashSet<FLUJO>();
             this.TAREA1 = new HashSet<TAREA>();
@@ -30,8 +29,6 @@ namespace DataAccessLayer
         public decimal CARGOS_IDDEP { get; set; }
     
         public virtual CARGOS CARGOS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ERROR_TAREA> ERROR_TAREA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREA_INSTANCIA> TAREA_INSTANCIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

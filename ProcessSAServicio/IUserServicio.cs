@@ -200,13 +200,25 @@ namespace ProcessSAServicio
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/TareasRechazadas/Usuario/{id}")]
-        List<TareaInstancia> GetAllTareasRechazadas(string id);
+        List<TareaError> GetAllTareasRechazadas(string id);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/TareaInstancia/Progreso")]
         void CambiarProgresoTarea(int idTarea, int progreso);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/TareaInstancia/Rechazar")]
+        void RechazarTarea(int idTarea, string justificacion);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/TareaInstancia/Reasignar")]
+        void ReasignarTarea(int idTarea, int reasignado);
         #endregion
         #region Roles
 
@@ -288,11 +300,13 @@ namespace ProcessSAServicio
 
         #endregion
         #region reportes
+        /*
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Reporte/{id}")]
         List<MasFlujosReportStructure> GetReporte(string id);
+        */
         #endregion
     }
 

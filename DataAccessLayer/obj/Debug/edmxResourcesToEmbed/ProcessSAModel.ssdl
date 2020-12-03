@@ -289,11 +289,11 @@ advertencia 6002: La tabla o vista 'PROCESSSA.MAS_FLUJOS_CREADOS' no tiene defin
     </ReferentialConstraint>
   </Association>
   <Association Name="ERROR_TAREA_TAREA_FK">
-    <End Role="TAREA" Type="Self.TAREA" Multiplicity="0..1" />
+    <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="0..1" />
     <End Role="ERROR_TAREA" Type="Self.ERROR_TAREA" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TAREA">
-        <PropertyRef Name="IDTAR" />
+      <Principal Role="TAREA_INSTANCIA">
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="ERROR_TAREA">
         <PropertyRef Name="TAREA_IDTAR" />
@@ -620,7 +620,7 @@ FROM "PROCESSSA"."MAS_FLUJOS_CREADOS" "MAS_FLUJOS_CREADOS"</DefiningQuery>
       <End Role="DOCUMENTO" EntitySet="DOCUMENTO" />
     </AssociationSet>
     <AssociationSet Name="ERROR_TAREA_TAREA_FK" Association="Self.ERROR_TAREA_TAREA_FK">
-      <End Role="TAREA" EntitySet="TAREA" />
+      <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
       <End Role="ERROR_TAREA" EntitySet="ERROR_TAREA" />
     </AssociationSet>
     <AssociationSet Name="FLUJO_CARGOS_FK" Association="Self.FLUJO_CARGOS_FK">

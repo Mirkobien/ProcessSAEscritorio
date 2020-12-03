@@ -31,7 +31,6 @@ namespace DataAccessLayer
         public virtual DbSet<CARGOS> CARGOS { get; set; }
         public virtual DbSet<DOCUMENTO> DOCUMENTO { get; set; }
         public virtual DbSet<EMPRESA> EMPRESA { get; set; }
-        public virtual DbSet<ERROR_TAREA> ERROR_TAREA { get; set; }
         public virtual DbSet<ESTADO_FLUJO> ESTADO_FLUJO { get; set; }
         public virtual DbSet<ESTADO_TAREA> ESTADO_TAREA { get; set; }
         public virtual DbSet<ESTADO_USUARIO> ESTADO_USUARIO { get; set; }
@@ -47,6 +46,7 @@ namespace DataAccessLayer
         public virtual DbSet<USUARIO_SISTEMA> USUARIO_SISTEMA { get; set; }
         public virtual DbSet<CARGOS_JERARQUIA> CARGOS_JERARQUIA { get; set; }
         public virtual DbSet<MAS_FLUJOS_CREADOS> MAS_FLUJOS_CREADOS { get; set; }
+        public virtual DbSet<ERROR_TAREA> ERROR_TAREA { get; set; }
     
         public virtual int CAMBIAR_PROGRESO_TAREA(Nullable<decimal> iD_TAREA, Nullable<decimal> pROGRESO_IN)
         {

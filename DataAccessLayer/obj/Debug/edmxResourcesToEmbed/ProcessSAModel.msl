@@ -44,16 +44,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ERROR_TAREA">
-      <EntityTypeMapping TypeName="Model.ERROR_TAREA">
-        <MappingFragment StoreEntitySet="ERROR_TAREA">
-          <ScalarProperty Name="IDERR" ColumnName="IDERR" />
-          <ScalarProperty Name="JUSTIFICACION" ColumnName="JUSTIFICACION" />
-          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-          <ScalarProperty Name="TAREA_IDTAR" ColumnName="TAREA_IDTAR" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ESTADO_FLUJO">
       <EntityTypeMapping TypeName="Model.ESTADO_FLUJO">
         <MappingFragment StoreEntitySet="ESTADO_FLUJO">
@@ -229,6 +219,16 @@
           <ScalarProperty Name="FLUJOS" ColumnName="FLUJOS" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ERROR_TAREA">
+      <EntityTypeMapping TypeName="Model.ERROR_TAREA">
+        <MappingFragment StoreEntitySet="ERROR_TAREA">
+          <ScalarProperty Name="TAREA_IDTAR" ColumnName="TAREA_IDTAR" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="JUSTIFICACION" ColumnName="JUSTIFICACION" />
+          <ScalarProperty Name="IDERR" ColumnName="IDERR" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

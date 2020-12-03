@@ -188,14 +188,24 @@ namespace ProcessSAServicio
             return EstadoTarea.GetAllEstadoTareas();
         }
 
-        public List<TareaInstancia> GetAllTareasRechazadas(string id)
+        public List<TareaError> GetAllTareasRechazadas(string id)
         {
-            return TareaInstancia.GetAllTareasRechazadasDeUser(int.Parse(id));
+            return TareaError.GetTareaErrors(int.Parse(id));
         }
 
         public void CambiarProgresoTarea(int idTarea, int progreso)
         {
             TareaInstancia.CambiarProgresoTarea(idTarea, progreso);
+        }
+
+        public void RechazarTarea(int idTarea, string justificacion)
+        {
+            TareaInstancia.RechazarTarea(idTarea, justificacion);
+        }
+
+        public void ReasignarTarea(int idTarea, int reasignado)
+        {
+            TareaInstancia.ReasignarTarea(idTarea, reasignado);
         }
 
         #endregion

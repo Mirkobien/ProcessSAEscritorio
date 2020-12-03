@@ -19,6 +19,6 @@ namespace DataAccessLayer
         public System.DateTime FECHA { get; set; }
         public Nullable<decimal> TAREA_IDTAR { get; set; }
     
-        public virtual TAREA TAREA { get; set; }
+        public virtual TAREA_INSTANCIA TAREA_INSTANCIA { get; set; }
     }
 }

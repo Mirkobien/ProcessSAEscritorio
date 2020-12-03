@@ -9,6 +9,38 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
+    [DataContract]
+    public class TareaError
+    {
+        public TareaError(ERROR_TAREA error)
+        {
+            Id = decimal.ToInt32(error.IDERR);
+            Justificacion = error.JUSTIFICACION;
+            Fecha = error.FECHA.ToString("yyyy-MM-dd");
+            Tarea = new TareaInstancia(error.TAREA_INSTANCIA);
+        }
+
+        public static List<TareaError> GetTareaErrors(int idJefeFlujo)
+        {
+            Entities ent = new Entities();
+            List<ERROR_TAREA> errores = ent.ERROR_TAREA.Where(e => e.TAREA_INSTANCIA.FLUJO_INSTANCIA.USUARIO_CLIENTE.IDUSU == idJefeFlujo).ToList();
+            List<TareaError> listaFinal = new List<TareaError>();
+            foreach(ERROR_TAREA error in errores)
+            {
+                listaFinal.Add(new TareaError(error));
+            }
+            return listaFinal;
+        }
+
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
+        public string Justificacion { get; set; }
+        [DataMember]
+        public string Fecha { get; set; }
+        [DataMember]
+        public TareaInstancia Tarea { get; set; }
+    }
     public enum EstadoTareaEnum
     {
         POR_CONFIRMAR = 1,
@@ -122,6 +154,32 @@ namespace BusinessLogic
             ent.TAREA_INSTANCIA.Where(t => t.ID == id).FirstOrDefault().ESTADO = idEstado;
             ent.SaveChanges();
         }
+
+        public static void RechazarTarea(int id, string Justificacion)
+        {
+            Entities ent = new Entities();
+            ent.TAREA_INSTANCIA.Where(t => t.ID == id).FirstOrDefault().ESTADO = (int)EstadoTareaEnum.RECHAZADA;
+            ERROR_TAREA error = new ERROR_TAREA();
+            error.FECHA = DateTime.Now;
+            error.JUSTIFICACION = Justificacion;
+            error.TAREA_IDTAR = id;
+            ent.ERROR_TAREA.Add(error);
+            ent.SaveChanges();
+        }
+
+        public static void ReasignarTarea(int id, int responsable)
+        {
+            Entities ent = new Entities();
+            TAREA_INSTANCIA tarea = ent.TAREA_INSTANCIA.Where(t => t.ID == id).FirstOrDefault();
+            if (tarea.ESTADO != (int)EstadoTareaEnum.RECHAZADA)
+                return;
+            tarea.ESTADO = (int)EstadoTareaEnum.POR_CONFIRMAR;
+            tarea.RESPONSABLE = responsable;
+            ERROR_TAREA error = ent.ERROR_TAREA.Where(e => e.TAREA_IDTAR == id).FirstOrDefault();
+            ent.ERROR_TAREA.Remove(error);
+            ent.SaveChanges();
+        }
+
         public void CambiarEstado(int idEstado)
         {
             Entities ent = new Entities();
