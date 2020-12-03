@@ -18,6 +18,7 @@ namespace DataAccessLayer
         public TAREA()
         {
             this.ERROR_TAREA = new HashSet<ERROR_TAREA>();
+            this.TAREA_INSTANCIA = new HashSet<TAREA_INSTANCIA>();
             this.FLUJO = new HashSet<FLUJO>();
             this.TAREA1 = new HashSet<TAREA>();
             this.TAREA2 = new HashSet<TAREA>();
@@ -26,15 +27,13 @@ namespace DataAccessLayer
     
         public decimal IDTAR { get; set; }
         public string DESCRIPCION { get; set; }
-        public System.DateTime INICIO { get; set; }
-        public System.DateTime FIN { get; set; }
-        public decimal DURACION { get; set; }
-        public Nullable<decimal> ESTADO_TAREA_IDEST { get; set; }
-        public Nullable<decimal> CARGOS_IDDEP { get; set; }
+        public decimal CARGOS_IDDEP { get; set; }
     
+        public virtual CARGOS CARGOS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ERROR_TAREA> ERROR_TAREA { get; set; }
-        public virtual ESTADO_TAREA ESTADO_TAREA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TAREA_INSTANCIA> TAREA_INSTANCIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FLUJO> FLUJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -43,6 +42,5 @@ namespace DataAccessLayer
         public virtual ICollection<TAREA> TAREA2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
-        public virtual CARGOS CARGOS { get; set; }
     }
 }

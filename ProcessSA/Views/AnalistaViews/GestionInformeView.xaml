@@ -9,16 +9,15 @@
              Background="{DynamicResource MahApps.Brushes.Control.Background}">
     <StackPanel>
         <Label Margin="10, 0, 10, 10" DockPanel.Dock="Top" FontSize="26" FontWeight="Bold" Content="Informes"/>
-        <Grid Margin="20, 0, 20, 20">
-            <Button HorizontalAlignment="Left" Width="150" DockPanel.Dock="Left" Content="Crear Informe" />
-            <Button Width="150" Content="Modificar Informe" />
-            <Button HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" Content="Eliminar Informe" />
-        </Grid>
-        <DataGrid Margin="20, 0 , 20, 0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Descripcion"/>
-                <DataGridTextColumn Header="Responsable"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Border Margin="10" BorderBrush="Black" BorderThickness="1">
+            <StackPanel>
+                <Label Style="{StaticResource Titulo}" HorizontalAlignment="Center" Content="Descargar PDF de..."/>
+                <Grid VerticalAlignment="Center" Margin="20, 20, 20, 20">
+                    <Button Command="{Binding ReportMetaFlujoCommand}" HorizontalAlignment="Left" Content="Empleados con más flujos completados" />
+                    <Button Command="{Binding ReporteParticipativoCommand}" HorizontalAlignment="Center" Content="Empleados con más flujos ejecutados." />
+                    <Button HorizontalAlignment="Right" Width="150" Content="Eliminar Informe" />
+                </Grid>
+            </StackPanel>
+        </Border>
     </StackPanel>
 </UserControl>

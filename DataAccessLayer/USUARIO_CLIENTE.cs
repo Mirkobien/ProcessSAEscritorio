@@ -18,6 +18,8 @@ namespace DataAccessLayer
         public USUARIO_CLIENTE()
         {
             this.AUTH_USER = new HashSet<AUTH_USER>();
+            this.FLUJO_INSTANCIA = new HashSet<FLUJO_INSTANCIA>();
+            this.TAREA_INSTANCIA = new HashSet<TAREA_INSTANCIA>();
             this.TAREA = new HashSet<TAREA>();
         }
     
@@ -37,8 +39,12 @@ namespace DataAccessLayer
         public virtual ICollection<AUTH_USER> AUTH_USER { get; set; }
         public virtual CARGOS CARGOS { get; set; }
         public virtual ESTADO_USUARIO ESTADO_USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FLUJO_INSTANCIA> FLUJO_INSTANCIA { get; set; }
         public virtual ROL_CLIENTE ROL_CLIENTE { get; set; }
         public virtual SEXO SEXO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TAREA_INSTANCIA> TAREA_INSTANCIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREA> TAREA { get; set; }
     }

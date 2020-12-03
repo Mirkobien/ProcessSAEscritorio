@@ -45,6 +45,16 @@ namespace ProcessSA.Models
             return etareas;
         }
 
+        public async static Task<List<Reporte1>> GetReportes()
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync(USER_URL + "Reportes/1");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return await responseMessage.Content.ReadAsAsync<List<Reporte1>>();
+            }
+            return null;
+        }
+
         public async static Task<Empresa> GetEmpresa(int id)
         {
             HttpResponseMessage responseMessage = await client.GetAsync(USER_URL + "Empresas/" + id.ToString());
@@ -104,6 +114,7 @@ namespace ProcessSA.Models
 
         public static void InitClient()
         {
+            
             client.BaseAddress = new Uri(BASE_URL);
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(

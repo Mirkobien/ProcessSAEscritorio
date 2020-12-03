@@ -18,6 +18,8 @@
              xmlns:ejecmodalviews="clr-namespace:ProcessSA.Views.EjecutivoViews.Modal"
              xmlns:analisviewmodels="clr-namespace:ProcessSA.ViewModels.AnalistaViewModels"
              xmlns:analisviews="clr-namespace:ProcessSA.Views.AnalistaViews"
+             xmlns:analismodalviewmodels="clr-namespace:ProcessSA.ViewModels.AnalistaViewModels.Modal"
+             xmlns:analismodalviews="clr-namespace:ProcessSA.Views.AnalistaViews.Modal"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
@@ -96,6 +98,11 @@
             <DataTemplate DataType="{x:Type analisviewmodels:GestionInformeViewModel}">
                 <analisviews:GestionInformeView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type analismodalviewmodels:ReporteViewModel}">
+                <analismodalviews:ReporteView/>
+            </DataTemplate>
+                
             <DataTemplate DataType="{x:Type ejecviewmodels:ContratosViewModel}">
                 <ejecviews:ContratosView/>
             </DataTemplate>

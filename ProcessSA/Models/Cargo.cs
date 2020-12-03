@@ -1,51 +1,31 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using System.Xml.Serialization;
 
 namespace ProcessSA.Models
 {
-    public class Cargo : ObservableObject, IDataErrorInfo
+    [JsonObject]
+    [Serializable]
+    public class Cargo : ObservableObject
     {
         public Cargo()
         {
-            Usuarios = new ObservableCollection<User>();
         }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string result = null;
-                switch (columnName)
-                {
-                    case "Nombre":
-                        if (string.IsNullOrEmpty(Nombre))
-                            result = "El Nombre del Cargo no puede estar vacio.";
-                        break;
-                    default:
-                        break;
-                }
-
-                return result;
-            }
-        }
-
-        public string Error
-        {
-            get
-            {
-                return "Errorsito";
-            }
-        }
-
 
         public string Nombre { get; set; }
         public int Id { get; set; }
+        [XmlIgnore]
+        [ScriptIgnore]
         public ObservableCollection<User> Usuarios { get; set; }
+        [XmlIgnore]
+        [ScriptIgnore]
         public ObservableCollection<Cargo> Cargos { get; set; }
 
         public static IEnumerable<Cargo> Traverse(Cargo root)

@@ -28,7 +28,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ARCHIVO" Type="blob" Nullable="false" />
           <Property Name="EMPRESA_IDEMP" Type="number" Precision="38" Scale="0" />
         </EntityType>
@@ -36,7 +36,7 @@
           <Key>
             <PropertyRef Name="IDEMP" />
           </Key>
-          <Property Name="IDEMP" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDEMP" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="RUT" Type="varchar2" MaxLength="14" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="CORREO" Type="varchar2" MaxLength="50" Nullable="false" />
@@ -48,7 +48,7 @@
           <Key>
             <PropertyRef Name="IDERR" />
           </Key>
-          <Property Name="IDERR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDERR" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="JUSTIFICACION" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="FECHA" Type="date" Nullable="false" />
           <Property Name="TAREA_IDTAR" Type="number" Precision="38" Scale="0" />
@@ -64,7 +64,7 @@
           <Key>
             <PropertyRef Name="IDEST" />
           </Key>
-          <Property Name="IDEST" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDEST" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ESTADO_USUARIO">
@@ -81,11 +81,18 @@
           <Property Name="IDFLU" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="DIAS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CARGOS_IDDEP" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FLUJO_INSTANCIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="INICIO" Type="date" Nullable="false" />
+          <Property Name="PLANTILLA_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="FIN" Type="date" Nullable="false" />
-          <Property Name="ESTADO_FLUJO_IDESF" Type="number" Precision="38" Scale="0" />
-          <Property Name="CARGOS_IDDEP" Type="number" Precision="38" Scale="0" />
+          <Property Name="RESPONSABLE" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="LOG_ERROR">
           <Key>
@@ -122,11 +129,7 @@
           </Key>
           <Property Name="IDTAR" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
-          <Property Name="INICIO" Type="date" Nullable="false" />
-          <Property Name="FIN" Type="date" Nullable="false" />
-          <Property Name="DURACION" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ESTADO_TAREA_IDEST" Type="number" Precision="38" Scale="0" />
-          <Property Name="CARGOS_IDDEP" Type="number" Precision="38" Scale="0" />
+          <Property Name="CARGOS_IDDEP" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="TAREA_FLUJO">
           <Key>
@@ -135,6 +138,19 @@
           </Key>
           <Property Name="TAREA_IDTAR" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="FLUJO_IDFLU" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAREA_INSTANCIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="INICIO" Type="date" Nullable="false" />
+          <Property Name="FIN" Type="date" Nullable="false" />
+          <Property Name="RESPONSABLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PLANTILLA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PROGRESO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FLUJO" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="TAREA_TAREA">
           <Key>
@@ -164,7 +180,7 @@
           <Key>
             <PropertyRef Name="IDSIS" />
           </Key>
-          <Property Name="IDSIS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDSIS" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="APELLIDO" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="CORREO" Type="varchar2" MaxLength="50" Nullable="false" />
@@ -192,6 +208,18 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
           <Property Name="PADRE_ID" Type="number" Precision="38" Scale="0" />
           <Property Name="NIVEL" Type="number" Precision="38" Scale="0" />
           <Property Name="EMPRESA_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'PROCESSSA.MAS_FLUJOS_CREADOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="MAS_FLUJOS_CREADOS">
+          <Key>
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="EMPRESA" />
+          </Key>
+          <Property Name="Cargo" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar2" MaxLength="101" />
+          <Property Name="FLUJOS" Type="number" Precision="38" Scale="0" />
+          <Property Name="EMPRESA" Type="varchar2" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="AUTH_USER_USUARIO_CLIENTE_FK">
           <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="0..1" />
@@ -278,7 +306,7 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
           </ReferentialConstraint>
         </Association>
         <Association Name="FLUJO_CARGOS_FK">
-          <End Role="CARGOS" Type="Self.CARGOS" Multiplicity="0..1" />
+          <End Role="CARGOS" Type="Self.CARGOS" Multiplicity="1" />
           <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CARGOS">
@@ -289,15 +317,39 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FLUJO_ESTADO_FLUJO_FK">
-          <End Role="ESTADO_FLUJO" Type="Self.ESTADO_FLUJO" Multiplicity="0..1" />
-          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+        <Association Name="FLUJO_INSTANCIA_ESTADO">
+          <End Role="ESTADO_FLUJO" Type="Self.ESTADO_FLUJO" Multiplicity="1" />
+          <End Role="FLUJO_INSTANCIA" Type="Self.FLUJO_INSTANCIA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ESTADO_FLUJO">
               <PropertyRef Name="IDESF" />
             </Principal>
-            <Dependent Role="FLUJO">
-              <PropertyRef Name="ESTADO_FLUJO_IDESF" />
+            <Dependent Role="FLUJO_INSTANCIA">
+              <PropertyRef Name="ESTADO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_INSTANCIA_PLANTILLA">
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="1" />
+          <End Role="FLUJO_INSTANCIA" Type="Self.FLUJO_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FLUJO">
+              <PropertyRef Name="IDFLU" />
+            </Principal>
+            <Dependent Role="FLUJO_INSTANCIA">
+              <PropertyRef Name="PLANTILLA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_INSTANCIA_RESPONSABLE">
+          <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="1" />
+          <End Role="FLUJO_INSTANCIA" Type="Self.FLUJO_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_CLIENTE">
+              <PropertyRef Name="IDUSU" />
+            </Principal>
+            <Dependent Role="FLUJO_INSTANCIA">
+              <PropertyRef Name="RESPONSABLE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -314,7 +366,7 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
           </ReferentialConstraint>
         </Association>
         <Association Name="TAREA_CARGOS_FK">
-          <End Role="CARGOS" Type="Self.CARGOS" Multiplicity="0..1" />
+          <End Role="CARGOS" Type="Self.CARGOS" Multiplicity="1" />
           <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CARGOS">
@@ -325,15 +377,27 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TAREA_ESTADO_TAREA_FK">
-          <End Role="ESTADO_TAREA" Type="Self.ESTADO_TAREA" Multiplicity="0..1" />
-          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+        <Association Name="TAREA_DE_FLUJO">
+          <End Role="FLUJO_INSTANCIA" Type="Self.FLUJO_INSTANCIA" Multiplicity="1" />
+          <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FLUJO_INSTANCIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAREA_INSTANCIA">
+              <PropertyRef Name="FLUJO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_ESTADO">
+          <End Role="ESTADO_TAREA" Type="Self.ESTADO_TAREA" Multiplicity="1" />
+          <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ESTADO_TAREA">
               <PropertyRef Name="IDEST" />
             </Principal>
-            <Dependent Role="TAREA">
-              <PropertyRef Name="ESTADO_TAREA_IDEST" />
+            <Dependent Role="TAREA_INSTANCIA">
+              <PropertyRef Name="ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,6 +422,30 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
             </Principal>
             <Dependent Role="TAREA_FLUJO">
               <PropertyRef Name="TAREA_IDTAR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_PLANTILLA">
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="1" />
+          <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREA">
+              <PropertyRef Name="IDTAR" />
+            </Principal>
+            <Dependent Role="TAREA_INSTANCIA">
+              <PropertyRef Name="PLANTILLA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_RESPONSABLE">
+          <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="1" />
+          <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_CLIENTE">
+              <PropertyRef Name="IDUSU" />
+            </Principal>
+            <Dependent Role="TAREA_INSTANCIA">
+              <PropertyRef Name="RESPONSABLE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -469,6 +557,10 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CAMBIAR_PROGRESO_TAREA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROCESSSA">
+          <Parameter Name="ID_TAREA" Type="number" Mode="In" />
+          <Parameter Name="PROGRESO_IN" Type="number" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="AUTH_USER" EntityType="Self.AUTH_USER" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="CARGOS" EntityType="Self.CARGOS" Schema="PROCESSSA" store:Type="Tables" />
@@ -479,12 +571,14 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
           <EntitySet Name="ESTADO_TAREA" EntityType="Self.ESTADO_TAREA" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="ESTADO_USUARIO" EntityType="Self.ESTADO_USUARIO" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="FLUJO" EntityType="Self.FLUJO" Schema="PROCESSSA" store:Type="Tables" />
+          <EntitySet Name="FLUJO_INSTANCIA" EntityType="Self.FLUJO_INSTANCIA" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="LOG_ERROR" EntityType="Self.LOG_ERROR" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="ROL_CLIENTE" EntityType="Self.ROL_CLIENTE" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="ROL_SISTEMA" EntityType="Self.ROL_SISTEMA" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="SEXO" EntityType="Self.SEXO" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="TAREA" EntityType="Self.TAREA" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="TAREA_FLUJO" EntityType="Self.TAREA_FLUJO" Schema="PROCESSSA" store:Type="Tables" />
+          <EntitySet Name="TAREA_INSTANCIA" EntityType="Self.TAREA_INSTANCIA" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="TAREA_TAREA" EntityType="Self.TAREA_TAREA" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="USUARIO_CLIENTE" EntityType="Self.USUARIO_CLIENTE" Schema="PROCESSSA" store:Type="Tables" />
           <EntitySet Name="USUARIO_SISTEMA" EntityType="Self.USUARIO_SISTEMA" Schema="PROCESSSA" store:Type="Tables" />
@@ -497,6 +591,14 @@ advertencia 6002: La tabla o vista 'PROCESSSA.CARGOS_JERARQUIA' no tiene definid
 "CARGOS_JERARQUIA"."NIVEL" AS "NIVEL", 
 "CARGOS_JERARQUIA"."EMPRESA_ID" AS "EMPRESA_ID"
 FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MAS_FLUJOS_CREADOS" EntityType="Self.MAS_FLUJOS_CREADOS" store:Type="Views" store:Schema="PROCESSSA">
+            <DefiningQuery>SELECT 
+"MAS_FLUJOS_CREADOS"."Cargo" AS "Cargo", 
+"MAS_FLUJOS_CREADOS"."Nombre" AS "Nombre", 
+"MAS_FLUJOS_CREADOS"."FLUJOS" AS "FLUJOS", 
+"MAS_FLUJOS_CREADOS"."EMPRESA" AS "EMPRESA"
+FROM "PROCESSSA"."MAS_FLUJOS_CREADOS" "MAS_FLUJOS_CREADOS"</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="AUTH_USER_USUARIO_CLIENTE_FK" Association="Self.AUTH_USER_USUARIO_CLIENTE_FK">
             <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
@@ -530,9 +632,17 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             <End Role="CARGOS" EntitySet="CARGOS" />
             <End Role="FLUJO" EntitySet="FLUJO" />
           </AssociationSet>
-          <AssociationSet Name="FLUJO_ESTADO_FLUJO_FK" Association="Self.FLUJO_ESTADO_FLUJO_FK">
+          <AssociationSet Name="FLUJO_INSTANCIA_ESTADO" Association="Self.FLUJO_INSTANCIA_ESTADO">
             <End Role="ESTADO_FLUJO" EntitySet="ESTADO_FLUJO" />
+            <End Role="FLUJO_INSTANCIA" EntitySet="FLUJO_INSTANCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_INSTANCIA_PLANTILLA" Association="Self.FLUJO_INSTANCIA_PLANTILLA">
             <End Role="FLUJO" EntitySet="FLUJO" />
+            <End Role="FLUJO_INSTANCIA" EntitySet="FLUJO_INSTANCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_INSTANCIA_RESPONSABLE" Association="Self.FLUJO_INSTANCIA_RESPONSABLE">
+            <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
+            <End Role="FLUJO_INSTANCIA" EntitySet="FLUJO_INSTANCIA" />
           </AssociationSet>
           <AssociationSet Name="SISTEMA_ESTADO_USUARIO_FK" Association="Self.SISTEMA_ESTADO_USUARIO_FK">
             <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
@@ -542,9 +652,13 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             <End Role="CARGOS" EntitySet="CARGOS" />
             <End Role="TAREA" EntitySet="TAREA" />
           </AssociationSet>
-          <AssociationSet Name="TAREA_ESTADO_TAREA_FK" Association="Self.TAREA_ESTADO_TAREA_FK">
+          <AssociationSet Name="TAREA_DE_FLUJO" Association="Self.TAREA_DE_FLUJO">
+            <End Role="FLUJO_INSTANCIA" EntitySet="FLUJO_INSTANCIA" />
+            <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_ESTADO" Association="Self.TAREA_ESTADO">
             <End Role="ESTADO_TAREA" EntitySet="ESTADO_TAREA" />
-            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
           </AssociationSet>
           <AssociationSet Name="TAREA_FLUJO_FLUJO_FK" Association="Self.TAREA_FLUJO_FLUJO_FK">
             <End Role="FLUJO" EntitySet="FLUJO" />
@@ -553,6 +667,14 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <AssociationSet Name="TAREA_FLUJO_TAREA_FK" Association="Self.TAREA_FLUJO_TAREA_FK">
             <End Role="TAREA" EntitySet="TAREA" />
             <End Role="TAREA_FLUJO" EntitySet="TAREA_FLUJO" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_PLANTILLA" Association="Self.TAREA_PLANTILLA">
+            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_RESPONSABLE" Association="Self.TAREA_RESPONSABLE">
+            <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
+            <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
           </AssociationSet>
           <AssociationSet Name="TAREA_TAREA_TAREA_FK" Association="Self.TAREA_TAREA_TAREA_FK">
             <End Role="TAREA" EntitySet="TAREA" />
@@ -618,15 +740,15 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <NavigationProperty Name="CARGOS1" Relationship="Self.CARGOS_CARGOS_FK" FromRole="CARGOS" ToRole="CARGOS1" />
           <NavigationProperty Name="CARGOS2" Relationship="Self.CARGOS_CARGOS_FK" FromRole="CARGOS1" ToRole="CARGOS" />
           <NavigationProperty Name="EMPRESA" Relationship="Self.CARGOS_EMPRESA_FK" FromRole="CARGOS" ToRole="EMPRESA" />
+          <NavigationProperty Name="FLUJO" Relationship="Self.FLUJO_CARGOS_FK" FromRole="CARGOS" ToRole="FLUJO" />
+          <NavigationProperty Name="TAREA" Relationship="Self.TAREA_CARGOS_FK" FromRole="CARGOS" ToRole="TAREA" />
           <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.USUARIO_CLIENTE_CARGOS_FK" FromRole="CARGOS" ToRole="USUARIO_CLIENTE" />
-          <NavigationProperty Name="FLUJO" Relationship="Model.FLUJO_CARGOS_FK" FromRole="CARGOS" ToRole="FLUJO" />
-          <NavigationProperty Name="TAREA" Relationship="Model.TAREA_CARGOS_FK" FromRole="CARGOS" ToRole="TAREA" />
         </EntityType>
         <EntityType Name="DOCUMENTO">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ARCHIVO" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="EMPRESA_IDEMP" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="EMPRESA" Relationship="Self.DOCUMENTO_EMPRESA_FK" FromRole="DOCUMENTO" ToRole="EMPRESA" />
@@ -635,7 +757,7 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <Key>
             <PropertyRef Name="IDEMP" />
           </Key>
-          <Property Name="IDEMP" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDEMP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="RUT" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -649,7 +771,7 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <Key>
             <PropertyRef Name="IDERR" />
           </Key>
-          <Property Name="IDERR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDERR" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="JUSTIFICACION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FECHA" Type="DateTime" Nullable="false" />
           <Property Name="TAREA_IDTAR" Type="Decimal" Precision="38" Scale="0" />
@@ -661,15 +783,15 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           </Key>
           <Property Name="IDESF" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FLUJO" Relationship="Self.FLUJO_ESTADO_FLUJO_FK" FromRole="ESTADO_FLUJO" ToRole="FLUJO" />
+          <NavigationProperty Name="FLUJO_INSTANCIA" Relationship="Self.FLUJO_INSTANCIA_ESTADO" FromRole="ESTADO_FLUJO" ToRole="FLUJO_INSTANCIA" />
         </EntityType>
         <EntityType Name="ESTADO_TAREA">
           <Key>
             <PropertyRef Name="IDEST" />
           </Key>
-          <Property Name="IDEST" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDEST" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="TAREA" Relationship="Self.TAREA_ESTADO_TAREA_FK" FromRole="ESTADO_TAREA" ToRole="TAREA" />
+          <NavigationProperty Name="TAREA_INSTANCIA" Relationship="Self.TAREA_ESTADO" FromRole="ESTADO_TAREA" ToRole="TAREA_INSTANCIA" />
         </EntityType>
         <EntityType Name="ESTADO_USUARIO">
           <Key>
@@ -687,14 +809,25 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <Property Name="IDFLU" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIAS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="INICIO" Type="DateTime" Nullable="false" />
-          <Property Name="FIN" Type="DateTime" Nullable="false" />
-          <Property Name="ESTADO_FLUJO_IDESF" Type="Decimal" Precision="38" Scale="0" />
-          <NavigationProperty Name="ESTADO_FLUJO" Relationship="Self.FLUJO_ESTADO_FLUJO_FK" FromRole="FLUJO" ToRole="ESTADO_FLUJO" />
+          <Property Name="CARGOS_IDDEP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CARGOS" Relationship="Self.FLUJO_CARGOS_FK" FromRole="FLUJO" ToRole="CARGOS" />
+          <NavigationProperty Name="FLUJO_INSTANCIA" Relationship="Self.FLUJO_INSTANCIA_PLANTILLA" FromRole="FLUJO" ToRole="FLUJO_INSTANCIA" />
           <NavigationProperty Name="TAREA" Relationship="Self.TAREA_FLUJO" FromRole="FLUJO" ToRole="TAREA" />
-          <Property Name="CARGOS_IDDEP" Type="Decimal" Precision="38" Scale="0" />
-          <NavigationProperty Name="CARGOS" Relationship="Model.FLUJO_CARGOS_FK" FromRole="FLUJO" ToRole="CARGOS" />
+        </EntityType>
+        <EntityType Name="FLUJO_INSTANCIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INICIO" Type="DateTime" Nullable="false" />
+          <Property Name="PLANTILLA_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FIN" Type="DateTime" Nullable="false" />
+          <Property Name="RESPONSABLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ESTADO_FLUJO" Relationship="Self.FLUJO_INSTANCIA_ESTADO" FromRole="FLUJO_INSTANCIA" ToRole="ESTADO_FLUJO" />
+          <NavigationProperty Name="FLUJO" Relationship="Self.FLUJO_INSTANCIA_PLANTILLA" FromRole="FLUJO_INSTANCIA" ToRole="FLUJO" />
+          <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.FLUJO_INSTANCIA_FK1" FromRole="FLUJO_INSTANCIA" ToRole="USUARIO_CLIENTE" />
+          <NavigationProperty Name="TAREA_INSTANCIA" Relationship="Self.TAREA_DE_FLUJO" FromRole="FLUJO_INSTANCIA" ToRole="TAREA_INSTANCIA" />
         </EntityType>
         <EntityType Name="LOG_ERROR">
           <Key>
@@ -735,18 +868,31 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           </Key>
           <Property Name="IDTAR" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="INICIO" Type="DateTime" Nullable="false" />
-          <Property Name="FIN" Type="DateTime" Nullable="false" />
-          <Property Name="DURACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ESTADO_TAREA_IDEST" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CARGOS_IDDEP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CARGOS" Relationship="Self.TAREA_CARGOS_FK" FromRole="TAREA" ToRole="CARGOS" />
           <NavigationProperty Name="ERROR_TAREA" Relationship="Self.ERROR_TAREA_TAREA_FK" FromRole="TAREA" ToRole="ERROR_TAREA" />
-          <NavigationProperty Name="ESTADO_TAREA" Relationship="Self.TAREA_ESTADO_TAREA_FK" FromRole="TAREA" ToRole="ESTADO_TAREA" />
+          <NavigationProperty Name="TAREA_INSTANCIA" Relationship="Self.TAREA_PLANTILLA" FromRole="TAREA" ToRole="TAREA_INSTANCIA" />
           <NavigationProperty Name="FLUJO" Relationship="Self.TAREA_FLUJO" FromRole="TAREA" ToRole="FLUJO" />
           <NavigationProperty Name="TAREA1" Relationship="Self.TAREA_TAREA" FromRole="TAREA" ToRole="TAREA1" />
           <NavigationProperty Name="TAREA2" Relationship="Self.TAREA_TAREA" FromRole="TAREA1" ToRole="TAREA" />
           <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.USUARIO_TAREA" FromRole="TAREA" ToRole="USUARIO_CLIENTE" />
-          <Property Name="CARGOS_IDDEP" Type="Decimal" Precision="38" Scale="0" />
-          <NavigationProperty Name="CARGOS" Relationship="Model.TAREA_CARGOS_FK" FromRole="TAREA" ToRole="CARGOS" />
+        </EntityType>
+        <EntityType Name="TAREA_INSTANCIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INICIO" Type="DateTime" Nullable="false" />
+          <Property Name="FIN" Type="DateTime" Nullable="false" />
+          <Property Name="RESPONSABLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PLANTILLA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PROGRESO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FLUJO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="ESTADO_TAREA" Relationship="Self.TAREA_ESTADO" FromRole="TAREA_INSTANCIA" ToRole="ESTADO_TAREA" />
+          <NavigationProperty Name="FLUJO_INSTANCIA" Relationship="Self.TAREA_DE_FLUJO" FromRole="TAREA_INSTANCIA" ToRole="FLUJO_INSTANCIA" />
+          <NavigationProperty Name="TAREA" Relationship="Self.TAREA_PLANTILLA" FromRole="TAREA_INSTANCIA" ToRole="TAREA" />
+          <NavigationProperty Name="USUARIO_CLIENTE" Relationship="Self.TAREA_RESPONSABLE" FromRole="TAREA_INSTANCIA" ToRole="USUARIO_CLIENTE" />
         </EntityType>
         <EntityType Name="USUARIO_CLIENTE">
           <Key>
@@ -766,15 +912,17 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <NavigationProperty Name="AUTH_USER" Relationship="Self.AUTH_USER_USUARIO_CLIENTE_FK" FromRole="USUARIO_CLIENTE" ToRole="AUTH_USER" />
           <NavigationProperty Name="CARGOS" Relationship="Self.USUARIO_CLIENTE_CARGOS_FK" FromRole="USUARIO_CLIENTE" ToRole="CARGOS" />
           <NavigationProperty Name="ESTADO_USUARIO" Relationship="Self.CLIENTE_ESTADO_USUARIO_FK" FromRole="USUARIO_CLIENTE" ToRole="ESTADO_USUARIO" />
+          <NavigationProperty Name="FLUJO_INSTANCIA" Relationship="Self.FLUJO_INSTANCIA_FK1" FromRole="USUARIO_CLIENTE" ToRole="FLUJO_INSTANCIA" />
           <NavigationProperty Name="ROL_CLIENTE" Relationship="Self.USUARIO_CLIENTE_ROL_CLIENTE_FK" FromRole="USUARIO_CLIENTE" ToRole="ROL_CLIENTE" />
           <NavigationProperty Name="SEXO" Relationship="Self.USUARIO_CLIENTE_SEXO_FK" FromRole="USUARIO_CLIENTE" ToRole="SEXO" />
+          <NavigationProperty Name="TAREA_INSTANCIA" Relationship="Self.TAREA_RESPONSABLE" FromRole="USUARIO_CLIENTE" ToRole="TAREA_INSTANCIA" />
           <NavigationProperty Name="TAREA" Relationship="Self.USUARIO_TAREA" FromRole="USUARIO_CLIENTE" ToRole="TAREA" />
         </EntityType>
         <EntityType Name="USUARIO_SISTEMA">
           <Key>
             <PropertyRef Name="IDSIS" />
           </Key>
-          <Property Name="IDSIS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDSIS" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -785,6 +933,17 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <NavigationProperty Name="ESTADO_USUARIO" Relationship="Self.SISTEMA_ESTADO_USUARIO_FK" FromRole="USUARIO_SISTEMA" ToRole="ESTADO_USUARIO" />
           <NavigationProperty Name="ROL_SISTEMA" Relationship="Self.USUARIO_SISTEMA_ROL_SISTEMA_FK" FromRole="USUARIO_SISTEMA" ToRole="ROL_SISTEMA" />
           <NavigationProperty Name="SEXO" Relationship="Self.USUARIO_SISTEMA_SEXO_FK" FromRole="USUARIO_SISTEMA" ToRole="SEXO" />
+        </EntityType>
+        <EntityType Name="CARGOS_JERARQUIA">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="NOMBRE" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PADRE_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="NIVEL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EMPRESA_ID" Type="Decimal" Precision="38" Scale="0" />
         </EntityType>
         <Association Name="AUTH_USER_USUARIO_CLIENTE_FK">
           <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="0..1" />
@@ -834,6 +993,30 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FLUJO_CARGOS_FK">
+          <End Role="CARGOS" Type="Self.CARGOS" Multiplicity="1" />
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGOS">
+              <PropertyRef Name="IDDEP" />
+            </Principal>
+            <Dependent Role="FLUJO">
+              <PropertyRef Name="CARGOS_IDDEP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_CARGOS_FK">
+          <End Role="CARGOS" Type="Self.CARGOS" Multiplicity="1" />
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGOS">
+              <PropertyRef Name="IDDEP" />
+            </Principal>
+            <Dependent Role="TAREA">
+              <PropertyRef Name="CARGOS_IDDEP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="USUARIO_CLIENTE_CARGOS_FK">
           <End Role="CARGOS" Type="Self.CARGOS" Multiplicity="0..1" />
           <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="*" />
@@ -870,27 +1053,27 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FLUJO_ESTADO_FLUJO_FK">
-          <End Role="ESTADO_FLUJO" Type="Self.ESTADO_FLUJO" Multiplicity="0..1" />
-          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
+        <Association Name="FLUJO_INSTANCIA_ESTADO">
+          <End Role="ESTADO_FLUJO" Type="Self.ESTADO_FLUJO" Multiplicity="1" />
+          <End Role="FLUJO_INSTANCIA" Type="Self.FLUJO_INSTANCIA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ESTADO_FLUJO">
               <PropertyRef Name="IDESF" />
             </Principal>
-            <Dependent Role="FLUJO">
-              <PropertyRef Name="ESTADO_FLUJO_IDESF" />
+            <Dependent Role="FLUJO_INSTANCIA">
+              <PropertyRef Name="ESTADO_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TAREA_ESTADO_TAREA_FK">
-          <End Role="ESTADO_TAREA" Type="Self.ESTADO_TAREA" Multiplicity="0..1" />
-          <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
+        <Association Name="TAREA_ESTADO">
+          <End Role="ESTADO_TAREA" Type="Self.ESTADO_TAREA" Multiplicity="1" />
+          <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ESTADO_TAREA">
               <PropertyRef Name="IDEST" />
             </Principal>
-            <Dependent Role="TAREA">
-              <PropertyRef Name="ESTADO_TAREA_IDEST" />
+            <Dependent Role="TAREA_INSTANCIA">
+              <PropertyRef Name="ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -915,6 +1098,42 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             </Principal>
             <Dependent Role="USUARIO_SISTEMA">
               <PropertyRef Name="ESTADO_USUARIO_IDESU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_INSTANCIA_PLANTILLA">
+          <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="1" />
+          <End Role="FLUJO_INSTANCIA" Type="Self.FLUJO_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FLUJO">
+              <PropertyRef Name="IDFLU" />
+            </Principal>
+            <Dependent Role="FLUJO_INSTANCIA">
+              <PropertyRef Name="PLANTILLA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FLUJO_INSTANCIA_FK1">
+          <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="1" />
+          <End Role="FLUJO_INSTANCIA" Type="Self.FLUJO_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_CLIENTE">
+              <PropertyRef Name="IDUSU" />
+            </Principal>
+            <Dependent Role="FLUJO_INSTANCIA">
+              <PropertyRef Name="RESPONSABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_DE_FLUJO">
+          <End Role="FLUJO_INSTANCIA" Type="Self.FLUJO_INSTANCIA" Multiplicity="1" />
+          <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FLUJO_INSTANCIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TAREA_INSTANCIA">
+              <PropertyRef Name="FLUJO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -966,6 +1185,30 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TAREA_PLANTILLA">
+          <End Role="TAREA" Type="Self.TAREA" Multiplicity="1" />
+          <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREA">
+              <PropertyRef Name="IDTAR" />
+            </Principal>
+            <Dependent Role="TAREA_INSTANCIA">
+              <PropertyRef Name="PLANTILLA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAREA_RESPONSABLE">
+          <End Role="USUARIO_CLIENTE" Type="Self.USUARIO_CLIENTE" Multiplicity="1" />
+          <End Role="TAREA_INSTANCIA" Type="Self.TAREA_INSTANCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_CLIENTE">
+              <PropertyRef Name="IDUSU" />
+            </Principal>
+            <Dependent Role="TAREA_INSTANCIA">
+              <PropertyRef Name="RESPONSABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="TAREA_FLUJO">
           <End Role="FLUJO" Type="Self.FLUJO" Multiplicity="*" />
           <End Role="TAREA" Type="Self.TAREA" Multiplicity="*" />
@@ -988,13 +1231,16 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <EntitySet Name="ESTADO_TAREA" EntityType="Self.ESTADO_TAREA" />
           <EntitySet Name="ESTADO_USUARIO" EntityType="Self.ESTADO_USUARIO" />
           <EntitySet Name="FLUJO" EntityType="Self.FLUJO" />
+          <EntitySet Name="FLUJO_INSTANCIA" EntityType="Self.FLUJO_INSTANCIA" />
           <EntitySet Name="LOG_ERROR" EntityType="Self.LOG_ERROR" />
           <EntitySet Name="ROL_CLIENTE" EntityType="Self.ROL_CLIENTE" />
           <EntitySet Name="ROL_SISTEMA" EntityType="Self.ROL_SISTEMA" />
           <EntitySet Name="SEXO" EntityType="Self.SEXO" />
           <EntitySet Name="TAREA" EntityType="Self.TAREA" />
+          <EntitySet Name="TAREA_INSTANCIA" EntityType="Self.TAREA_INSTANCIA" />
           <EntitySet Name="USUARIO_CLIENTE" EntityType="Self.USUARIO_CLIENTE" />
           <EntitySet Name="USUARIO_SISTEMA" EntityType="Self.USUARIO_SISTEMA" />
+          <EntitySet Name="CARGOS_JERARQUIA" EntityType="Self.CARGOS_JERARQUIA" />
           <AssociationSet Name="AUTH_USER_USUARIO_CLIENTE_FK" Association="Self.AUTH_USER_USUARIO_CLIENTE_FK">
             <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
             <End Role="AUTH_USER" EntitySet="AUTH_USER" />
@@ -1011,6 +1257,14 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             <End Role="EMPRESA" EntitySet="EMPRESA" />
             <End Role="CARGOS" EntitySet="CARGOS" />
           </AssociationSet>
+          <AssociationSet Name="FLUJO_CARGOS_FK" Association="Self.FLUJO_CARGOS_FK">
+            <End Role="CARGOS" EntitySet="CARGOS" />
+            <End Role="FLUJO" EntitySet="FLUJO" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_CARGOS_FK" Association="Self.TAREA_CARGOS_FK">
+            <End Role="CARGOS" EntitySet="CARGOS" />
+            <End Role="TAREA" EntitySet="TAREA" />
+          </AssociationSet>
           <AssociationSet Name="USUARIO_CLIENTE_CARGOS_FK" Association="Self.USUARIO_CLIENTE_CARGOS_FK">
             <End Role="CARGOS" EntitySet="CARGOS" />
             <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
@@ -1023,13 +1277,13 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             <End Role="TAREA" EntitySet="TAREA" />
             <End Role="ERROR_TAREA" EntitySet="ERROR_TAREA" />
           </AssociationSet>
-          <AssociationSet Name="FLUJO_ESTADO_FLUJO_FK" Association="Self.FLUJO_ESTADO_FLUJO_FK">
+          <AssociationSet Name="FLUJO_INSTANCIA_ESTADO" Association="Self.FLUJO_INSTANCIA_ESTADO">
             <End Role="ESTADO_FLUJO" EntitySet="ESTADO_FLUJO" />
-            <End Role="FLUJO" EntitySet="FLUJO" />
+            <End Role="FLUJO_INSTANCIA" EntitySet="FLUJO_INSTANCIA" />
           </AssociationSet>
-          <AssociationSet Name="TAREA_ESTADO_TAREA_FK" Association="Self.TAREA_ESTADO_TAREA_FK">
+          <AssociationSet Name="TAREA_ESTADO" Association="Self.TAREA_ESTADO">
             <End Role="ESTADO_TAREA" EntitySet="ESTADO_TAREA" />
-            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
           </AssociationSet>
           <AssociationSet Name="CLIENTE_ESTADO_USUARIO_FK" Association="Self.CLIENTE_ESTADO_USUARIO_FK">
             <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
@@ -1038,6 +1292,18 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <AssociationSet Name="SISTEMA_ESTADO_USUARIO_FK" Association="Self.SISTEMA_ESTADO_USUARIO_FK">
             <End Role="ESTADO_USUARIO" EntitySet="ESTADO_USUARIO" />
             <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_INSTANCIA_PLANTILLA" Association="Self.FLUJO_INSTANCIA_PLANTILLA">
+            <End Role="FLUJO" EntitySet="FLUJO" />
+            <End Role="FLUJO_INSTANCIA" EntitySet="FLUJO_INSTANCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FLUJO_INSTANCIA_FK1" Association="Self.FLUJO_INSTANCIA_FK1">
+            <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
+            <End Role="FLUJO_INSTANCIA" EntitySet="FLUJO_INSTANCIA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_DE_FLUJO" Association="Self.TAREA_DE_FLUJO">
+            <End Role="FLUJO_INSTANCIA" EntitySet="FLUJO_INSTANCIA" />
+            <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
           </AssociationSet>
           <AssociationSet Name="USUARIO_CLIENTE_ROL_CLIENTE_FK" Association="Self.USUARIO_CLIENTE_ROL_CLIENTE_FK">
             <End Role="ROL_CLIENTE" EntitySet="ROL_CLIENTE" />
@@ -1055,6 +1321,14 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             <End Role="SEXO" EntitySet="SEXO" />
             <End Role="USUARIO_SISTEMA" EntitySet="USUARIO_SISTEMA" />
           </AssociationSet>
+          <AssociationSet Name="TAREA_PLANTILLA" Association="Self.TAREA_PLANTILLA">
+            <End Role="TAREA" EntitySet="TAREA" />
+            <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
+          </AssociationSet>
+          <AssociationSet Name="TAREA_RESPONSABLE" Association="Self.TAREA_RESPONSABLE">
+            <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
+            <End Role="TAREA_INSTANCIA" EntitySet="TAREA_INSTANCIA" />
+          </AssociationSet>
           <AssociationSet Name="TAREA_FLUJO" Association="Self.TAREA_FLUJO">
             <End Role="FLUJO" EntitySet="FLUJO" />
             <End Role="TAREA" EntitySet="TAREA" />
@@ -1067,50 +1341,21 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
             <End Role="USUARIO_CLIENTE" EntitySet="USUARIO_CLIENTE" />
             <End Role="TAREA" EntitySet="TAREA" />
           </AssociationSet>
-          <AssociationSet Name="FLUJO_CARGOS_FK" Association="Model.FLUJO_CARGOS_FK">
-            <End Role="CARGOS" EntitySet="CARGOS" />
-            <End Role="FLUJO" EntitySet="FLUJO" />
-          </AssociationSet>
-          <AssociationSet Name="TAREA_CARGOS_FK" Association="Model.TAREA_CARGOS_FK">
-            <End Role="CARGOS" EntitySet="CARGOS" />
-            <End Role="TAREA" EntitySet="TAREA" />
-          </AssociationSet>
-          <EntitySet Name="CARGOS_JERARQUIA" EntityType="Model.CARGOS_JERARQUIA" />
+          <FunctionImport Name="CAMBIAR_PROGRESO_TAREA">
+            <Parameter Name="ID_TAREA" Mode="In" Type="Decimal" />
+            <Parameter Name="PROGRESO_IN" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <EntitySet Name="MAS_FLUJOS_CREADOS" EntityType="Model.MAS_FLUJOS_CREADOS" />
         </EntityContainer>
-        <Association Name="FLUJO_CARGOS_FK">
-          <End Type="Model.CARGOS" Role="CARGOS" Multiplicity="0..1" />
-          <End Type="Model.FLUJO" Role="FLUJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CARGOS">
-              <PropertyRef Name="IDDEP" />
-            </Principal>
-            <Dependent Role="FLUJO">
-              <PropertyRef Name="CARGOS_IDDEP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TAREA_CARGOS_FK">
-          <End Type="Model.CARGOS" Role="CARGOS" Multiplicity="0..1" />
-          <End Type="Model.TAREA" Role="TAREA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CARGOS">
-              <PropertyRef Name="IDDEP" />
-            </Principal>
-            <Dependent Role="TAREA">
-              <PropertyRef Name="CARGOS_IDDEP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CARGOS_JERARQUIA">
+        <EntityType Name="MAS_FLUJOS_CREADOS">
           <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="EMPRESA" />
           </Key>
-          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PADRE_ID" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="NIVEL" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="EMPRESA_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="FLUJOS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="EMPRESA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1198,14 +1443,22 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <EntitySetMapping Name="FLUJO">
             <EntityTypeMapping TypeName="Model.FLUJO">
               <MappingFragment StoreEntitySet="FLUJO">
-                <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
                 <ScalarProperty Name="IDFLU" ColumnName="IDFLU" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="DIAS" ColumnName="DIAS" />
+                <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FLUJO_INSTANCIA">
+            <EntityTypeMapping TypeName="Model.FLUJO_INSTANCIA">
+              <MappingFragment StoreEntitySet="FLUJO_INSTANCIA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="INICIO" ColumnName="INICIO" />
+                <ScalarProperty Name="PLANTILLA_ID" ColumnName="PLANTILLA_ID" />
+                <ScalarProperty Name="ESTADO_ID" ColumnName="ESTADO_ID" />
                 <ScalarProperty Name="FIN" ColumnName="FIN" />
-                <ScalarProperty Name="ESTADO_FLUJO_IDESF" ColumnName="ESTADO_FLUJO_IDESF" />
+                <ScalarProperty Name="RESPONSABLE" ColumnName="RESPONSABLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1245,13 +1498,23 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
           <EntitySetMapping Name="TAREA">
             <EntityTypeMapping TypeName="Model.TAREA">
               <MappingFragment StoreEntitySet="TAREA">
-                <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
                 <ScalarProperty Name="IDTAR" ColumnName="IDTAR" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAREA_INSTANCIA">
+            <EntityTypeMapping TypeName="Model.TAREA_INSTANCIA">
+              <MappingFragment StoreEntitySet="TAREA_INSTANCIA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="INICIO" ColumnName="INICIO" />
                 <ScalarProperty Name="FIN" ColumnName="FIN" />
-                <ScalarProperty Name="DURACION" ColumnName="DURACION" />
-                <ScalarProperty Name="ESTADO_TAREA_IDEST" ColumnName="ESTADO_TAREA_IDEST" />
+                <ScalarProperty Name="RESPONSABLE" ColumnName="RESPONSABLE" />
+                <ScalarProperty Name="PLANTILLA" ColumnName="PLANTILLA" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="PROGRESO" ColumnName="PROGRESO" />
+                <ScalarProperty Name="FLUJO" ColumnName="FLUJO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1285,6 +1548,17 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CARGOS_JERARQUIA">
+            <EntityTypeMapping TypeName="Model.CARGOS_JERARQUIA">
+              <MappingFragment StoreEntitySet="CARGOS_JERARQUIA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PADRE_ID" ColumnName="PADRE_ID" />
+                <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+                <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="TAREA_FLUJO" TypeName="Model.TAREA_FLUJO" StoreEntitySet="TAREA_FLUJO">
             <EndProperty Name="FLUJO">
               <ScalarProperty Name="IDFLU" ColumnName="FLUJO_IDFLU" />
@@ -1309,14 +1583,14 @@ FROM "PROCESSSA"."CARGOS_JERARQUIA" "CARGOS_JERARQUIA"</DefiningQuery>
               <ScalarProperty Name="IDTAR" ColumnName="TAREA_IDTAR" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="CARGOS_JERARQUIA">
-            <EntityTypeMapping TypeName="Model.CARGOS_JERARQUIA">
-              <MappingFragment StoreEntitySet="CARGOS_JERARQUIA">
-                <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
-                <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
-                <ScalarProperty Name="PADRE_ID" ColumnName="PADRE_ID" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+          <FunctionImportMapping FunctionImportName="CAMBIAR_PROGRESO_TAREA" FunctionName="Model.Store.CAMBIAR_PROGRESO_TAREA" />
+          <EntitySetMapping Name="MAS_FLUJOS_CREADOS">
+            <EntityTypeMapping TypeName="Model.MAS_FLUJOS_CREADOS">
+              <MappingFragment StoreEntitySet="MAS_FLUJOS_CREADOS">
+                <ScalarProperty Name="EMPRESA" ColumnName="EMPRESA" />
+                <ScalarProperty Name="FLUJOS" ColumnName="FLUJOS" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

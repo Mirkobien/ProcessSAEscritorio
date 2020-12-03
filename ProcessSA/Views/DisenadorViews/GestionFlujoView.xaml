@@ -17,9 +17,7 @@
         <DataGrid SelectedItem="{Binding SelectedFlujo}" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Flujos}" Margin="20, 0 , 20, 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Inicio, StringFormat=dd-MM-yyyy}" Header="Inicio" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Fin, StringFormat=dd-MM-yyyy}" Header="Fin" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Estado.Descripcion}" Header="Estado" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Cargo.Nombre}" Header="Estado" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

@@ -1,4 +1,5 @@
 ﻿using ProcessSA.Models;
+using ProcessSA.ViewModels.Base;
 using ProcessSA.ViewModels.DisenadorViewModels;
 using ProcessSA.ViewModels.Interface;
 using ProcessSA.Views.DisenadorViews;
@@ -19,8 +20,18 @@ namespace ProcessSA.ViewModels
             BaseViewModels.Add(new AnalistaViewModels.GestionInformeViewModel());
             CurrentViewModel = BaseViewModels[0];
 
+            foreach (BaseViewModel vm in BaseViewModels)
+            {
+                vm.ChangePage += CambiarPagina;
+            }
+
             Name = "MainAnalista";
             DisplayName = "Analista";
+        }
+
+        private void CambiarPagina(object sender, BaseViewModel e)
+        {
+            CurrentViewModel = e;
         }
 
         private void App_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

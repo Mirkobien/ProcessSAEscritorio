@@ -125,17 +125,44 @@
     <Reference Include="MahApps.Metro.IconPacks.Zondicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.4.4.0\lib\net47\MahApps.Metro.IconPacks.Zondicons.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.9.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.19.7.0\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -164,18 +191,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Clase.cs" />
     <Compile Include="Helpers\BindableSelectedItemBehavior.cs" />
     <Compile Include="Helpers\ExceptionHandler.cs" />
     <Compile Include="Models\Cargo.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Flujo.cs" />
     <Compile Include="Models\Jerarquias.cs" />
+    <Compile Include="Models\Reportes.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Tarea.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -185,6 +215,7 @@
     <Compile Include="ViewModels\AdminViewModels\Modals\AgregarUsuarioViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModels\ParametrizacionViewModel.cs" />
     <Compile Include="ViewModels\AnalistaViewModels\GestionInformeViewModel.cs" />
+    <Compile Include="ViewModels\AnalistaViewModels\Modal\ReporteViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseVMListHolder.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\DisenadorViewModels\ElegirEmpresaVM.cs" />
@@ -213,6 +244,9 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\Windows\SeleccionarEmpresaVM.cs" />
     <Compile Include="ViewModels\Windows\WindowBaseVM.cs" />
+    <Compile Include="Views\AnalistaViews\Modal\ReporteView.xaml.cs">
+      <DependentUpon>ReporteView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DisenadorViews\ElegirEmpresaView.xaml.cs">
       <DependentUpon>ElegirEmpresaView.xaml</DependentUpon>
     </Compile>
@@ -255,6 +289,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AnalistaViews\GestionInformeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AnalistaViews\Modal\ReporteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -410,6 +448,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Report1.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DataAccessLayer.AUTH_USUARIO.datasource" />
     <None Include="Properties\DataSources\DataAccessLayer.DEPARTAMENTO.datasource" />
@@ -430,6 +469,21 @@
     <None Include="Properties\DataSources\DataAccessLayer.TAREA.datasource" />
     <None Include="Properties\DataSources\DataAccessLayer.USUARIO.datasource" />
     <None Include="Properties\DataSources\DataAccessLayer.USUARIO_SISTEMA.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.Cargo.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.Empresa.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.EstadoFlujo.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.EstadoTarea.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.EstadoUsuario.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.Flujo.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.JerarquiaDepartamento.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.JerarquiaUsuario.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.ObservableObject.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.Reporte1.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.RESTClient.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.Rol.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.Sexo.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.Tarea.datasource" />
+    <None Include="Properties\DataSources\ProcessSA.Models.User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -441,7 +495,9 @@
   <ItemGroup>
     <Resource Include="Resource\ProcessLogo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Reporte\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\ProcessSAIcon.png" />
   </ItemGroup>

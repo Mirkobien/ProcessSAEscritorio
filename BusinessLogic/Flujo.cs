@@ -35,6 +35,71 @@ namespace BusinessLogic
     }
 
     [DataContract]
+    public class FlujoInstancia
+    {
+        public FlujoInstancia(FLUJO_INSTANCIA flujo)
+        {
+            Id = decimal.ToInt32(flujo.ID);
+            Inicio = flujo.INICIO;
+            Fin = flujo.FIN;
+            Plantilla = new Flujo(flujo.FLUJO);
+            Estado = new EstadoFlujo(flujo.ESTADO_FLUJO);
+            Responsable = new User(flujo.USUARIO_CLIENTE);
+            Tareas = new List<TareaInstancia>();
+            foreach(TAREA_INSTANCIA tarea in flujo.TAREA_INSTANCIA)
+            {
+                Tareas.Add(new TareaInstancia(tarea));
+            }
+        }
+
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
+        public DateTime Inicio { get; set; }
+        [DataMember]
+        public DateTime Fin { get; set; }
+        [DataMember]
+        public Flujo Plantilla { get; set; }
+        [DataMember]
+        public EstadoFlujo Estado { get; set; }
+        [DataMember]
+        public User Responsable { get; set; }
+        [DataMember]
+        public List<TareaInstancia> Tareas { get; set; }
+
+        public List<FlujoInstancia> GetAllFlujosDeCargo(int cargoId)
+        {
+            Entities ent = new Entities();
+            List<FLUJO_INSTANCIA> flujos = ent.FLUJO_INSTANCIA.Where(f => f.FLUJO.CARGOS.IDDEP == cargoId).ToList();
+            List<FlujoInstancia> listaFinal = new List<FlujoInstancia>();
+            foreach(FLUJO_INSTANCIA flujo in flujos)
+            {
+                listaFinal.Add(new FlujoInstancia(flujo));
+            }
+            return listaFinal;
+        }
+
+        public static void CambiarEstado(int idFlujo, int idEstado)
+        {
+            Entities ent = new Entities();
+            ent.FLUJO_INSTANCIA.Where(f => f.ID == idFlujo).FirstOrDefault().ESTADO_ID = idEstado;
+            ent.SaveChanges();
+        }
+
+        public static List<FlujoInstancia> GetAllFromUser(int v)
+        {
+            Entities ent = new Entities();
+            List<FLUJO_INSTANCIA> flujos = ent.FLUJO_INSTANCIA.Where(f => f.RESPONSABLE == v).ToList();
+            List<FlujoInstancia> listaFinal = new List<FlujoInstancia>();
+            foreach (FLUJO_INSTANCIA flujo in flujos)
+            {
+                listaFinal.Add(new FlujoInstancia(flujo));
+            }
+            return listaFinal;
+        }
+    }
+
+    [DataContract]
     public class Flujo
     {
         public Flujo(FLUJO flujo)
@@ -42,11 +107,13 @@ namespace BusinessLogic
             Id = decimal.ToInt32(flujo.IDFLU);
             Nombre = flujo.NOMBRE;
             Descripcion = flujo.DESCRIPCION;
-            Inicio = flujo.INICIO;
-            Fin = flujo.FIN;
-            Dias = decimal.ToInt32(flujo.DIAS);
-            Estado = new EstadoFlujo(flujo.ESTADO_FLUJO);
             Cargo = new Cargo(flujo.CARGOS);
+            Tareas = new List<Tarea>();
+            Instancias = flujo.FLUJO_INSTANCIA.Count();
+            foreach(TAREA tar in flujo.TAREA)
+            {
+                Tareas.Add(new Tarea(tar));
+            }
         }
 
         [DataMember]
@@ -54,19 +121,13 @@ namespace BusinessLogic
         [DataMember]
         public string Nombre { get; set; }
         [DataMember]
-        public DateTime Inicio { get; set; }
-        [DataMember]
-        public DateTime Fin { get; set; }
-        [DataMember]
-        public int Dias { get; set; }
-        [DataMember]
         public string Descripcion { get; set; }
-        [DataMember]
-        public EstadoFlujo Estado { get; set; }
         [DataMember]
         public List<Tarea> Tareas { get; set; }
         [DataMember]
         public Cargo Cargo { get; set; }
+        [DataMember]
+        public int Instancias { get; set; }
 
         public static List<Flujo> GetAllFlujos(int id)
         {
@@ -94,23 +155,27 @@ namespace BusinessLogic
 
         public void Guardar()
         {
-            if (this.Inicio.Year < 1990)
-                this.Inicio = DateTime.Today;
-            if (this.Fin.Year < 1990)
-                this.Fin = DateTime.Today;
 
             Entities ent = new Entities();
-            FLUJO flujo = ToFLUJO(ent);
+            FLUJO flujo = ToFLUJO();
             FLUJO flujoExistente = ent.FLUJO.Where(f => f.IDFLU == flujo.IDFLU).FirstOrDefault();
 
             if (flujoExistente != null)
             {
-                flujo.ESTADO_FLUJO_IDESF = flujoExistente.ESTADO_FLUJO_IDESF;
                 flujo.NOMBRE = flujoExistente.NOMBRE;
                 flujo.CARGOS = flujoExistente.CARGOS;
-                flujo.TAREA.Clear();
-                foreach(Tarea tar in Tareas)
+                foreach (TAREA tar in flujo.TAREA.Where(t => Tareas.All(ta => ta.Id != t.IDTAR)))
                 {
+                    flujo.TAREA.Remove(tar);
+                }
+                foreach (Tarea tar in Tareas)
+                {
+                    TAREA tarea = flujo.TAREA.Where(t => t.IDTAR == tar.Id).FirstOrDefault();
+                    if (tarea != null)
+                    {
+                        tarea.DESCRIPCION = tar.Descripcion;
+                        continue;
+                    }
                     flujo.TAREA.Add(tar.GetTAREA(ent));
                 }
                 ent.SaveChanges();
@@ -119,24 +184,20 @@ namespace BusinessLogic
 
             foreach (Tarea tar in Tareas)
             {
-                tar.Guardar(flujo);
+                flujo.TAREA.Add(tar.GetTAREA(ent));
             }
             ent.FLUJO.Add(flujo);
             ent.SaveChanges();
         }
 
-        private FLUJO ToFLUJO(Entities ent)
+        private FLUJO ToFLUJO()
         {
             FLUJO flujo = new FLUJO()
             {
                 DESCRIPCION = Descripcion,
-                INICIO = Inicio,
-                FIN = Fin,
                 NOMBRE = Nombre,
                 CARGOS_IDDEP = Cargo.Id
             };
-            flujo.ESTADO_FLUJO = ent.ESTADO_FLUJO.Where(p => p.IDESF == Estado.Id).FirstOrDefault();
-
             return flujo;
         }
 
@@ -158,10 +219,45 @@ namespace BusinessLogic
             ent.SaveChanges();
         }
 
-        public static void CambiarEstado(int idFlujo, int idEstado)
+        public static List<Flujo> GetAllFlujosDeCargo(int v)
         {
             Entities ent = new Entities();
-            ent.FLUJO.Where(f => f.IDFLU == idFlujo).FirstOrDefault().ESTADO_FLUJO_IDESF = idEstado;
+            List<Flujo> flujos = new List<Flujo>();
+            foreach(FLUJO flujo in ent.FLUJO.Where(f => f.CARGOS_IDDEP == v))
+            {
+                flujos.Add(new Flujo(flujo));
+            }
+            return flujos;
+        }
+
+        public static void Ejecutar(int idFlujo, int idResponsable, List<EjecutarTareaRequestData> tareaData)
+        {
+            Entities ent = new Entities();
+            FLUJO flujo = ent.FLUJO.Where(f => f.IDFLU == idFlujo).FirstOrDefault();
+            FLUJO_INSTANCIA flujoInstancia = new FLUJO_INSTANCIA();
+            DateTime ultimaFecha = DateTime.Now;
+            foreach(TAREA tarea in flujo.TAREA)
+            {
+                TAREA_INSTANCIA instancia = new TAREA_INSTANCIA();
+                EjecutarTareaRequestData request = tareaData.Where(t => t.Id == tarea.IDTAR).FirstOrDefault();
+                instancia.INICIO = DateTime.Parse(request.Inicio);
+                instancia.FIN = DateTime.Parse(request.Fin);
+                instancia.ESTADO = 1;
+                instancia.RESPONSABLE = request.IdResponsable;
+                instancia.PLANTILLA = tarea.IDTAR;
+                flujoInstancia.TAREA_INSTANCIA.Add(instancia);
+
+                if(instancia.FIN > ultimaFecha)
+                {
+                    ultimaFecha = instancia.FIN;
+                }
+            }
+            flujoInstancia.PLANTILLA_ID = flujo.IDFLU;
+            flujoInstancia.RESPONSABLE = idResponsable;
+            flujoInstancia.ESTADO_ID = 1;
+            flujoInstancia.INICIO = DateTime.Today;
+            flujoInstancia.FIN = ultimaFecha;
+            ent.FLUJO_INSTANCIA.Add(flujoInstancia);
             ent.SaveChanges();
         }
     }

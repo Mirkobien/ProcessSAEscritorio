@@ -69,9 +69,10 @@ namespace ProcessSA.ViewModels.AdminViewModels
             }
         }
 
-        public void EliminarUsuario(User usuario)
+        public async void EliminarUsuario(User usuario)
         {
-
+            await RESTClient.EliminarUser(usuario.Id);
+            OnLoaded();
         }
 
         public async override void OnLoaded()

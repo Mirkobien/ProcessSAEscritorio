@@ -39,7 +39,6 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
         public int Dias { get; set; }
         public BaseViewModel PreviousViewModel { get; set; }
         public Flujo Flujo { get; set; }
-
         public Tarea SelectedTarea { get; set; }
 
         private ICommand _volverCommand;
@@ -111,7 +110,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
         }
         public void CrearTarea()
         {
-            OnChangePage(new AgregarTareaViewModel(this, Empresa) { Cargos = Cargos.ToList() });
+            OnChangePage(new AgregarTareaViewModel(this, Empresa, this.Flujo.Nombre) { Cargos = Cargos.ToList() });
         }
         public override void Volver()
         {
@@ -121,8 +120,10 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
         public async override void OnLoaded()
         {
             if (Cargos.Count < 1)
+            {
                 Cargos = new ObservableCollection<Cargo>(await RESTClient.GetAllDepartamentosList(Empresa.Id));
-            Flujo.Cargo = Cargos[0];
+                Flujo.Cargo = Cargos[0];
+            }
         }
 
         internal void Volver(AgregarTareaViewModel agregarTareaViewModel)

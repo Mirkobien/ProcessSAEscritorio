@@ -12,6 +12,8 @@ namespace DataAccessLayer
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities : DbContext
     {
@@ -34,13 +36,29 @@ namespace DataAccessLayer
         public virtual DbSet<ESTADO_TAREA> ESTADO_TAREA { get; set; }
         public virtual DbSet<ESTADO_USUARIO> ESTADO_USUARIO { get; set; }
         public virtual DbSet<FLUJO> FLUJO { get; set; }
+        public virtual DbSet<FLUJO_INSTANCIA> FLUJO_INSTANCIA { get; set; }
         public virtual DbSet<LOG_ERROR> LOG_ERROR { get; set; }
         public virtual DbSet<ROL_CLIENTE> ROL_CLIENTE { get; set; }
         public virtual DbSet<ROL_SISTEMA> ROL_SISTEMA { get; set; }
         public virtual DbSet<SEXO> SEXO { get; set; }
         public virtual DbSet<TAREA> TAREA { get; set; }
+        public virtual DbSet<TAREA_INSTANCIA> TAREA_INSTANCIA { get; set; }
         public virtual DbSet<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
         public virtual DbSet<USUARIO_SISTEMA> USUARIO_SISTEMA { get; set; }
         public virtual DbSet<CARGOS_JERARQUIA> CARGOS_JERARQUIA { get; set; }
+        public virtual DbSet<MAS_FLUJOS_CREADOS> MAS_FLUJOS_CREADOS { get; set; }
+    
+        public virtual int CAMBIAR_PROGRESO_TAREA(Nullable<decimal> iD_TAREA, Nullable<decimal> pROGRESO_IN)
+        {
+            var iD_TAREAParameter = iD_TAREA.HasValue ?
+                new ObjectParameter("ID_TAREA", iD_TAREA) :
+                new ObjectParameter("ID_TAREA", typeof(decimal));
+    
+            var pROGRESO_INParameter = pROGRESO_IN.HasValue ?
+                new ObjectParameter("PROGRESO_IN", pROGRESO_IN) :
+                new ObjectParameter("PROGRESO_IN", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CAMBIAR_PROGRESO_TAREA", iD_TAREAParameter, pROGRESO_INParameter);
+        }
     }
 }

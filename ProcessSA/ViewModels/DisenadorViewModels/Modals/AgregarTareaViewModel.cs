@@ -13,7 +13,7 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
     class AgregarTareaViewModel : BaseViewModel
     {
 
-        public AgregarTareaViewModel(AgregarFlujoVM agregarFlujoVM, Empresa emp)
+        public AgregarTareaViewModel(AgregarFlujoVM agregarFlujoVM, Empresa emp, string nombreFlujo)
         {
             PreviousViewModel = agregarFlujoVM;
             Empresa = emp;
@@ -21,7 +21,10 @@ namespace ProcessSA.ViewModels.DisenadorViewModels.Modals
             Tarea = new Tarea();
             Cargos = agregarFlujoVM.Cargos.ToList();
             Tarea.Cargo = Cargos[0];
+            FlujoNombre = nombreFlujo;
         }
+
+        public string FlujoNombre { get; set; }
 
         private ICommand _guardarCommand;
         private ICommand _volverCommand;

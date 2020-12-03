@@ -18,9 +18,9 @@ namespace DataAccessLayer
         public CARGOS()
         {
             this.CARGOS1 = new HashSet<CARGOS>();
-            this.USUARIO_CLIENTE = new HashSet<USUARIO_CLIENTE>();
             this.FLUJO = new HashSet<FLUJO>();
             this.TAREA = new HashSet<TAREA>();
+            this.USUARIO_CLIENTE = new HashSet<USUARIO_CLIENTE>();
         }
     
         public decimal IDDEP { get; set; }
@@ -33,10 +33,10 @@ namespace DataAccessLayer
         public virtual CARGOS CARGOS2 { get; set; }
         public virtual EMPRESA EMPRESA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FLUJO> FLUJO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREA> TAREA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USUARIO_CLIENTE> USUARIO_CLIENTE { get; set; }
     }
 }

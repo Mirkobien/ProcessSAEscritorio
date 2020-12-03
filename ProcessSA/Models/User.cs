@@ -1,9 +1,11 @@
-﻿using ProcessSA.Models;
+﻿using Newtonsoft.Json;
+using ProcessSA.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -83,11 +85,16 @@ namespace ProcessSA.Models
         public int Id { get; set; }
         public string Descripcion { get; set; }
     }
+    [Serializable]
     public enum UserType
     {
-        USUARIO_CLIENTE,
-        USUARIO_SISTEMA
+        [EnumMember]
+        USUARIO_CLIENTE = 0,
+        [EnumMember]
+        USUARIO_SISTEMA = 1
     }
+    [JsonObject]
+    [Serializable]
     public class User : ObservableObject, IDataErrorInfo
     {
         private int id;

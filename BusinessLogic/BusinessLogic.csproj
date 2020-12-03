@@ -46,6 +46,8 @@
     <Compile Include="Empresa.cs" />
     <Compile Include="Flujo.cs" />
     <Compile Include="Cargo.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="ReportStructure.cs" />
     <Compile Include="Sexo.cs" />
     <Compile Include="Tarea.cs" />
     <Compile Include="User.cs" />

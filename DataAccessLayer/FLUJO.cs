@@ -17,21 +17,19 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FLUJO()
         {
+            this.FLUJO_INSTANCIA = new HashSet<FLUJO_INSTANCIA>();
             this.TAREA = new HashSet<TAREA>();
         }
     
         public decimal IDFLU { get; set; }
         public string NOMBRE { get; set; }
         public string DESCRIPCION { get; set; }
-        public decimal DIAS { get; set; }
-        public System.DateTime INICIO { get; set; }
-        public System.DateTime FIN { get; set; }
-        public Nullable<decimal> ESTADO_FLUJO_IDESF { get; set; }
-        public Nullable<decimal> CARGOS_IDDEP { get; set; }
+        public decimal CARGOS_IDDEP { get; set; }
     
-        public virtual ESTADO_FLUJO ESTADO_FLUJO { get; set; }
+        public virtual CARGOS CARGOS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FLUJO_INSTANCIA> FLUJO_INSTANCIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREA> TAREA { get; set; }
-        public virtual CARGOS CARGOS { get; set; }
     }
 }

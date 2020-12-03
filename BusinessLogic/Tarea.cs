@@ -9,6 +9,25 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
+    public enum EstadoTareaEnum
+    {
+        POR_CONFIRMAR = 1,
+        CONFIRMADO = 2,
+        COMPLETADO = 3,
+        ATRASADO = 4,
+        RECHAZADA = 5
+    }
+    public class EjecutarTareaRequestData
+    {
+        public EjecutarTareaRequestData()
+        {
+
+        }
+        public int Id { get; set; }
+        public string Inicio { get; set; }
+        public string Fin { get; set; }
+        public int IdResponsable { get; set; }
+    }
     [DataContract]
     public class EstadoTarea
     {
@@ -44,23 +63,109 @@ namespace BusinessLogic
     }
 
     [DataContract]
+    public class TareaInstancia
+    {
+        public TareaInstancia(TAREA_INSTANCIA tarea)
+        {
+            Id = decimal.ToInt32(tarea.ID);
+            Inicio = tarea.INICIO;
+            Fin = tarea.FIN;
+            Plantilla = new Tarea(tarea.TAREA);
+            Responsable = new User(tarea.USUARIO_CLIENTE);
+            Estado = new EstadoTarea(tarea.ESTADO_TAREA);
+            Progreso = decimal.ToInt32(tarea.PROGRESO);
+        }
+
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
+        public DateTime Inicio { get; set; }
+        [DataMember]
+        public DateTime Fin { get; set; }
+        [DataMember]
+        public int Progreso { get; set; }
+        [DataMember]
+        public Tarea Plantilla { get; set; }
+        [DataMember]
+        public User Responsable { get; set; }
+        [DataMember]
+        public EstadoTarea Estado { get; set; }
+
+        public static List<TareaInstancia> GetAllTareasDeFlujo(int id)
+        {
+            Entities ent = new Entities();
+            List<TAREA_INSTANCIA> tareas = ent.TAREA_INSTANCIA.Where(t => t.FLUJO == id).ToList();
+            List<TareaInstancia> listaFinal = new List<TareaInstancia>();
+            foreach(TAREA_INSTANCIA tarea in tareas)
+            {
+                listaFinal.Add(new TareaInstancia(tarea));
+            }
+            return listaFinal;
+        }
+
+        public void SetProgresoYGuardar(int progreso)
+        {
+            Entities ent = new Entities();
+            ent.TAREA_INSTANCIA.Where(t => t.ID == Id).FirstOrDefault().PROGRESO = progreso;
+            ent.SaveChanges();
+        }
+        public static void SetProgresoYGuardar(int id, int progreso)
+        {
+            Entities ent = new Entities();
+            ent.TAREA_INSTANCIA.Where(t => t.ID == id).FirstOrDefault().PROGRESO = progreso;
+            ent.SaveChanges();
+        }
+
+        public static void CambiarEstado(int id, int idEstado)
+        {
+            Entities ent = new Entities();
+            ent.TAREA_INSTANCIA.Where(t => t.ID == id).FirstOrDefault().ESTADO = idEstado;
+            ent.SaveChanges();
+        }
+        public void CambiarEstado(int idEstado)
+        {
+            Entities ent = new Entities();
+            ent.TAREA_INSTANCIA.Where(t => t.ID == Id).FirstOrDefault().ESTADO = idEstado;
+            ent.SaveChanges();
+        }
+
+        public static List<TareaInstancia> GetAllTareasDeUser(int v)
+        {
+            Entities ent = new Entities();
+            List<TareaInstancia> listaFinal = new List<TareaInstancia>();
+            foreach(TAREA_INSTANCIA tarea in ent.TAREA_INSTANCIA.Where(t => t.RESPONSABLE == v).ToList())
+            {
+                listaFinal.Add(new TareaInstancia(tarea));
+            }
+            return listaFinal;
+        }
+
+        public static List<TareaInstancia> GetAllTareasRechazadasDeUser(int v)
+        {
+            Entities ent = new Entities();
+            List<TareaInstancia> listaFinal = new List<TareaInstancia>();
+            foreach (TAREA_INSTANCIA tarea in ent.TAREA_INSTANCIA.Where(t => t.FLUJO_INSTANCIA.RESPONSABLE == v && t.ESTADO == (int)EstadoTareaEnum.RECHAZADA).ToList())
+            {
+                listaFinal.Add(new TareaInstancia(tarea));
+            }
+            return listaFinal;
+        }
+
+        public static void CambiarProgresoTarea(int idTarea, int progreso)
+        {
+            Entities ent = new Entities();
+            ent.CAMBIAR_PROGRESO_TAREA(idTarea, progreso);
+            ent.SaveChanges();
+        }
+    }
+    [DataContract]
     public class Tarea
     {
         public Tarea(TAREA tarea)
         {
             Id = decimal.ToInt32(tarea.IDTAR);
             Descripcion = tarea.DESCRIPCION;
-            Comienzo = tarea.INICIO;
-            Termino = tarea.FIN;
-            Duracion = decimal.ToInt32(tarea.DURACION);
-            Responsables = new List<User>();
             Cargo = new Cargo(tarea.CARGOS);
-            foreach(USUARIO_CLIENTE usr in tarea.USUARIO_CLIENTE)
-            {
-                Responsables.Add(new User(usr));
-            }
-
-            Estado = new EstadoTarea(tarea.ESTADO_TAREA);
         }
 
         public Tarea()
@@ -72,16 +177,6 @@ namespace BusinessLogic
         public int Id { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
-        [DataMember]
-        public int Duracion { get; set; }
-        [DataMember]
-        public DateTime Comienzo { get; set; }
-        [DataMember]
-        public DateTime Termino { get; set; }
-        [DataMember]
-        public List<User> Responsables { get; set; }
-        [DataMember]
-        public EstadoTarea Estado { get; set; }
         [DataMember]
         public Cargo Cargo { get; set; }
 
@@ -106,28 +201,8 @@ namespace BusinessLogic
             return listaFinal;
         }
 
-        public void CambiarEstado(EstadoTarea est)
-        {
-            Entities ent = new Entities();
-
-            ent.TAREA.Where(p => p.IDTAR == Id).FirstOrDefault().ESTADO_TAREA_IDEST = est.Id;
-            ent.SaveChanges();
-        }
-
-        public void CambiarEstado(int est)
-        {
-            Entities ent = new Entities();
-
-            ent.TAREA.Where(p => p.IDTAR == Id).FirstOrDefault().ESTADO_TAREA_IDEST = est;
-            ent.SaveChanges();
-        }
-
         internal TAREA GetTAREA(Entities ent)
         {
-            if (this.Comienzo.Year < 1990)
-                this.Comienzo = DateTime.Today;
-            if (this.Termino.Year < 1990)
-                this.Termino = DateTime.Today;
 
             TAREA tareaExistente = ent.TAREA.Where(t => this.Id == t.IDTAR).FirstOrDefault();
             if (tareaExistente != null)
@@ -135,7 +210,6 @@ namespace BusinessLogic
                 return tareaExistente;
             }
             TAREA tar = ToTAREA();
-            tar.USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList();
             return tar;
         }
 
@@ -149,32 +223,11 @@ namespace BusinessLogic
 
         public void Guardar()
         {
-
-            if (this.Comienzo.Year < 1990)
-                this.Comienzo = DateTime.Today;
-            if (this.Termino.Year < 1990)
-                this.Termino = DateTime.Today;
-
             Entities ent = new Entities();
             TAREA tar = ToTAREA();
-            tar.USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList();
 
             ent.TAREA.Add(ToTAREA());
             ent.SaveChanges();
-        }
-        public void Guardar(FLUJO flujo)
-        {
-
-            if (this.Comienzo.Year < 1990)
-                this.Comienzo = DateTime.Today;
-            if (this.Termino.Year < 1990)
-                this.Termino = DateTime.Today;
-
-            Entities ent = new Entities();
-            TAREA tar = ToTAREA();
-            tar.USUARIO_CLIENTE = (from res in Responsables join usu in ent.USUARIO_CLIENTE on res.Id equals usu.IDUSU select usu).ToList();
-
-            flujo.TAREA.Add(ToTAREA());
         }
 
         private TAREA ToTAREA()
@@ -182,10 +235,7 @@ namespace BusinessLogic
             TAREA tarea = new TAREA
             {
                 IDTAR = Id,
-                INICIO = Comienzo,
-                FIN = Termino,
                 DESCRIPCION = Descripcion,
-                ESTADO_TAREA_IDEST = Estado.Id,
                 CARGOS_IDDEP = Cargo.Id
             };
             return tarea;
@@ -205,7 +255,6 @@ namespace BusinessLogic
         public void Eliminar()
         {
             Entities ent = new Entities();
-
 
             TAREA tar = ent.TAREA.Where(p => p.IDTAR == Id).FirstOrDefault();
             ent.TAREA.Remove(tar);

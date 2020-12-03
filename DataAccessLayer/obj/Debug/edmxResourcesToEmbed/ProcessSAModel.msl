@@ -81,14 +81,22 @@
     <EntitySetMapping Name="FLUJO">
       <EntityTypeMapping TypeName="Model.FLUJO">
         <MappingFragment StoreEntitySet="FLUJO">
-          <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
           <ScalarProperty Name="IDFLU" ColumnName="IDFLU" />
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-          <ScalarProperty Name="DIAS" ColumnName="DIAS" />
+          <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FLUJO_INSTANCIA">
+      <EntityTypeMapping TypeName="Model.FLUJO_INSTANCIA">
+        <MappingFragment StoreEntitySet="FLUJO_INSTANCIA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="INICIO" ColumnName="INICIO" />
+          <ScalarProperty Name="PLANTILLA_ID" ColumnName="PLANTILLA_ID" />
+          <ScalarProperty Name="ESTADO_ID" ColumnName="ESTADO_ID" />
           <ScalarProperty Name="FIN" ColumnName="FIN" />
-          <ScalarProperty Name="ESTADO_FLUJO_IDESF" ColumnName="ESTADO_FLUJO_IDESF" />
+          <ScalarProperty Name="RESPONSABLE" ColumnName="RESPONSABLE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -128,13 +136,23 @@
     <EntitySetMapping Name="TAREA">
       <EntityTypeMapping TypeName="Model.TAREA">
         <MappingFragment StoreEntitySet="TAREA">
-          <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
           <ScalarProperty Name="IDTAR" ColumnName="IDTAR" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="CARGOS_IDDEP" ColumnName="CARGOS_IDDEP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TAREA_INSTANCIA">
+      <EntityTypeMapping TypeName="Model.TAREA_INSTANCIA">
+        <MappingFragment StoreEntitySet="TAREA_INSTANCIA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="INICIO" ColumnName="INICIO" />
           <ScalarProperty Name="FIN" ColumnName="FIN" />
-          <ScalarProperty Name="DURACION" ColumnName="DURACION" />
-          <ScalarProperty Name="ESTADO_TAREA_IDEST" ColumnName="ESTADO_TAREA_IDEST" />
+          <ScalarProperty Name="RESPONSABLE" ColumnName="RESPONSABLE" />
+          <ScalarProperty Name="PLANTILLA" ColumnName="PLANTILLA" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="PROGRESO" ColumnName="PROGRESO" />
+          <ScalarProperty Name="FLUJO" ColumnName="FLUJO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -168,6 +186,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CARGOS_JERARQUIA">
+      <EntityTypeMapping TypeName="Model.CARGOS_JERARQUIA">
+        <MappingFragment StoreEntitySet="CARGOS_JERARQUIA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="PADRE_ID" ColumnName="PADRE_ID" />
+          <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+          <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="TAREA_FLUJO" TypeName="Model.TAREA_FLUJO" StoreEntitySet="TAREA_FLUJO">
       <EndProperty Name="FLUJO">
         <ScalarProperty Name="IDFLU" ColumnName="FLUJO_IDFLU" />
@@ -192,14 +221,14 @@
         <ScalarProperty Name="IDTAR" ColumnName="TAREA_IDTAR" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="CARGOS_JERARQUIA">
-      <EntityTypeMapping TypeName="Model.CARGOS_JERARQUIA">
-        <MappingFragment StoreEntitySet="CARGOS_JERARQUIA">
-          <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
-          <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
-          <ScalarProperty Name="PADRE_ID" ColumnName="PADRE_ID" />
-          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
+    <FunctionImportMapping FunctionImportName="CAMBIAR_PROGRESO_TAREA" FunctionName="Model.Store.CAMBIAR_PROGRESO_TAREA" />
+    <EntitySetMapping Name="MAS_FLUJOS_CREADOS">
+      <EntityTypeMapping TypeName="Model.MAS_FLUJOS_CREADOS">
+        <MappingFragment StoreEntitySet="MAS_FLUJOS_CREADOS">
+          <ScalarProperty Name="EMPRESA" ColumnName="EMPRESA" />
+          <ScalarProperty Name="FLUJOS" ColumnName="FLUJOS" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Cargo" ColumnName="Cargo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

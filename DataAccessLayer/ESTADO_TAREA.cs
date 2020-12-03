@@ -17,13 +17,13 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ESTADO_TAREA()
         {
-            this.TAREA = new HashSet<TAREA>();
+            this.TAREA_INSTANCIA = new HashSet<TAREA_INSTANCIA>();
         }
     
         public decimal IDEST { get; set; }
         public string DESCRIPCION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TAREA> TAREA { get; set; }
+        public virtual ICollection<TAREA_INSTANCIA> TAREA_INSTANCIA { get; set; }
     }
 }

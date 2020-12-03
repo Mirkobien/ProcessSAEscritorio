@@ -89,7 +89,13 @@
     <Compile Include="FLUJO.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FLUJO_INSTANCIA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LOG_ERROR.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MAS_FLUJOS_CREADOS.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProcessSAModel.Context.cs">
@@ -118,6 +124,9 @@
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TAREA.cs">
+      <DependentUpon>ProcessSAModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAREA_INSTANCIA.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
     <Compile Include="USUARIO_CLIENTE.cs">

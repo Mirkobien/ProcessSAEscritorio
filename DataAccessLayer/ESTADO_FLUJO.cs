@@ -17,13 +17,13 @@ namespace DataAccessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ESTADO_FLUJO()
         {
-            this.FLUJO = new HashSet<FLUJO>();
+            this.FLUJO_INSTANCIA = new HashSet<FLUJO_INSTANCIA>();
         }
     
         public decimal IDESF { get; set; }
         public string DESCRIPCION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FLUJO> FLUJO { get; set; }
+        public virtual ICollection<FLUJO_INSTANCIA> FLUJO_INSTANCIA { get; set; }
     }
 }

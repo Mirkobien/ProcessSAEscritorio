@@ -57,7 +57,7 @@
             <TextBox Text="{Binding Password}"/>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0">
-            <Label Content="Rol" HorizontalAlignment="Center"/>
+            <Label Content="Cargos" HorizontalAlignment="Center"/>
             <ComboBox IsTextSearchEnabled="True" ItemsSource="{Binding Cargos}" SelectedItem="{Binding Usuario.Cargo}" DisplayMemberPath="Nombre"></ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">

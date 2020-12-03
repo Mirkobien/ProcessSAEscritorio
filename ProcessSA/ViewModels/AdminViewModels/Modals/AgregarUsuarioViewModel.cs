@@ -18,10 +18,6 @@ namespace ProcessSA.ViewModels.AdminViewModels.Modals
         {
             Empresa = emp;
             PreviousViewModel = previousVM;
-            Task.Run(() =>
-            {
-                OnLoaded();
-            });
 
             Usuario = new User();
         }
@@ -60,7 +56,7 @@ namespace ProcessSA.ViewModels.AdminViewModels.Modals
             get => _cargos; set
             {
                 _cargos = value;
-                OnPropertyChanged("Roles");
+                OnPropertyChanged("Cargos");
             }
         }
 

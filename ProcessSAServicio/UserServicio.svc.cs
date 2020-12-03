@@ -150,24 +150,6 @@ namespace ProcessSAServicio
             return Tarea.GetAllTareaCargo(int.Parse(id));
         }
 
-        public void CambiarEstadoTarea(int idTarea, int idEstado)
-        {
-            Tarea.GetTarea(idTarea).CambiarEstado(idEstado);
-        }
-
-        public void CambiarEstadoTareas(List<int> idTareas, int idEstado)
-        {
-            foreach(int i in idTareas)
-            {
-                Tarea.GetTarea(i).CambiarEstado(idEstado);
-            }
-        }
-
-        public List<EstadoTarea> GetAllEstadoTareas()
-        {
-            return EstadoTarea.GetAllEstadoTareas();
-        }
-
         public void EliminarTarea(string id)
         {
             Tarea tar = new Tarea();
@@ -180,6 +162,42 @@ namespace ProcessSAServicio
                 return;
             }
         }
+        #endregion
+        #region TareaInstancia
+
+        public List<TareaInstancia> GetAllTareaInstancia(string id)
+        {
+            return TareaInstancia.GetAllTareasDeUser(int.Parse(id));
+        }
+
+        public void CambiarEstadoTarea(int idTarea, int idEstado)
+        {
+            TareaInstancia.CambiarEstado(idTarea, idEstado);
+        }
+
+        public void CambiarEstadoTareas(List<int> idTareas, int idEstado)
+        {
+            foreach (int i in idTareas)
+            {
+                TareaInstancia.CambiarEstado(i, idEstado);
+            }
+        }
+
+        public List<EstadoTarea> GetAllEstadoTareas()
+        {
+            return EstadoTarea.GetAllEstadoTareas();
+        }
+
+        public List<TareaInstancia> GetAllTareasRechazadas(string id)
+        {
+            return TareaInstancia.GetAllTareasRechazadasDeUser(int.Parse(id));
+        }
+
+        public void CambiarProgresoTarea(int idTarea, int progreso)
+        {
+            TareaInstancia.CambiarProgresoTarea(idTarea, progreso);
+        }
+
         #endregion
         #region Roles
 
@@ -228,7 +246,35 @@ namespace ProcessSAServicio
 
         public void CambiarEstadoFlujo(int idFlujo, int idEstado)
         {
-            Flujo.CambiarEstado(idFlujo, idEstado);
+            FlujoInstancia.CambiarEstado(idFlujo, idEstado);
+        }
+
+        public List<Flujo> GetAllFlujosDeCargo(string id)
+        {
+            return Flujo.GetAllFlujosDeCargo(int.Parse(id));
+        }
+        #endregion
+        #region FlujoInstancias
+        public void EjecutarFlujo(int idFlujo, int idResponsable, List<EjecutarTareaRequestData> tareaData)
+        {
+            Flujo.Ejecutar(idFlujo, idResponsable, tareaData);
+        }
+
+        public List<FlujoInstancia> GetAllFlujoInstanciaDeUsuario(string id)
+        {
+            return FlujoInstancia.GetAllFromUser(int.Parse(id));
+        }
+
+        public List<MasFlujosReportStructure> GetReporte(string id)
+        {
+            switch (id)
+            {
+                case "1":
+                    return MasFlujosReportStructure.GetReporte();
+                default:
+                    return null;
+                    break;
+            }
         }
         #endregion
     }
