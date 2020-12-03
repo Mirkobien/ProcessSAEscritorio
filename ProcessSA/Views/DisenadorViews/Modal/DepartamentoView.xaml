@@ -26,11 +26,11 @@
         </TextBlock>
         <StackPanel VerticalAlignment="Center" Margin="10,7" Grid.ColumnSpan="2" Grid.Row="1" Height="52">
             <Label HorizontalAlignment="Center" Content="Nombre"/>
-            <TextBox Text="{Binding Departamento.Nombre}"/>
+            <TextBox Text="{Binding Departamento.Nombre, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Center" Margin="10,7" Grid.ColumnSpan="2" Grid.Row="2" Height="52">
             <Label HorizontalAlignment="Center" Content="Descripcion"/>
-            <TextBox Text="{Binding Departamento.Descripcion}"/>
+            <TextBox Text="{Binding Departamento.Descripcion, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         </StackPanel>
         <Button Command="{Binding VolverCommand}" Content="Volver" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
         <Button Command="{Binding GuardarCommand}" Content="Guardar Departamento" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>

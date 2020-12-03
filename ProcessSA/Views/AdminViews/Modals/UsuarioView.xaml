@@ -26,27 +26,27 @@
         
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Rut" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Usuario.Rut}"/>
+            <TextBox Text="{Binding Usuario.Rut, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Nombre" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Usuario.Nombre}"/>
+            <TextBox Text="{Binding Usuario.Nombre, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Apellido Paterno" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Usuario.Apellido}"/>
+            <TextBox Text="{Binding Usuario.Apellido, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Apellido Materno" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Usuario.ApellidoMaterno}"/>
+            <TextBox Text="{Binding Usuario.ApellidoMaterno, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Correo" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Usuario.Correo}"/>
+            <TextBox Text="{Binding Usuario.Correo, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Teléfono" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Usuario.Telefono}"/>
+            <TextBox Text="{Binding Usuario.Telefono, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label Content="Usuario" HorizontalAlignment="Center"/>
