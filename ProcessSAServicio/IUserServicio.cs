@@ -298,15 +298,11 @@ namespace ProcessSAServicio
         BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/FlujoInstancias/Usuario/{id}")]
         List<FlujoInstancia> GetAllFlujoInstanciaDeUsuario(string id);
 
-        #endregion
-        #region reportes
-        /*
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
         ResponseFormat = WebMessageFormat.Json,
-        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/Reporte/{id}")]
-        List<MasFlujosReportStructure> GetReporte(string id);
-        */
+        BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "/FlujoInstancias/")]
+        List<FlujoInstancia> GetAllFlujoInstancia();
         #endregion
     }
 

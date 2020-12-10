@@ -97,6 +97,18 @@ namespace BusinessLogic
             }
             return listaFinal;
         }
+
+        public static List<FlujoInstancia> GetAll()
+        {
+            Entities ent = new Entities();
+            List<FLUJO_INSTANCIA> flujos = ent.FLUJO_INSTANCIA.ToList();
+            List<FlujoInstancia> listaFinal = new List<FlujoInstancia>();
+            foreach (FLUJO_INSTANCIA flujo in flujos)
+            {
+                listaFinal.Add(new FlujoInstancia(flujo));
+            }
+            return listaFinal;
+        }
     }
 
     [DataContract]

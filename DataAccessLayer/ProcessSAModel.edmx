@@ -36,7 +36,7 @@
           <Key>
             <PropertyRef Name="IDEMP" />
           </Key>
-          <Property Name="IDEMP" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDEMP" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RUT" Type="varchar2" MaxLength="14" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="50" Nullable="false" />
           <Property Name="CORREO" Type="varchar2" MaxLength="50" Nullable="false" />
@@ -757,7 +757,7 @@ FROM "PROCESSSA"."MAS_FLUJOS_CREADOS" "MAS_FLUJOS_CREADOS"</DefiningQuery>
           <Key>
             <PropertyRef Name="IDEMP" />
           </Key>
-          <Property Name="IDEMP" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="IDEMP" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RUT" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />

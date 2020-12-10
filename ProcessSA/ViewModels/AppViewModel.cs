@@ -194,6 +194,11 @@ namespace ProcessSA.ViewModels
                     LoggedIn = false;
                     LoggedUser = null;
                     VerEmpresas = false;
+
+                    Task.Run(async () => {
+                        Empresas = await RESTClient.GetAllEmpresas();
+                        Empresa = Empresas[0];
+                    });
                 } else
                 {
                     

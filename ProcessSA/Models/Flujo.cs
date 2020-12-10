@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace ProcessSA.Models
 {
+    public class FlujoInstancia
+    {
+        public FlujoInstancia()
+        {
+
+        }
+
+        public User Responsable { get; set; }
+        public Flujo Flujo { get; set; }
+    }
     public class EstadoFlujo : ObservableObject, IDataErrorInfo
     {
         public EstadoFlujo()

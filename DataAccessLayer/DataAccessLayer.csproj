@@ -95,6 +95,11 @@
     <Compile Include="LOG_ERROR.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MasFlujos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MasFlujos.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MAS_FLUJOS_CREADOS.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
@@ -114,6 +119,11 @@
       <DependentUpon>ProcessSAModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ROL_CLIENTE.cs">
       <DependentUpon>ProcessSAModel.tt</DependentUpon>
     </Compile>
@@ -138,6 +148,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="MasFlujos.xsc">
+      <DependentUpon>MasFlujos.xsd</DependentUpon>
+    </None>
+    <None Include="MasFlujos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MasFlujos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MasFlujos.xss">
+      <DependentUpon>MasFlujos.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="ProcessSAModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -145,6 +166,10 @@
     </EntityDeploy>
     <None Include="ProcessSAModel.edmx.diagram">
       <DependentUpon>ProcessSAModel.edmx</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

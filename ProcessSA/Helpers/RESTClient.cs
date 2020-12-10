@@ -18,6 +18,18 @@ namespace ProcessSA.Models
         public static HttpClient client = new HttpClient();
 
         public static string USER_URL = ConfigurationManager.AppSettings.Get("users-url");
+
+        public async static Task<List<FlujoInstancia>> GetAllFlujoInstancias()
+        {
+            List<FlujoInstancia> etareas = new List<FlujoInstancia>();
+            HttpResponseMessage responseMessage = await client.GetAsync(USER_URL + "FlujoInstancia");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                etareas = await responseMessage.Content.ReadAsAsync<List<FlujoInstancia>>();
+            }
+            return etareas;
+        }
+
         public static string BASE_URL = ConfigurationManager.AppSettings.Get("base-url");
 
         public async static Task<List<EstadoTarea>> GetAllEstadoTareas()
@@ -43,16 +55,6 @@ namespace ProcessSA.Models
                 etareas = await responseMessage.Content.ReadAsAsync<List<Flujo>>();
             }
             return etareas;
-        }
-
-        public async static Task<List<Reporte1>> GetReportes()
-        {
-            HttpResponseMessage responseMessage = await client.GetAsync(USER_URL + "Reportes/1");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return await responseMessage.Content.ReadAsAsync<List<Reporte1>>();
-            }
-            return null;
         }
 
         public async static Task<Empresa> GetEmpresa(int id)
@@ -316,6 +318,16 @@ namespace ProcessSA.Models
                 return;
             }
             return;
+        }
+
+        public async static Task<List<MasFlujosReportStructure>> GetReporteMasFlujos()
+        {
+            HttpResponseMessage message = await client.GetAsync(USER_URL + "Reportes/MasFlujos");
+            if (message.IsSuccessStatusCode)
+            {
+                return await message.Content.ReadAsAsync<List<MasFlujosReportStructure>>();
+            }
+            return null;
         }
     }
 }

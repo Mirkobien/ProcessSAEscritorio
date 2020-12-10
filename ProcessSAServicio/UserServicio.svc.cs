@@ -275,16 +275,15 @@ namespace ProcessSAServicio
             return FlujoInstancia.GetAllFromUser(int.Parse(id));
         }
 
+        public List<FlujoInstancia> GetAllFlujoInstancia()
+        {
+            return FlujoInstancia.GetAll();
+        }
+        #endregion
+        #region Reportes
         public List<MasFlujosReportStructure> GetReporte(string id)
         {
-            switch (id)
-            {
-                case "1":
-                    return MasFlujosReportStructure.GetReporte();
-                default:
-                    return null;
-                    break;
-            }
+            return MasFlujosReportStructure.GetReporte();
         }
         #endregion
     }

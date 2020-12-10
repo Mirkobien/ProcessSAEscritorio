@@ -29,7 +29,7 @@ namespace ProcessSA.Views.AnalistaViews.Modal
         }
 
         private async void _reportViewer_Load(object sender, EventArgs a)
-        {
+        {/*
             List<Reporte1> lista = await RESTClient.GetReportes();
             var DataSource = new ReportDataSource()
             {
@@ -40,7 +40,7 @@ namespace ProcessSA.Views.AnalistaViews.Modal
             string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Reportes\\Report1.rdlc";
             _reportViewer.LocalReport.ReportPath = startupPath;
             _reportViewer.Refresh();
-            _reportViewer.RefreshReport();
+            _reportViewer.RefreshReport();*/
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

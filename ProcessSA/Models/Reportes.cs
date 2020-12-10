@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ProcessSA.Models
 {
-    public class Reporte1
+    public class MasFlujosReportStructure
     {
-        public Reporte1()
+        public MasFlujosReportStructure()
         {
-
         }
+
         public int CantidadFlujos { get; set; }
         public string NombreUsuario { get; set; }
         public string Empresa { get; set; }

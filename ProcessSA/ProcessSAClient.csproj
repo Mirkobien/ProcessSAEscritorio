@@ -201,6 +201,7 @@
     <Compile Include="Clase.cs" />
     <Compile Include="Helpers\BindableSelectedItemBehavior.cs" />
     <Compile Include="Helpers\ExceptionHandler.cs" />
+    <Compile Include="Helpers\Reporte\ReportStructure.cs" />
     <Compile Include="Models\Cargo.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Flujo.cs" />
@@ -495,9 +496,7 @@
   <ItemGroup>
     <Resource Include="Resource\ProcessLogo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Reporte\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resource\ProcessSAIcon.png" />
   </ItemGroup>
